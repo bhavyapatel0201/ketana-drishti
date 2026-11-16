@@ -62,3 +62,10 @@ Newest entries at the bottom.
 - Chart 1 balance is consistent with 365.25-day years (Mercury ends 2000-12-02, minus 2.5555 years = birth date).
 - Still open: the ~9 day gap to JHora (see below).
 - 31 tests passing.
+
+### 2026-11-16 - v0.2.0 released
+- Added `facts_cli` and ADR-0003, tagged and released v0.2.0. Phases 1 and 2 are done; the rules layer works without any AI.
+- A commit went straight to `main` (owner bypass of the branch protection). From now on every change goes through a branch and PR.
+
+### Next
+- Phase 3, LLM layer (v0.3.0): a Claude client that may only use the facts, a citation checker, guardrails, ADR-0004.
