@@ -1,10 +1,23 @@
 # Changelog
 
-All notable changes to this project are documented here.
-Format based on Keep a Changelog; versions follow Semantic Versioning.
+All notable changes to Ketana Drishti are recorded here.
+Format follows [Keep a Changelog](https://keepachangelog.com/); versions follow [SemVer](https://semver.org/).
 
-## [0.1.0] - 2026-11-15
+## [0.2.0] - 2026-11-16
+### Added
+- Fact format (`Fact`) and rules for Lagna, planets, retrograde, dignity and aspects
+- Vimshottari dasha facts (balance at birth and the running Mahadasha, Antardasha and Pratyantardasha for a given date)
+- `facts_cli` command to print the facts of a saved chart
+- Tests across all three fixture charts
+- ADR-0003 (fact format and dasha decision)
 
+### Changed
+- Dasha periods are computed from the Moon's longitude (`dasha.py`) instead of the library's dasha block, whose balance was off by -12 to +46 days; chart 1 now matches Jagannatha Hora to within a day
+
+### Fixed
+- The "dasha balance about 9 days shorter than Jagannatha Hora" issue from 0.1.0 (see above)
+
+## [0.1.0] - 2026-11-16
 ### Added
 - Command-line tool that takes a birth date, time and place (or latitude and longitude)
   and prints a Vedic birth chart as JSON (jyotishganit).

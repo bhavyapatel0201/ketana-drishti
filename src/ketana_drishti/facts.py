@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from datetime import date
 
+from .dasha import find_moon, mahadashas, running
+
 
 @dataclass
 class Fact:
@@ -9,9 +11,6 @@ class Fact:
     source: str
     values: dict
 
-
-def _houses(chart: dict) -> list:
-    return chart["d1Chart"]["houses"]
 
 DIGNITY_TEXT = {
     "exalted": "exalted",
@@ -22,19 +21,20 @@ DIGNITY_TEXT = {
 }
 
 
+def _houses(chart: dict) -> list:
+    return chart["d1Chart"]["houses"]
+
+
 def lagna_facts(chart: dict) -> list[Fact]:
     facts = []
     for i, h in enumerate(_houses(chart)):
         if h["number"] != 1:
             continue
         src = f"d1Chart.houses[{i}]"
-        facts.append(Fact(
-            "lagna.sign", f"Lagna (ascendant) is {h['sign']}", src,
-            {"sign": h["sign"], "degrees": h["signDegrees"]}))
-        facts.append(Fact(
-            "lagna.nakshatra",
-            f"Lagna is in {h['nakshatra']}, pada {h['pada']}", src,
-            {"nakshatra": h["nakshatra"], "pada": h["pada"]}))
+        facts.append(Fact("lagna.sign", f"Lagna (ascendant) is {h['sign']}", src,
+                          {"sign": h["sign"], "degrees": h["signDegrees"]}))
+        facts.append(Fact("lagna.nakshatra", f"Lagna is in {h['nakshatra']}, pada {h['pada']}", src,
+                          {"nakshatra": h["nakshatra"], "pada": h["pada"]}))
     return facts
 
 
@@ -45,20 +45,15 @@ def planet_facts(chart: dict) -> list[Fact]:
             body = o["celestialBody"]
             key = body.lower()
             src = f"d1Chart.houses[{i}].occupants[{j}]"
-            facts.append(Fact(
-                f"{key}.sign", f"{body} is in {o['sign']}", src,
-                {"sign": o["sign"], "degrees": o["signDegrees"]}))
-            facts.append(Fact(
-                f"{key}.nakshatra",
-                f"{body} is in {o['nakshatra']}, pada {o['pada']}", src,
-                {"nakshatra": o["nakshatra"], "pada": o["pada"]}))
-            facts.append(Fact(
-                f"{key}.house", f"{body} is in house {o['house']}", src,
-                {"house": o["house"]}))
+            facts.append(Fact(f"{key}.sign", f"{body} is in {o['sign']}", src,
+                              {"sign": o["sign"], "degrees": o["signDegrees"]}))
+            facts.append(Fact(f"{key}.nakshatra", f"{body} is in {o['nakshatra']}, pada {o['pada']}", src,
+                              {"nakshatra": o["nakshatra"], "pada": o["pada"]}))
+            facts.append(Fact(f"{key}.house", f"{body} is in house {o['house']}", src,
+                              {"house": o["house"]}))
             if body not in ("Rahu", "Ketu") and o.get("motion_type") == "retrograde":
-                facts.append(Fact(
-                    f"{key}.retrograde", f"{body} is retrograde", src,
-                    {"motion": "retrograde"}))
+                facts.append(Fact(f"{key}.retrograde", f"{body} is retrograde", src,
+                                  {"motion": "retrograde"}))
             dignity = o.get("dignities", {}).get("dignity")
             if dignity:
                 words = DIGNITY_TEXT.get(dignity, dignity)
@@ -66,12 +61,14 @@ def planet_facts(chart: dict) -> list[Fact]:
                                   {"dignity": dignity}))
     return facts
 
+
 def _ordinal(n: int) -> str:
     if 10 <= n % 100 <= 20:
         suffix = "th"
     else:
         suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
     return f"{n}{suffix}"
+
 
 def aspect_facts(chart: dict) -> list[Fact]:
     facts = []
@@ -95,45 +92,31 @@ def aspect_facts(chart: dict) -> list[Fact]:
                                       {"from": body, "to_house": hn, "aspect": n}))
     return facts
 
-def _parse(s: str) -> date:
-    return date.fromisoformat(s)
-
-def _pick(periods: dict, as_of: date):
-    for name, p in periods.items():
-        if _parse(p["start"]) <= as_of < _parse(p["end"]):
-            return name, p
-    return None, None
 
 def dasha_facts(chart: dict, as_of: date | None = None) -> list[Fact]:
+    """Vimshottari dasha, computed from the Moon (see dasha.py and ADR-0003)."""
     facts = []
-    d = chart.get("dashas")
-    if not d:
+    try:
+        i, j, _ = find_moon(chart)
+    except ValueError:
         return facts
-    for planet, years in (d.get("balance") or {}).items():
-        facts.append(Fact("dasha.balance",
-                          f"Dasha balance at birth: {planet}, {years:.2f} years remaining",
-                          "dashas.balance", {"planet": planet, "years": years}))
+    src = f"d1Chart.houses[{i}].occupants[{j}]"
+    lord, balance, _ = mahadashas(chart)
+    facts.append(Fact("dasha.balance",
+                      f"Dasha balance at birth: {lord}, {balance:.2f} years remaining "
+                      f"(computed from the Moon's position)",
+                      src, {"planet": lord, "years": round(balance, 4)}))
     if as_of is None:
         return facts
-    src = "dashas.all.mahadashas"
-    levels = [("mahadasha", "Mahadasha", "antardashas"),
-              ("antardasha", "Antardasha", "pratyantardashas"),
-              ("pratyantardasha", "Pratyantardasha", None)]
-    periods = d["all"]["mahadashas"]
-    for fid, label, child_key in levels:
-        name, p = _pick(periods, as_of)
-        if p is None:
-            break
-        src = f"{src}.{name}"
+    for fid, label, p in zip(("mahadasha", "antardasha", "pratyantardasha"),
+                             ("Mahadasha", "Antardasha", "Pratyantardasha"),
+                             running(chart, as_of)):
+        start, end = p["start"].date().isoformat(), p["end"].date().isoformat()
         facts.append(Fact(f"dasha.{fid}",
-                          f"Running {label} as of {as_of.isoformat()}: {name}, "
-                          f"{p['start']} to {p['end']}",
-                          src, {"planet": name, "start": p["start"], "end": p["end"]}))
-        if child_key is None:
-            break
-        periods = p.get(child_key) or {}
-        src = f"{src}.{child_key}"
+                          f"Running {label} as of {as_of.isoformat()}: {p['lord']}, {start} to {end}",
+                          src, {"planet": p["lord"], "start": start, "end": end}))
     return facts
+
 
 def build_facts(chart: dict, as_of: date | None = None) -> list[Fact]:
     return (lagna_facts(chart) + planet_facts(chart)
