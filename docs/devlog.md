@@ -49,3 +49,8 @@ Newest entries at the bottom.
 - Issue #10: drishti (aspect) facts from the library's `aspects` / `aspectsReceived` data.
 - Issue #11: current dasha facts, and the dasha balance and end-date comparison with JHora.
 - Issue #12: `facts` CLI command, ADR-0003 (fact format), README example, CHANGELOG, tag v0.2.0.
+### 2026-11-16 - Aspect facts (issue #10)
+- The library already provides aspects: each planet has `aspects.gives` (target planet or house plus `aspect_type`), and each house has `aspectsReceived`. We turn that data into facts and compute nothing ourselves.
+- `aspect_type` is the house count from the planet (7 = opposite house). A test checks this on all three fixtures.
+- Rahu and Ketu get 5th, 7th and 9th aspects from the library. Traditions differ on whether the nodes aspect at all, so the text only reports what the library says.
+- 23 tests passing.

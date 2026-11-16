@@ -65,6 +65,35 @@ def planet_facts(chart: dict) -> list[Fact]:
                                   {"dignity": dignity}))
     return facts
 
+def _ordinal(n: int) -> str:
+    if 10 <= n % 100 <= 20:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n}{suffix}"
+
+def aspect_facts(chart: dict) -> list[Fact]:
+    facts = []
+    for i, h in enumerate(_houses(chart)):
+        for j, o in enumerate(h.get("occupants", [])):
+            body = o["celestialBody"]
+            key = body.lower()
+            gives = (o.get("aspects") or {}).get("gives", [])
+            for k, a in enumerate(gives):
+                n = int(a["aspect_type"])
+                src = f"d1Chart.houses[{i}].occupants[{j}].aspects.gives[{k}]"
+                if "to_planet" in a:
+                    target = a["to_planet"]
+                    facts.append(Fact(f"{key}.aspect.{target.lower()}",
+                                      f"{body} aspects {target} ({_ordinal(n)} aspect)", src,
+                                      {"from": body, "to_planet": target, "aspect": n}))
+                elif "to_house" in a:
+                    hn = a["to_house"]
+                    facts.append(Fact(f"{key}.aspect.house{hn}",
+                                      f"{body} aspects house {hn} ({_ordinal(n)} aspect)", src,
+                                      {"from": body, "to_house": hn, "aspect": n}))
+    return facts
+
 
 def build_facts(chart: dict) -> list[Fact]:
-    return lagna_facts(chart) + planet_facts(chart)
+    return lagna_facts(chart) + planet_facts(chart) + aspect_facts(chart)
