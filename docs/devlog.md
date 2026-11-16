@@ -49,8 +49,16 @@ Newest entries at the bottom.
 - Issue #10: drishti (aspect) facts from the library's `aspects` / `aspectsReceived` data.
 - Issue #11: current dasha facts, and the dasha balance and end-date comparison with JHora.
 - Issue #12: `facts` CLI command, ADR-0003 (fact format), README example, CHANGELOG, tag v0.2.0.
+
 ### 2026-11-16 - Aspect facts (issue #10)
 - The library already provides aspects: each planet has `aspects.gives` (target planet or house plus `aspect_type`), and each house has `aspectsReceived`. We turn that data into facts and compute nothing ourselves.
 - `aspect_type` is the house count from the planet (7 = opposite house). A test checks this on all three fixtures.
 - Rahu and Ketu get 5th, 7th and 9th aspects from the library. Traditions differ on whether the nodes aspect at all, so the text only reports what the library says.
 - 23 tests passing.
+
+### 2026-11-16 - Dasha facts (issue #11)
+- Library dasha data: `dashas.balance` (birth-nakshatra lord and years remaining) and `dashas.all.mahadashas`, nested Mahadasha > Antardasha > Pratyantardasha, each with ISO `start` and `end` dates. It has no "current dasha" marker.
+- Facts: `dasha.balance` always; running `dasha.mahadasha`, `dasha.antardasha` and `dasha.pratyantardasha` only when `build_facts(chart, as_of=date)` is given a date. Readings stay reproducible because nothing depends on today's date.
+- Chart 1 balance is consistent with 365.25-day years (Mercury ends 2000-12-02, minus 2.5555 years = birth date).
+- Still open: the ~9 day gap to JHora (see below).
+- 31 tests passing.

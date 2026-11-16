@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import date
 
 
 @dataclass
@@ -94,6 +95,46 @@ def aspect_facts(chart: dict) -> list[Fact]:
                                       {"from": body, "to_house": hn, "aspect": n}))
     return facts
 
+def _parse(s: str) -> date:
+    return date.fromisoformat(s)
 
-def build_facts(chart: dict) -> list[Fact]:
-    return lagna_facts(chart) + planet_facts(chart) + aspect_facts(chart)
+def _pick(periods: dict, as_of: date):
+    for name, p in periods.items():
+        if _parse(p["start"]) <= as_of < _parse(p["end"]):
+            return name, p
+    return None, None
+
+def dasha_facts(chart: dict, as_of: date | None = None) -> list[Fact]:
+    facts = []
+    d = chart.get("dashas")
+    if not d:
+        return facts
+    for planet, years in (d.get("balance") or {}).items():
+        facts.append(Fact("dasha.balance",
+                          f"Dasha balance at birth: {planet}, {years:.2f} years remaining",
+                          "dashas.balance", {"planet": planet, "years": years}))
+    if as_of is None:
+        return facts
+    src = "dashas.all.mahadashas"
+    levels = [("mahadasha", "Mahadasha", "antardashas"),
+              ("antardasha", "Antardasha", "pratyantardashas"),
+              ("pratyantardasha", "Pratyantardasha", None)]
+    periods = d["all"]["mahadashas"]
+    for fid, label, child_key in levels:
+        name, p = _pick(periods, as_of)
+        if p is None:
+            break
+        src = f"{src}.{name}"
+        facts.append(Fact(f"dasha.{fid}",
+                          f"Running {label} as of {as_of.isoformat()}: {name}, "
+                          f"{p['start']} to {p['end']}",
+                          src, {"planet": name, "start": p["start"], "end": p["end"]}))
+        if child_key is None:
+            break
+        periods = p.get(child_key) or {}
+        src = f"{src}.{child_key}"
+    return facts
+
+def build_facts(chart: dict, as_of: date | None = None) -> list[Fact]:
+    return (lagna_facts(chart) + planet_facts(chart)
+            + aspect_facts(chart) + dasha_facts(chart, as_of))
