@@ -4,7 +4,8 @@ Run:  uvicorn ketana_drishti.api:app --reload      (then open http://127.0.0.1:8
 """
 import datetime as dt
 import logging
-from dataclasses import asdict
+import os
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -13,11 +14,13 @@ from pydantic import BaseModel, Field, model_validator
 
 from .chart import build_chart
 from .facts import build_facts
+from .llm import ClaudeClient, FakeClient, LLMError
+from .reading import LANGUAGES, ReadingError, generate_reading
 
 log = logging.getLogger("ketana_drishti.api")
 WEB_DIR = Path(__file__).resolve().parents[2] / "web"
 
-app = FastAPI(title="Ketana Drishti", version="0.2.0")
+app = FastAPI(title="Ketana Drishti", version="0.3.0")
 
 
 class ChartRequest(BaseModel):
@@ -59,6 +62,60 @@ def chart(req: ChartRequest):
     as_of = req.as_of or dt.date.today()
     facts = [asdict(f) for f in build_facts(result, as_of)]
     return {"chart": result, "facts": facts}
+
+
+class FactIn(BaseModel):
+    id: str = Field(min_length=1, max_length=80)
+    text: str = Field(min_length=1, max_length=500)
+
+
+class ReadingRequest(BaseModel):
+    facts: list[FactIn] = Field(min_length=1, max_length=400)
+    language: str = "en"
+    question: str | None = Field(default=None, max_length=200)
+
+
+@dataclass
+class _F:
+    id: str
+    text: str
+
+
+def demo_enabled() -> bool:
+    return os.environ.get("KETANA_DEMO", "").strip() == "1"
+
+
+def make_client(facts):
+    """Real Claude client, or a free scripted one when KETANA_DEMO=1."""
+    if demo_enabled():
+        picked = [f for f in facts][:3]
+        return FakeClient([{"statements": [
+            {"text": "Demo mode (no AI used): " + f.text, "fact_ids": [f.id]} for f in picked
+        ]}])
+    return ClaudeClient()
+
+
+@app.post("/api/reading")
+def reading(req: ReadingRequest):
+    if req.language not in LANGUAGES:
+        raise HTTPException(400, "Language must be one of: " + ", ".join(sorted(LANGUAGES)) + ".")
+    facts = [_F(f.id, f.text) for f in req.facts]
+    try:
+        client = make_client(facts)
+        r = generate_reading(client, facts, language=req.language, question=req.question)
+    except LLMError as e:
+        raise HTTPException(503, str(e))
+    except ReadingError as e:
+        raise HTTPException(502, str(e))
+    return {
+        "statements": [{"text": s.text, "fact_ids": s.fact_ids} for s in r.statements],
+        "disclaimer": r.disclaimer,
+        "language": r.language,
+        "model": r.model,
+        "demo": demo_enabled(),
+        "retried": r.retried,
+        "dropped": r.dropped,
+    }
 
 
 if WEB_DIR.is_dir():

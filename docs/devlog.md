@@ -72,3 +72,11 @@ Newest entries at the bottom.
 
 ### 2026-11-16 - Licence corrected
 - The repo is MIT (LICENSE file); ADR-0001 said AGPL-3.0. Updated the docs to match.
+
+## 2026-11-16: Phase 3, LLM layer
+
+- Wrote the Claude client wrapper with a fake for offline tests. Hit two setup problems: pasted the key ID instead of the secret (`apikey_...` vs `sk-ant-...`), and then a "credit balance too low" error. Made client errors show Anthropic's own message, never the key.
+- Built the grounded reading flow: facts in, tool call out, citation check, one retry, disclaimer from code.
+- Added `/api/reading`, the Reading tab, and a free demo mode so the feature can be shown without credit.
+- Decided not to buy credit yet; the live-model choice moves to Phase 6 (ADR-0004).
+- Lesson: an exposed key must be deleted at once, and secrets belong only in `.env`.

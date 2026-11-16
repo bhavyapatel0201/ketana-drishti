@@ -1,0 +1,56 @@
+import pytest
+from fastapi.testclient import TestClient
+
+from ketana_drishti import api
+from ketana_drishti.llm import FakeClient, LLMError
+
+client = TestClient(api.app)
+FACTS = [{"id": "moon.sign", "text": "The Moon is in Scorpio."},
+         {"id": "lagna.sign", "text": "The Lagna is Gemini."}]
+
+
+def post(**over):
+    body = {"facts": FACTS, "language": "en", **over}
+    return client.post("/api/reading", json=body)
+
+
+def test_demo_mode_needs_no_key(monkeypatch):
+    monkeypatch.setenv("KETANA_DEMO", "1")
+    r = post()
+    assert r.status_code == 200
+    d = r.json()
+    assert d["demo"] is True and d["statements"]
+    assert d["statements"][0]["fact_ids"] == ["moon.sign"]
+    assert "not medical" in d["disclaimer"]
+
+
+def test_real_path_uses_client_and_checks(monkeypatch):
+    monkeypatch.delenv("KETANA_DEMO", raising=False)
+    fake = FakeClient([{"statements": [{"text": "Thoughtful.", "fact_ids": ["moon.sign"]}]}])
+    monkeypatch.setattr(api, "make_client", lambda facts: fake)
+    r = post(question="my mind")
+    assert r.status_code == 200 and r.json()["demo"] is False
+    assert "my mind" in fake.calls[0]["user"]
+
+
+def test_uncited_answer_is_rejected(monkeypatch):
+    monkeypatch.delenv("KETANA_DEMO", raising=False)
+    bad = {"statements": [{"text": "Invented.", "fact_ids": ["nope"]}]}
+    monkeypatch.setattr(api, "make_client", lambda facts: FakeClient([bad, bad]))
+    assert post().status_code == 502
+
+
+def test_llm_failure_is_503_with_message(monkeypatch):
+    monkeypatch.delenv("KETANA_DEMO", raising=False)
+
+    def boom(facts):
+        raise LLMError("Your credit balance is too low")
+
+    monkeypatch.setattr(api, "make_client", boom)
+    r = post()
+    assert r.status_code == 503 and "credit balance" in r.json()["detail"]
+
+
+def test_bad_language_and_empty_facts():
+    assert post(language="fr").status_code == 400
+    assert client.post("/api/reading", json={"facts": []}).status_code == 422

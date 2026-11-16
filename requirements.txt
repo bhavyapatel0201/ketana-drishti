@@ -2,3 +2,8 @@ jyotishganit
 geopy
 timezonefinder
 pytest
+anthropic>=2.9
+python-dotenv>=1.2
+fastapi
+uvicorn
+httpx
