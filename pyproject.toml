@@ -1,0 +1,11 @@
+[project]
+name = "ketana-drishti"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = ["jyotishganit", "geopy", "timezonefinder"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
