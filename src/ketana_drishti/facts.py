@@ -12,6 +12,14 @@ class Fact:
 def _houses(chart: dict) -> list:
     return chart["d1Chart"]["houses"]
 
+DIGNITY_TEXT = {
+    "exalted": "exalted",
+    "debilitated": "debilitated",
+    "own_sign": "in its own sign",
+    "moolatrikona": "in its moolatrikona sign",
+    "neutral": "neutral (no special dignity)",
+}
+
 
 def lagna_facts(chart: dict) -> list[Fact]:
     facts = []
@@ -52,9 +60,9 @@ def planet_facts(chart: dict) -> list[Fact]:
                     {"motion": "retrograde"}))
             dignity = o.get("dignities", {}).get("dignity")
             if dignity:
-                facts.append(Fact(
-                    f"{key}.dignity", f"{body} is {dignity}", src,
-                    {"dignity": dignity}))
+                words = DIGNITY_TEXT.get(dignity, dignity)
+                facts.append(Fact(f"{key}.dignity", f"{body} is {words}", src,
+                                  {"dignity": dignity}))
     return facts
 
 
