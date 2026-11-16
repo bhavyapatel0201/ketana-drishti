@@ -69,3 +69,6 @@ Newest entries at the bottom.
 
 ### Next
 - Phase 3, LLM layer (v0.3.0): a Claude client that may only use the facts, a citation checker, guardrails, ADR-0004.
+
+### 2026-11-16 - Licence corrected
+- The repo is MIT (LICENSE file); ADR-0001 said AGPL-3.0. Updated the docs to match.
