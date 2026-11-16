@@ -16,3 +16,9 @@ Use jyotishganit. The repo is licensed AGPL-3.0, chosen at repo creation as a sa
 ## Consequences
 - jyotishganit and skyfield are permissively licensed, so the licence can be revisited.
 - The engine downloads planet ephemeris data and the Hipparcos catalog on first run.
+
+## Update 2026-11-16
+The repository is licensed under MIT (the `LICENSE` file), not AGPL-3.0 as first written.
+All current dependencies (jyotishganit, Skyfield, geopy, timezonefinder, FastAPI) are
+permissively licensed, so MIT is compatible. Revisit this if an AGPL library
+(e.g. Kerykeion or pyswisseph) is ever added.
