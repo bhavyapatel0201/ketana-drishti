@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ketana Drishti - Vedic birth chart</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%239a3b1f%27/%3E%3Cpath d=%27M16 5l11 11-11 11L5 16z%27 fill=%27none%27 stroke=%27white%27 stroke-width=%272%27/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1d2330; --muted:#667085; --line:#d9d4c7;
+  --accent:#9a3b1f; --accent-ink:#ffffff; --soft:#f0ebe0; --good:#1f7a4d; --bad:#b42318; --focus:#2a5bd7;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#14161c; --card:#1d2029; --ink:#eceef3; --muted:#9aa3b5; --line:#343948;
+    --accent:#e0825f; --accent-ink:#1b1209; --soft:#262a35; --good:#59c28d; --bad:#f08a80; --focus:#8fb0ff; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:1180px;margin:0 auto}
+h1{margin:0;font-size:1.6rem;letter-spacing:.01em}
+.tag{margin:2px 0 0;color:var(--muted);font-size:.95rem}
+main{max-width:1180px;margin:0 auto;padding:8px 16px 40px;display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+main>*,.chartwrap>*{min-width:0}
+@media (min-width:920px){ main{grid-template-columns:340px minmax(0,1fr);align-items:start} .form-card{position:sticky;top:12px} }
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+h2{margin:0 0 12px;font-size:1.05rem}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 4px}
+input,select,button{font:inherit;color:inherit}
+input[type=text],input[type=date],input[type=time],input[type=number],input[type=url],input[type=search]{
+  width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);min-height:44px}
+input:focus-visible,button:focus-visible,[tabindex]:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.row>div{min-width:0}
+input[type=date],input[type=time]{min-width:0;font-size:.95rem;padding:10px 8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--card);cursor:pointer}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600;width:100%;margin-top:16px}
+.btn:disabled{opacity:.6;cursor:progress}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn-row .btn{flex:1 1 130px;font-size:.9rem}
+.link{background:none;border:0;color:var(--accent);padding:6px 0;cursor:pointer;text-decoration:underline;min-height:0}
+.status{margin-top:12px;font-size:.92rem;min-height:1.3em}
+.status.err{color:var(--bad)} .status.ok{color:var(--good)}
+details{margin-top:12px;font-size:.9rem} summary{cursor:pointer;color:var(--muted)}
+.hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:var(--card);padding:0 14px;min-height:40px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.meta{color:var(--muted);font-size:.85rem;margin:0 0 8px}
+.chartwrap{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:1080px){ .chartwrap{grid-template-columns:minmax(0,520px) minmax(0,1fr)} }
+svg.chart{width:100%;max-width:520px;height:auto;display:block;margin:0 auto;touch-action:manipulation}
+svg .frame{fill:none;stroke:var(--ink);stroke-width:1.6}
+svg .cell{fill:transparent;cursor:pointer}
+svg .cell:hover,svg .cell.sel{fill:var(--soft)}
+svg .cell.lagna{fill:color-mix(in srgb,var(--accent) 10%,transparent)}
+svg .cell:focus-visible{outline:none;stroke:var(--focus);stroke-width:3}
+svg text{fill:var(--ink);font-family:inherit;pointer-events:none}
+svg .pl{font-size:13px;pointer-events:all;cursor:pointer}
+svg .pl.sel{font-weight:700;fill:var(--accent);text-decoration:underline}
+svg .pl:focus-visible{outline:none;text-decoration:underline}
+svg .sn{font-size:11px;fill:var(--muted)}
+svg .ctr{font-size:13px;fill:var(--muted)}
+.empty{padding:36px 12px;text-align:center;color:var(--muted)}
+.detail{background:var(--soft);border-radius:12px;padding:12px 14px;min-height:120px}
+.detail h3{margin:0 0 6px;font-size:1rem}
+.detail dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:.92rem}
+.detail dt{color:var(--muted)} .detail dd{margin:0}
+.legend{font-size:.8rem;color:var(--muted);margin-top:8px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:18px 0 12px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:10px 14px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;min-height:44px}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+tbody tr{cursor:pointer} tbody tr:hover,tbody tr.sel{background:var(--soft)}
+.facts{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.facts li{border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.facts code{font-size:.78rem;color:var(--muted);word-break:break-all}
+.facts .id{font-weight:600;font-size:.82rem;color:var(--accent)}
+.cards{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.cards .c{border:1px solid var(--line);border-radius:12px;padding:12px}
+.cards .c b{display:block;font-size:1.05rem}
+.cards .c span{color:var(--muted);font-size:.85rem}
+.badge{display:inline-block;padding:0 8px;border-radius:999px;font-size:.75rem;background:var(--soft);margin-left:4px}
+footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);font-size:.8rem}
+.sr{position:absolute;left:-9999px}
+@media print{ .form-card,.tabs,.btn-row,.seg,footer{display:none} main{display:block} body{background:#fff} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ketana Drishti</h1>
+  <p class="tag">Grounded readings: compute first, cite everything. Vedic (sidereal) birth chart, Lahiri ayanamsa.</p>
+</header>
+<main>
+  <section class="card form-card" aria-labelledby="fh">
+    <h2 id="fh">Birth details</h2>
+    <form id="form" novalidate>
+      <label for="name">Name (optional)</label>
+      <input id="name" type="text" maxlength="80" autocomplete="off">
+      <div class="row">
+        <div><label for="date">Date of birth</label><input id="date" type="date" required min="1900-01-01"></div>
+        <div><label for="time">Time of birth</label><input id="time" type="time" step="1" required></div>
+      </div>
+      <div id="placeBlock">
+        <label for="place">Place of birth</label>
+        <input id="place" type="text" placeholder="City, Country" autocomplete="off">
+        <button type="button" class="link" id="toCoords">Enter latitude and longitude instead</button>
+      </div>
+      <div id="coordBlock" hidden>
+        <div class="row">
+          <div><label for="lat">Latitude</label><input id="lat" type="number" step="any" min="-90" max="90" placeholder="23.03"></div>
+          <div><label for="lon">Longitude</label><input id="lon" type="number" step="any" min="-180" max="180" placeholder="72.58"></div>
+        </div>
+        <p class="hint">North and East are positive; South and West are negative.</p>
+        <button type="button" class="link" id="toPlace">Use a place name instead</button>
+      </div>
+      <label for="asof">Dasha as of</label>
+      <input id="asof" type="date">
+      <button class="btn primary" id="go" type="submit">Generate chart</button>
+      <div class="btn-row">
+        <button type="button" class="btn" id="sample">Try sample</button>
+        <button type="button" class="btn" id="loadBtn">Load chart JSON</button>
+      </div>
+      <input id="file" type="file" accept="application/json,.json" hidden>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+      <details>
+        <summary>Advanced</summary>
+        <label for="api">Server URL</label>
+        <input id="api" type="url" placeholder="same server (default)">
+        <p class="hint">Leave empty when this page is served by the Ketana Drishti server. Birth details go only to that server; the place name is looked up with OpenStreetMap Nominatim.</p>
+      </details>
+    </form>
+  </section>
+
+  <section class="card" id="result" aria-labelledby="rh">
+    <h2 id="rh">Your chart</h2>
+    <div id="empty" class="empty">Enter your birth details and press <b>Generate chart</b>, or press <b>Try sample</b> to explore.</div>
+    <div id="out" hidden>
+      <div class="chart-head">
+        <div><strong id="title"></strong><p class="meta" id="meta"></p></div>
+        <div class="seg" role="group" aria-label="Chart style">
+          <button type="button" id="sN" aria-pressed="true">North Indian</button>
+          <button type="button" id="sS" aria-pressed="false">South Indian</button>
+        </div>
+      </div>
+      <div class="chartwrap">
+        <div>
+          <div id="chartHost"></div>
+          <p class="legend">↑ exalted · ↓ debilitated · ● own sign · ◆ moolatrikona · ᴿ retrograde. Tap a house or planet for details.</p>
+        </div>
+        <div class="detail" id="detail" aria-live="polite"></div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Chart data">
+        <button role="tab" id="t1" aria-selected="true" aria-controls="p1">Planets</button>
+        <button role="tab" id="t2" aria-selected="false" aria-controls="p2">Facts</button>
+        <button role="tab" id="t3" aria-selected="false" aria-controls="p3">Dasha</button>
+      </div>
+      <div id="p1" role="tabpanel" aria-labelledby="t1"></div>
+      <div id="p2" role="tabpanel" aria-labelledby="t2" hidden></div>
+      <div id="p3" role="tabpanel" aria-labelledby="t3" hidden></div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="dl">Download chart JSON</button>
+        <button type="button" class="btn" id="print">Print</button>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>For reflection and entertainment only. Astrology has no validated predictive evidence; this tool makes no health, money or relationship predictions.</footer>
+
+<script>
+"use strict";
+const SIGNS=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+const ABBR={Sun:"Su",Moon:"Mo",Mars:"Ma",Mercury:"Me",Jupiter:"Ju",Venus:"Ve",Saturn:"Sa",Rahu:"Ra",Ketu:"Ke"};
+const DIGN={exalted:["↑","exalted"],debilitated:["↓","debilitated"],own_sign:["●","own sign"],moolatrikona:["◆","moolatrikona"]};
+const NORTH={
+  1:{p:"200,200 100,100 200,0 300,100",c:[200,80],n:[200,166]},
+  2:{p:"0,0 200,0 100,100",c:[100,38],n:[100,80]},
+  3:{p:"0,0 100,100 0,200",c:[38,100],n:[76,100]},
+  4:{p:"0,200 100,100 200,200 100,300",c:[88,200],n:[158,200]},
+  5:{p:"0,200 100,300 0,400",c:[38,300],n:[76,300]},
+  6:{p:"0,400 100,300 200,400",c:[100,360],n:[100,322]},
+  7:{p:"200,400 100,300 200,200 300,300",c:[200,320],n:[200,238]},
+  8:{p:"200,400 300,300 400,400",c:[300,360],n:[300,322]},
+  9:{p:"400,400 300,300 400,200",c:[362,300],n:[324,300]},
+  10:{p:"400,200 300,300 200,200 300,100",c:[312,200],n:[242,200]},
+  11:{p:"400,200 300,100 400,0",c:[362,100],n:[324,100]},
+  12:{p:"400,0 300,100 200,0",c:[300,38],n:[300,80]}
+};
+const SOUTH={Pisces:[0,0],Aries:[0,1],Taurus:[0,2],Gemini:[0,3],Cancer:[1,3],Leo:[2,3],Virgo:[3,3],Libra:[3,2],Scorpio:[3,1],Sagittarius:[3,0],Capricorn:[2,0],Aquarius:[1,0]};
+const $=id=>document.getElementById(id);
+const state={chart:null,facts:[],model:null,style:"north",sel:null};
+
+function el(tag,attrs,text){
+  const ns=["svg","g","polygon","rect","line","text"].includes(tag)?"http://www.w3.org/2000/svg":null;
+  const e=ns?document.createElementNS(ns,tag):document.createElement(tag);
+  for(const k in (attrs||{})) e.setAttribute(k,attrs[k]);
+  if(text!==undefined) e.textContent=text;
+  return e;
+}
+function dms(x){
+  let d=Math.floor(x), m=Math.floor((x-d)*60), s=Math.round(((x-d)*60-m)*60);
+  if(s===60){s=0;m++} if(m===60){m=0;d++}
+  return d+"° "+String(m).padStart(2,"0")+"′ "+String(s).padStart(2,"0")+"″";
+}
+function ordinal(n){const s=["th","st","nd","rd"],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])}
+
+function toModel(chart){
+  const hs=(chart.d1Chart&&chart.d1Chart.houses)||[];
+  if(hs.length!==12) throw new Error("This file does not look like a Ketana Drishti chart.");
+  const houses=hs.slice().sort((a,b)=>a.number-b.number).map(h=>({
+    num:h.number,sign:h.sign,signIdx:SIGNS.indexOf(h.sign),deg:h.signDegrees,nak:h.nakshatra,pada:h.pada,
+    planets:(h.occupants||[]).map(o=>({name:o.celestialBody,sign:o.sign,deg:o.signDegrees,nak:o.nakshatra,pada:o.pada,
+      house:o.house,retro:o.motion_type==="retrograde"&&o.celestialBody!=="Rahu"&&o.celestialBody!=="Ketu",
+      dignity:(o.dignities&&o.dignities.dignity)||null,aspects:o.aspects||null}))
+  }));
+  return {houses,lagna:houses[0]};
+}
+function label(p){
+  const d=DIGN[p.dignity];
+  return (ABBR[p.name]||p.name.slice(0,2))+(p.retro?"ᴿ":"")+(d?d[0]:"")+" "+Math.floor(p.deg)+"°";
+}
+
+/* ---------- chart drawing ---------- */
+function drawHouseText(g,h,cx,cy,sx,sy,small){
+  const lines=[]; if(h.num===1) lines.push({t:"Asc "+Math.floor(h.deg)+"°",lagna:true});
+  h.planets.forEach(p=>lines.push({t:label(p),p}));
+  const lh=small?12:15, fs=small?11:13;
+  let y=cy-((lines.length-1)*lh)/2+4;
+  lines.forEach(L=>{
+    const t=el("text",{x:cx,y:y,"text-anchor":"middle","font-size":fs,class:L.p?"pl":"pl"},L.t);
+    if(L.p){
+      t.setAttribute("tabindex","0"); t.setAttribute("role","button");
+      t.setAttribute("aria-label",L.p.name+" in "+L.p.sign+", house "+L.p.house);
+      t.dataset.planet=L.p.name;
+      t.addEventListener("click",ev=>{ev.stopPropagation();select({type:"planet",name:L.p.name})});
+      t.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();select({type:"planet",name:L.p.name})}});
+    } else { t.setAttribute("class","pl"); t.style.pointerEvents="none"; t.style.cursor="default"; }
+    g.appendChild(t); y+=lh;
+  });
+  g.appendChild(el("text",{x:sx,y:sy+4,"text-anchor":"middle",class:"sn"},String(h.signIdx+1)));
+}
+function renderNorth(m){
+  const svg=el("svg",{viewBox:"0 0 400 400",class:"chart",role:"img","aria-label":"North Indian style birth chart"});
+  m.houses.forEach(h=>{
+    const d=NORTH[h.num];
+    const poly=el("polygon",{points:d.p,class:"cell"+(h.num===1?" lagna":""),tabindex:"0",role:"button","aria-label":"House "+h.num+", "+h.sign});
+    poly.dataset.house=h.num;
+    poly.addEventListener("click",()=>select({type:"house",num:h.num}));
+    poly.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();select({type:"house",num:h.num})}});
+    svg.appendChild(poly);
+  });
+  svg.appendChild(el("rect",{x:1,y:1,width:398,height:398,class:"frame"}));
+  svg.appendChild(el("line",{x1:0,y1:0,x2:400,y2:400,class:"frame"}));
+  svg.appendChild(el("line",{x1:400,y1:0,x2:0,y2:400,class:"frame"}));
+  svg.appendChild(el("polygon",{points:"200,0 400,200 200,400 0,200",class:"frame"}));
+  m.houses.forEach(h=>{const d=NORTH[h.num];const g=el("g");drawHouseText(g,h,d.c[0],d.c[1],d.n[0],d.n[1],h.planets.length>4);svg.appendChild(g)});
+  return svg;
+}
+function renderSouth(m){
+  const svg=el("svg",{viewBox:"0 0 400 400",class:"chart",role:"img","aria-label":"South Indian style birth chart"});
+  const bySign={}; m.houses.forEach(h=>bySign[h.sign]=h);
+  SIGNS.forEach(s=>{
+    const [r,c]=SOUTH[s], x=c*100, y=r*100, h=bySign[s];
+    const rect=el("rect",{x:x,y:y,width:100,height:100,class:"cell frame"+(h&&h.num===1?" lagna":""),tabindex:"0",role:"button","aria-label":s+(h?", house "+h.num:"")});
+    rect.style.strokeWidth="1.2";
+    rect.addEventListener("click",()=>h&&select({type:"house",num:h.num}));
+    rect.addEventListener("keydown",ev=>{if((ev.key==="Enter"||ev.key===" ")&&h){ev.preventDefault();select({type:"house",num:h.num})}});
+    if(h) rect.dataset.house=h.num;
+    svg.appendChild(rect);
+    svg.appendChild(el("text",{x:x+6,y:y+14,class:"sn"},s.slice(0,3)));
+    if(h){
+      if(h.num===1) svg.appendChild(el("line",{x1:x,y1:y,x2:x+18,y2:y+18,class:"frame"}));
+      const g=el("g"); const pl=h.planets.length+(h.num===1?1:0);
+      const lines=[]; if(h.num===1) lines.push({t:"Asc "+Math.floor(h.deg)+"°"}); h.planets.forEach(p=>lines.push({t:label(p),p}));
+      const small=pl>4, lh=small?12:15, fs=small?10.5:13; let yy=y+36;
+      lines.forEach(L=>{
+        const t=el("text",{x:x+50,y:yy,"text-anchor":"middle","font-size":fs,class:"pl"},L.t);
+        if(L.p){t.setAttribute("tabindex","0");t.setAttribute("role","button");t.setAttribute("aria-label",L.p.name+" in "+L.p.sign);t.dataset.planet=L.p.name;
+          t.addEventListener("click",ev=>{ev.stopPropagation();select({type:"planet",name:L.p.name})});
+          t.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();select({type:"planet",name:L.p.name})}});}
+        else t.style.pointerEvents="none";
+        g.appendChild(t); yy+=lh;
+      });
+      svg.appendChild(g);
+    }
+  });
+  const t=el("text",{x:200,y:196,"text-anchor":"middle",class:"ctr"},"Rasi");
+  svg.appendChild(t);
+  svg.appendChild(el("text",{x:200,y:216,"text-anchor":"middle",class:"ctr"},"Lagna: "+m.lagna.sign));
+  return svg;
+}
+function drawChart(){
+  const host=$("chartHost"); host.replaceChildren();
+  host.appendChild(state.style==="north"?renderNorth(state.model):renderSouth(state.model));
+  markSelection();
+}
+
+/* ---------- selection and details ---------- */
+function planetByName(n){for(const h of state.model.houses)for(const p of h.planets)if(p.name===n)return p;return null}
+function select(s){state.sel=s;markSelection();renderDetail();renderPlanets()}
+function markSelection(){
+  document.querySelectorAll("svg .sel").forEach(n=>n.classList.remove("sel"));
+  const s=state.sel; if(!s)return;
+  if(s.type==="planet"){document.querySelectorAll('svg [data-planet="'+s.name+'"]').forEach(n=>n.classList.add("sel"))}
+  else document.querySelectorAll('svg [data-house="'+s.num+'"]').forEach(n=>n.classList.add("sel"));
+}
+function addDl(dl,k,v){dl.appendChild(el("dt",null,k));dl.appendChild(el("dd",null,v))}
+function aspText(a){
+  const n=ordinal(parseInt(a.aspect_type,10));
+  return (a.to_planet?a.to_planet:"house "+a.to_house)+" ("+n+")";
+}
+function renderDetail(){
+  const box=$("detail"); box.replaceChildren(); const s=state.sel;
+  if(!s){box.appendChild(el("h3",null,"Details"));box.appendChild(el("p",null,"Select a house or a planet in the chart or table."));return}
+  const dl=el("dl");
+  if(s.type==="planet"){
+    const p=planetByName(s.name); if(!p)return;
+    box.appendChild(el("h3",null,p.name));
+    addDl(dl,"Sign",p.sign); addDl(dl,"Position",dms(p.deg)); addDl(dl,"Nakshatra",p.nak+", pada "+p.pada);
+    addDl(dl,"House",String(p.house));
+    addDl(dl,"Dignity",DIGN[p.dignity]?DIGN[p.dignity][1]:(p.dignity?p.dignity.replace("_"," "):"none"));
+    addDl(dl,"Motion",p.retro?"retrograde":(p.name==="Rahu"||p.name==="Ketu"?"node":"direct"));
+    const g=p.aspects&&p.aspects.gives; if(g&&g.length) addDl(dl,"Aspects",g.map(aspText).join(", "));
+    const r=p.aspects&&p.aspects.receives; if(r&&r.length) addDl(dl,"Aspected by",r.map(a=>(a.from_planet||"?")+" ("+ordinal(parseInt(a.aspect_type,10))+")").join(", "));
+  } else {
+    const h=state.model.houses.find(x=>x.num===s.num); if(!h)return;
+    box.appendChild(el("h3",null,"House "+h.num+(h.num===1?" (Lagna)":"")));
+    addDl(dl,"Sign",h.sign+" (sign "+(h.signIdx+1)+")");
+    if(h.num===1){addDl(dl,"Lagna",dms(h.deg));addDl(dl,"Nakshatra",h.nak+", pada "+h.pada)}
+    addDl(dl,"Planets",h.planets.length?h.planets.map(p=>p.name).join(", "):"none");
+  }
+  box.appendChild(dl);
+}
+
+/* ---------- tables and panels ---------- */
+function renderPlanets(){
+  const host=$("p1"); host.replaceChildren();
+  const wrap=el("div",{class:"tablewrap"}); const t=el("table"); const th=el("thead"); const tr=el("tr");
+  ["Planet","Sign","Position","Nakshatra","House","Status"].forEach(c=>tr.appendChild(el("th",null,c)));
+  th.appendChild(tr); t.appendChild(th); const tb=el("tbody");
+  const lag=state.model.lagna, rows=[{name:"Lagna",sign:lag.sign,deg:lag.deg,nak:lag.nak,pada:lag.pada,house:1,status:""}];
+  state.model.houses.forEach(h=>h.planets.forEach(p=>rows.push({name:p.name,sign:p.sign,deg:p.deg,nak:p.nak,pada:p.pada,house:p.house,
+    status:[p.retro?"retrograde":"",DIGN[p.dignity]?DIGN[p.dignity][1]:""].filter(Boolean).join(", ")})));
+  rows.forEach(r=>{
+    const row=el("tr",{tabindex:"0"}); if(state.sel&&state.sel.type==="planet"&&state.sel.name===r.name) row.className="sel";
+    [r.name,r.sign,dms(r.deg),r.nak+" ("+r.pada+")",String(r.house),r.status].forEach(c=>row.appendChild(el("td",null,c)));
+    const go=()=>select(r.name==="Lagna"?{type:"house",num:1}:{type:"planet",name:r.name});
+    row.addEventListener("click",go); row.addEventListener("keydown",ev=>{if(ev.key==="Enter"){go()}});
+    tb.appendChild(row);
+  });
+  t.appendChild(tb); wrap.appendChild(t); host.appendChild(wrap);
+}
+function renderFacts(q){
+  const host=$("p2"); host.replaceChildren();
+  if(!state.facts.length){host.appendChild(el("p",{class:"empty"},"Facts are produced by the server. Generate a chart through the server to see them here."));return}
+  const f=el("input",{type:"search",placeholder:"Filter facts (e.g. moon, retrograde, dasha)","aria-label":"Filter facts"}); f.value=q||"";
+  host.appendChild(f); const ul=el("ul",{class:"facts"}); host.appendChild(ul);
+  const draw=()=>{ul.replaceChildren();const k=f.value.trim().toLowerCase();
+    state.facts.filter(x=>!k||(x.id+" "+x.text).toLowerCase().includes(k)).forEach(x=>{
+      const li=el("li"); li.appendChild(el("div",{class:"id"},x.id)); li.appendChild(el("div",null,x.text)); li.appendChild(el("code",null,x.source)); ul.appendChild(li)})};
+  f.addEventListener("input",draw); draw();
+}
+function renderDasha(){
+  const host=$("p3"); host.replaceChildren();
+  const ds=state.facts.filter(f=>f.id.indexOf("dasha.")===0);
+  if(!ds.length){host.appendChild(el("p",{class:"empty"},"Dasha facts are produced by the server."));return}
+  const cards=el("div",{class:"cards"});
+  ds.forEach(f=>{const c=el("div",{class:"c"});
+    const title={"dasha.balance":"Balance at birth","dasha.mahadasha":"Mahadasha","dasha.antardasha":"Antardasha","dasha.pratyantardasha":"Pratyantardasha"}[f.id]||f.id;
+    c.appendChild(el("span",null,title));
+    c.appendChild(el("b",null,f.values&&f.values.planet?f.values.planet:""));
+    c.appendChild(el("span",null,f.values&&f.values.start?f.values.start+" to "+f.values.end:(f.values&&f.values.years!==undefined?f.values.years+" years remaining":"")));
+    cards.appendChild(c)});
+  host.appendChild(cards);
+  host.appendChild(el("p",{class:"hint"},"Computed from the Moon's longitude (Vimshottari, 365.2422-day years). Periods are shown from the as-of date."));
+}
+function setTab(n){
+  [1,2,3].forEach(i=>{$("t"+i).setAttribute("aria-selected",String(i===n));$("p"+i).hidden=i!==n});
+}
+
+/* ---------- show a chart ---------- */
+function show(chart,facts,titleText){
+  state.chart=chart; state.facts=facts||[]; state.model=toModel(chart); state.sel=null;
+  $("empty").hidden=true; $("out").hidden=false;
+  $("title").textContent=titleText||"Birth chart";
+  const i=chart._input, parts=[];
+  if(i){ if(i.datetime)parts.push(i.datetime.replace("T"," ")); if(i.timezone)parts.push(i.timezone+(i.utc_offset_hours!==undefined?" (UTC"+(i.utc_offset_hours>=0?"+":"")+i.utc_offset_hours+")":""));
+    if(i.lat!==undefined)parts.push(Number(i.lat).toFixed(3)+", "+Number(i.lon).toFixed(3)); }
+  if(chart.ayanamsa&&chart.ayanamsa.name) parts.push("Ayanamsa: "+chart.ayanamsa.name);
+  $("meta").textContent=parts.join(" · ");
+  drawChart(); renderDetail(); renderPlanets(); renderFacts(); renderDasha();
+  $("result").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- sample data (abbreviated, for exploring the interface) ---------- */
+function sampleChart(){
+  const lag=2, P=[
+    ["Rahu","Leo",12.8542,"Magha",4,"retrograde","neutral"],["Moon","Scorpio",27.9706,"Jyeshtha",4,"direct","debilitated"],
+    ["Jupiter","Aquarius",28.1139,"Purva Bhadrapada",3,"direct","neutral"],["Ketu","Aquarius",12.8542,"Shatabhisha",2,"retrograde","neutral"],
+    ["Venus","Pisces",17.8856,"Revati",1,"direct","exalted"],["Sun","Aries",29.3112,"Krittika",1,"direct","exalted"],
+    ["Mars","Aries",28.9938,"Krittika",1,"direct","own_sign"],["Mercury","Aries",4.8252,"Ashwini",2,"direct","neutral"],
+    ["Saturn","Aries",3.3216,"Ashwini",1,"direct","debilitated"]];
+  const houses=[...Array(12)].map((_,i)=>({number:i+1,sign:SIGNS[(lag+i)%12],signDegrees:i===0?6.1708:0,nakshatra:i===0?"Mrigashira":"",pada:i===0?4:0,occupants:[]}));
+  P.forEach(p=>{const h=(SIGNS.indexOf(p[1])-lag+12)%12; houses[h].occupants.push({celestialBody:p[0],sign:p[1],signDegrees:p[2],nakshatra:p[3],pada:p[4],house:h+1,motion_type:p[5],dignities:{dignity:p[6]}})});
+  return {_input:{datetime:"Sample chart (abbreviated)"},ayanamsa:{name:"True Chitra Paksha"},d1Chart:{houses}};
+}
+
+/* ---------- form ---------- */
+function setStatus(msg,kind){const s=$("status");s.textContent=msg;s.className="status"+(kind?" "+kind:"")}
+let useCoords=false;
+function coordMode(on){useCoords=on;$("placeBlock").hidden=on;$("coordBlock").hidden=!on}
+$("toCoords").addEventListener("click",()=>coordMode(true));
+$("toPlace").addEventListener("click",()=>coordMode(false));
+$("asof").value=new Date().toISOString().slice(0,10);
+
+$("form").addEventListener("submit",async ev=>{
+  ev.preventDefault(); setStatus("");
+  const date=$("date").value, time=$("time").value;
+  if(!date||!time){setStatus("Please enter the date and time of birth. If the exact time is unknown, use 12:00 and treat the Lagna with care.","err");return}
+  const body={datetime:date+"T"+(time.length===5?time+":00":time),name:$("name").value.trim()||null,as_of:$("asof").value||null};
+  if(useCoords){
+    const lat=parseFloat($("lat").value),lon=parseFloat($("lon").value);
+    if(!(lat>=-90&&lat<=90)||!(lon>=-180&&lon<=180)){setStatus("Latitude must be between -90 and 90, longitude between -180 and 180.","err");return}
+    body.lat=lat;body.lon=lon;
+  } else {
+    const place=$("place").value.trim();
+    if(!place){setStatus("Please enter the place of birth, or switch to latitude and longitude.","err");return}
+    body.place=place;
+  }
+  const base=$("api").value.trim().replace(/\/$/,"");
+  $("go").disabled=true; setStatus("Calculating chart… the first run can take a minute while ephemeris data downloads.");
+  try{
+    const r=await fetch(base+"/api/chart",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+    let data=null; try{data=await r.json()}catch(_){}
+    if(!r.ok){
+      let msg="The server could not calculate this chart (error "+r.status+").";
+      const d=data&&data.detail;
+      if(typeof d==="string") msg=d;
+      else if(Array.isArray(d)&&d[0]&&d[0].msg) msg=String(d[0].msg).replace(/^Value error, /,"");
+      setStatus(msg,"err");return}
+    show(data.chart,data.facts,body.name||"Birth chart"); setStatus("Chart ready.","ok");
+  }catch(e){
+    setStatus("Could not reach the chart server. Start it (uvicorn ketana_drishti.api:app) and open this page from it, or use Try sample / Load chart JSON.","err");
+  } finally {$("go").disabled=false}
+});
+$("sample").addEventListener("click",()=>{try{show(sampleChart(),[],"Sample chart");setStatus("Showing abbreviated sample data. Facts and dasha need the server.","ok")}catch(e){setStatus(e.message,"err")}});
+$("loadBtn").addEventListener("click",()=>$("file").click());
+$("file").addEventListener("change",async ev=>{
+  const f=ev.target.files[0]; if(!f)return;
+  try{
+    if(f.size>5e6) throw new Error("That file is too large to be a chart.");
+    const d=JSON.parse(await f.text()); const chart=d.chart||d;
+    show(chart,d.facts||[],f.name.replace(/\.json$/i,"")); setStatus("Loaded "+f.name+".","ok");
+  }catch(e){setStatus("Could not read that file: "+e.message,"err")}
+  ev.target.value="";
+});
+
+/* ---------- misc ---------- */
+$("sN").addEventListener("click",()=>{state.style="north";$("sN").setAttribute("aria-pressed","true");$("sS").setAttribute("aria-pressed","false");if(state.model)drawChart()});
+$("sS").addEventListener("click",()=>{state.style="south";$("sS").setAttribute("aria-pressed","true");$("sN").setAttribute("aria-pressed","false");if(state.model)drawChart()});
+[1,2,3].forEach(i=>$("t"+i).addEventListener("click",()=>setTab(i)));
+$("dl").addEventListener("click",()=>{
+  const blob=new Blob([JSON.stringify(state.chart,null,2)],{type:"application/json"}); const a=el("a");
+  a.href=URL.createObjectURL(blob); a.download="chart.json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+});
+$("print").addEventListener("click",()=>window.print());
+</script>
+</body>
+</html>
