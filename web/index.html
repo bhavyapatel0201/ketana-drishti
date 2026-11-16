@@ -72,6 +72,13 @@ svg .ctr{font-size:13px;fill:var(--muted)}
 .tabs button{border:0;background:none;padding:10px 14px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;min-height:44px}
 .tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
 .tablewrap{overflow-x:auto}
+.rform{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:10px}
+.rform label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--muted)}
+.rform input,.rform select{min-height:44px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card,transparent);color:var(--ink);font:inherit}
+.rform .grow{flex:1 1 220px}
+.rlist{padding-left:1.2em;display:grid;gap:12px;margin:12px 0}
+.chip{display:inline-block;margin:4px 6px 0 0;padding:2px 8px;border:1px solid var(--line);border-radius:999px;font-size:.78rem;color:var(--muted);cursor:help}
+.rnote{font-size:.85rem;color:var(--muted);margin-top:10px}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
@@ -158,10 +165,24 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
         <button role="tab" id="t1" aria-selected="true" aria-controls="p1">Planets</button>
         <button role="tab" id="t2" aria-selected="false" aria-controls="p2">Facts</button>
         <button role="tab" id="t3" aria-selected="false" aria-controls="p3">Dasha</button>
+        <button role="tab" id="t4" aria-selected="false" aria-controls="p4">Reading</button>
       </div>
       <div id="p1" role="tabpanel" aria-labelledby="t1"></div>
       <div id="p2" role="tabpanel" aria-labelledby="t2" hidden></div>
       <div id="p3" role="tabpanel" aria-labelledby="t3" hidden></div>
+      <div id="p4" role="tabpanel" aria-labelledby="t4" hidden>
+        <div class="rform">
+          <label>Language
+            <select id="rlang"><option value="en">English</option><option value="hi">हिन्दी</option><option value="gu">ગુજરાતી</option></select>
+          </label>
+          <label class="grow">Question (optional)
+            <input id="rq" maxlength="200" placeholder="e.g. What stands out about my mind and career style?">
+          </label>
+          <button type="button" class="btn" id="rgo">Generate reading</button>
+        </div>
+        <p class="hint" id="rstatus" aria-live="polite"></p>
+        <div id="rout"></div>
+      </div>
       <div class="btn-row">
         <button type="button" class="btn" id="dl">Download chart JSON</button>
         <button type="button" class="btn" id="print">Print</button>
@@ -379,7 +400,37 @@ function renderDasha(){
   host.appendChild(el("p",{class:"hint"},"Computed from the Moon's longitude (Vimshottari, 365.2422-day years). Periods are shown from the as-of date."));
 }
 function setTab(n){
-  [1,2,3].forEach(i=>{$("t"+i).setAttribute("aria-selected",String(i===n));$("p"+i).hidden=i!==n});
+  [1,2,3,4].forEach(i=>{$("t"+i).setAttribute("aria-selected",String(i===n));$("p"+i).hidden=i!==n});
+}
+
+/* ---------- reading (Phase 3) ---------- */
+async function generateReading(){
+  const st=$("rstatus"), out=$("rout"); out.replaceChildren();
+  if(!state.facts.length){st.textContent="A reading needs a chart made by the server (not the sample or a loaded file without facts).";return}
+  const base=$("api").value.trim().replace(/\/$/,"");
+  const body={facts:state.facts.map(f=>({id:f.id,text:f.text})),language:$("rlang").value,question:$("rq").value.trim()||null};
+  $("rgo").disabled=true; st.textContent="Writing the reading…";
+  try{
+    const r=await fetch(base+"/api/reading",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+    let d=null; try{d=await r.json()}catch(_){}
+    if(!r.ok){
+      let msg="The reading could not be made (error "+r.status+").";
+      if(d&&typeof d.detail==="string") msg=d.detail;
+      st.textContent=msg; return}
+    st.textContent="";
+    const byId={}; state.facts.forEach(f=>{byId[f.id]=f.text});
+    const ol=el("ol",{class:"rlist"});
+    d.statements.forEach(s=>{
+      const li=el("li"); li.appendChild(el("span",null,s.text)); li.appendChild(el("br"));
+      s.fact_ids.forEach(id=>li.appendChild(el("span",{class:"chip",title:byId[id]||id},id)));
+      ol.appendChild(li)});
+    out.appendChild(ol);
+    out.appendChild(el("p",{class:"rnote"},d.disclaimer));
+    if(d.demo) out.appendChild(el("p",{class:"rnote"},"Demo mode: no AI was used. These lines simply restate computed facts."));
+    else if(d.dropped) out.appendChild(el("p",{class:"rnote"},d.dropped+" statement(s) were removed because they did not pass the citation check."));
+  }catch(e){
+    st.textContent="Could not reach the server."
+  } finally {$("rgo").disabled=false}
 }
 
 /* ---------- show a chart ---------- */
@@ -393,6 +444,7 @@ function show(chart,facts,titleText){
   if(chart.ayanamsa&&chart.ayanamsa.name) parts.push("Ayanamsa: "+chart.ayanamsa.name);
   $("meta").textContent=parts.join(" · ");
   drawChart(); renderDetail(); renderPlanets(); renderFacts(); renderDasha();
+  $("rout").replaceChildren(); $("rstatus").textContent="";
   $("result").scrollIntoView({behavior:"smooth",block:"start"});
 }
 
@@ -462,7 +514,8 @@ $("file").addEventListener("change",async ev=>{
 /* ---------- misc ---------- */
 $("sN").addEventListener("click",()=>{state.style="north";$("sN").setAttribute("aria-pressed","true");$("sS").setAttribute("aria-pressed","false");if(state.model)drawChart()});
 $("sS").addEventListener("click",()=>{state.style="south";$("sS").setAttribute("aria-pressed","true");$("sN").setAttribute("aria-pressed","false");if(state.model)drawChart()});
-[1,2,3].forEach(i=>$("t"+i).addEventListener("click",()=>setTab(i)));
+[1,2,3,4].forEach(i=>$("t"+i).addEventListener("click",()=>setTab(i)));
+$("rgo").addEventListener("click",generateReading);
 $("dl").addEventListener("click",()=>{
   const blob=new Blob([JSON.stringify(state.chart,null,2)],{type:"application/json"}); const a=el("a");
   a.href=URL.createObjectURL(blob); a.download="chart.json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
