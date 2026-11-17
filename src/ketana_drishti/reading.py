@@ -20,20 +20,31 @@ DISCLAIMER = (
 LANGUAGES = {"en": "English", "hi": "Hindi", "gu": "Gujarati"}
 
 # Simple English guardrail on the model's output (see ADR-0004 for limits).
+# "cancer" is matched in lower case only, so the zodiac sign Cancer is allowed;
+# "invest" matches investing/investment but not "investigation".
 BLOCKED = re.compile(
-    r"\b(cancer|disease|illness|surgery|die|death|dead|suicide|pregnan\w*|"
-    r"lawsuit|invest\w*|stocks?|crypto|gambl\w*|lottery|divorce\w*|"
-    r"marry|marries|marriage|affair|cheat\w*)\b",
+    r"\b(disease|illness|surgery|die|death|dead|suicide|pregnan\w*|"
+    r"lawsuit|invest(?:s|ed|ing|ments?|ors?)?|stocks?|crypto|gambl\w*|lottery|"
+    r"divorce\w*|marry|marries|marriage|affair|cheat\w*)\b",
     re.IGNORECASE,
 )
+BLOCKED_LOWER = re.compile(r"\bcancer\b")
+
+
+def is_blocked(text: str) -> bool:
+    return bool(BLOCKED.search(text) or BLOCKED_LOWER.search(text))
+
 
 SYSTEM_TEMPLATE = """You write short astrology readings for Ketana Drishti.
 
 RULES (follow all of them):
-1. Use ONLY the numbered facts given by the user. Never add chart details, \
-planet positions, dashas or yogas that are not in the facts.
-2. Every statement must list, in fact_ids, the ids of the facts it relies on. \
-Use only ids that appear in the facts.
+1. FACTS say what is true of this chart. PASSAGES say what such placements \
+traditionally mean. Use only the facts and passages given by the user. Never add \
+chart details, planet positions, dashas or yogas that are not in the facts, and \
+never present a passage as a fact about this chart.
+2. Every statement must list, in fact_ids, the ids of the facts it is about (at \
+least one). If it uses a passage for the meaning, list that passage in passage_ids. \
+Use only ids that appear in the facts and passages.
 3. Do not predict or comment on health, illness, death, money or investments, \
 legal outcomes, or marriage and relationship outcomes. Speak about tendencies \
 and themes for reflection, never certainties.
@@ -59,6 +70,10 @@ TOOL = {
                             "minItems": 1,
                             "items": {"type": "string"},
                         },
+                        "passage_ids": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
                     },
                     "required": ["text", "fact_ids"],
                 },
@@ -77,6 +92,7 @@ class ReadingError(Exception):
 class Statement:
     text: str
     fact_ids: list
+    passage_ids: list = field(default_factory=list)
 
 
 @dataclass
@@ -88,6 +104,7 @@ class Reading:
     retried: bool = False
     dropped: int = 0
     problems: list = field(default_factory=list)
+    passages: list = field(default_factory=list)  # passages the statements actually cite
 
 
 def build_system(language: str = "en") -> str:
@@ -96,16 +113,22 @@ def build_system(language: str = "en") -> str:
     return SYSTEM_TEMPLATE.format(language=LANGUAGES[language])
 
 
-def build_user(facts, question: str | None = None) -> str:
+def build_user(facts, question: str | None = None, passages=None) -> str:
     lines = [f"[{f.id}] {f.text}" for f in facts]
     q = (question or "Give a general reading of this chart.").strip()
-    return f"QUESTION: {q}\n\nFACTS:\n" + "\n".join(lines)
+    out = f"QUESTION: {q}\n\nFACTS (true of this chart):\n" + "\n".join(lines)
+    if passages:
+        plines = [f"[{p.id}] {p.text}" for p in passages]
+        out += "\n\nPASSAGES (traditional meanings, not facts about this chart):\n" + "\n".join(plines)
+    return out
 
 
-def check(tool_input, facts):
+def check(tool_input, facts, passages=()):
     """Return (valid_statements, problems). A statement is valid only if it has
-    text, at least one fact id, only known ids, and passes the guardrail."""
+    text, at least one fact id, only known fact and passage ids, and passes the
+    guardrail. A passage alone never counts as a citation."""
     known = {f.id for f in facts}
+    known_p = {p.id for p in passages}
     problems, valid = [], []
     raw = (tool_input or {}).get("statements")
     if not isinstance(raw, list) or not raw:
@@ -120,23 +143,29 @@ def check(tool_input, facts):
         elif any(x not in known for x in ids):
             bad = [x for x in ids if x not in known]
             problems.append(f"Statement {i} cites unknown fact id(s): {', '.join(map(str, bad))}.")
-        elif BLOCKED.search(text):
+        elif any(x not in known_p for x in (s.get("passage_ids") or [])):
+            bad = [x for x in s.get("passage_ids") if x not in known_p]
+            problems.append(f"Statement {i} cites unknown passage id(s): {', '.join(map(str, bad))}.")
+        elif is_blocked(text):
             problems.append(f"Statement {i} touches a topic that is not allowed.")
         else:
-            valid.append(Statement(text=text, fact_ids=list(ids)))
+            valid.append(Statement(text=text, fact_ids=list(ids),
+                                   passage_ids=list(s.get("passage_ids") or [])))
     return valid, problems
 
 
-def generate_reading(client, facts, language: str = "en", question: str | None = None) -> Reading:
+def generate_reading(client, facts, language: str = "en", question: str | None = None,
+                     passages=None) -> Reading:
     """Ask the model, check the answer, retry once with the problems listed."""
     facts = list(facts)
+    passages = list(passages or [])
     if not facts:
         raise ReadingError("No facts to build a reading from.")
     system = build_system(language)
-    user = build_user(facts, question)
+    user = build_user(facts, question, passages)
 
     resp = client.complete(system, user, tool=TOOL)
-    valid, problems = check(resp.tool_input, facts)
+    valid, problems = check(resp.tool_input, facts, passages)
     retried = False
     if problems:
         retried = True
@@ -146,7 +175,7 @@ def generate_reading(client, facts, language: str = "en", question: str | None =
             + "\n- ".join(problems)
         )
         resp = client.complete(system, fix, tool=TOOL)
-        valid, problems2 = check(resp.tool_input, facts)
+        valid, problems2 = check(resp.tool_input, facts, passages)
         dropped = len(problems2)
         problems = problems2
     else:
@@ -154,8 +183,10 @@ def generate_reading(client, facts, language: str = "en", question: str | None =
 
     if not valid:
         raise ReadingError("The model gave no usable, cited statements. " + " ".join(problems))
+    used = {i for s in valid for i in s.passage_ids}
     return Reading(
         statements=valid,
+        passages=[p for p in passages if p.id in used],
         language=language,
         model=getattr(resp, "model", ""),
         retried=retried,
@@ -178,5 +209,8 @@ def render(reading: Reading, facts) -> str:
             if i not in seen:
                 seen.append(i)
     out += [f"- {i}: {by_id[i]}" for i in seen]
+    if reading.passages:
+        out += ["", "Traditional meanings used:"]
+        out += [f"- {p.id}: {p.text}" for p in reading.passages]
     out += ["", reading.disclaimer]
     return "\n".join(out)

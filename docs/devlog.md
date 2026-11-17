@@ -80,3 +80,12 @@ Newest entries at the bottom.
 - Added `/api/reading`, the Reading tab, and a free demo mode so the feature can be shown without credit.
 - Decided not to buy credit yet; the live-model choice moves to Phase 6 (ADR-0004).
 - Lesson: an exposed key must be deleted at once, and secrets belong only in `.env`.
+
+## 2026-11-17: Phase 4, RAG
+
+- Decided the corpus: short passages written in original wording (no copied text, no licence questions). Retrieval is a key match on the facts, not embeddings: a fact like `moon.nakshatra = Jyeshtha` already names exactly what it needs, so the lookup is exact, free and repeatable (ADR-0005).
+- Wrote 75 passages and the retrieval module. The real chart 1 matched every fact to a passage on the first run.
+- A guardrail test over the corpus found a bug from Phase 3: the topic filter blocked the sign Cancer and the word "investigation". Fixed and tested. Lesson: run new content through the old checks.
+- Readings now cite passages as well as facts. Rule: at least one fact per statement, because the fact is the claim about this chart and the passage only gives the meaning.
+- Built the evaluation: 24 charts across countries, hemispheres and decades. All 24 passed on every check (see `docs/eval-results-v0.4.0.md`). It uses no model, so it costs nothing and can run on every PR.
+- Not done yet: the passages should be reviewed for accuracy by someone who knows Jyotish; combinations (planet in house or sign) are not written.

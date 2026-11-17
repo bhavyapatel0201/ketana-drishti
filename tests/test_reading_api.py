@@ -5,7 +5,7 @@ from ketana_drishti import api
 from ketana_drishti.llm import FakeClient, LLMError
 
 client = TestClient(api.app)
-FACTS = [{"id": "moon.sign", "text": "The Moon is in Scorpio."},
+FACTS = [{"id": "moon.sign", "text": "The Moon is in Scorpio.", "values": {"sign": "Scorpio"}},
          {"id": "lagna.sign", "text": "The Lagna is Gemini."}]
 
 
@@ -27,7 +27,7 @@ def test_demo_mode_needs_no_key(monkeypatch):
 def test_real_path_uses_client_and_checks(monkeypatch):
     monkeypatch.delenv("KETANA_DEMO", raising=False)
     fake = FakeClient([{"statements": [{"text": "Thoughtful.", "fact_ids": ["moon.sign"]}]}])
-    monkeypatch.setattr(api, "make_client", lambda facts: fake)
+    monkeypatch.setattr(api, "make_client", lambda facts, passages=None: fake)
     r = post(question="my mind")
     assert r.status_code == 200 and r.json()["demo"] is False
     assert "my mind" in fake.calls[0]["user"]
@@ -36,14 +36,14 @@ def test_real_path_uses_client_and_checks(monkeypatch):
 def test_uncited_answer_is_rejected(monkeypatch):
     monkeypatch.delenv("KETANA_DEMO", raising=False)
     bad = {"statements": [{"text": "Invented.", "fact_ids": ["nope"]}]}
-    monkeypatch.setattr(api, "make_client", lambda facts: FakeClient([bad, bad]))
+    monkeypatch.setattr(api, "make_client", lambda facts, passages=None: FakeClient([bad, bad]))
     assert post().status_code == 502
 
 
 def test_llm_failure_is_503_with_message(monkeypatch):
     monkeypatch.delenv("KETANA_DEMO", raising=False)
 
-    def boom(facts):
+    def boom(facts, passages=None):
         raise LLMError("Your credit balance is too low")
 
     monkeypatch.setattr(api, "make_client", boom)
@@ -54,3 +54,12 @@ def test_llm_failure_is_503_with_message(monkeypatch):
 def test_bad_language_and_empty_facts():
     assert post(language="fr").status_code == 400
     assert client.post("/api/reading", json={"facts": []}).status_code == 422
+
+
+def test_demo_reading_returns_passages(monkeypatch):
+    monkeypatch.setenv("KETANA_DEMO", "1")
+    d = post().json()
+    ids = [p["id"] for p in d["passages"]]
+    assert "planet.moon" in ids or "sign.scorpio" in ids
+    assert d["statements"][0]["passage_ids"]
+    assert all(p["because"] for p in d["passages"])
