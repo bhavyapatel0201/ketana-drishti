@@ -89,3 +89,10 @@ Newest entries at the bottom.
 - Readings now cite passages as well as facts. Rule: at least one fact per statement, because the fact is the claim about this chart and the passage only gives the meaning.
 - Built the evaluation: 24 charts across countries, hemispheres and decades. All 24 passed on every check (see `docs/eval-results-v0.4.0.md`). It uses no model, so it costs nothing and can run on every PR.
 - Not done yet: the passages should be reviewed for accuracy by someone who knows Jyotish; combinations (planet in house or sign) are not written.
+
+## 2026-11-17: Phase 5 start, classic reading
+
+- Decided to spend nothing: the live reading no longer needs a paid model. Built a classic reading from facts and the 75 passages, with no AI: each line joins one computed fact with its traditional meaning and cites both. It goes through the same citation checker as model output and is checked on all 24 evaluation charts.
+- The Reading tab defaults to Classic; the AI style appears only when the server has a model (a key or demo mode).
+- Bugs found by looking at the real page: the retrieval cap of 30 dropped passages for later planets (classic now uses every passage); `display:flex` overrode the `hidden` attribute so the Style selector showed when it should not; the list indent cut off two-digit numbers.
+- Next: Hindi and Gujarati classic readings (passage text written by hand), place autocomplete, saved profiles.

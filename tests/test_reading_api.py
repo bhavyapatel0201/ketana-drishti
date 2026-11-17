@@ -10,7 +10,7 @@ FACTS = [{"id": "moon.sign", "text": "The Moon is in Scorpio.", "values": {"sign
 
 
 def post(**over):
-    body = {"facts": FACTS, "language": "en", **over}
+    body = {"facts": FACTS, "language": "en", "mode": "ai", **over}
     return client.post("/api/reading", json=body)
 
 
@@ -63,3 +63,50 @@ def test_demo_reading_returns_passages(monkeypatch):
     assert "planet.moon" in ids or "sign.scorpio" in ids
     assert d["statements"][0]["passage_ids"]
     assert all(p["because"] for p in d["passages"])
+
+
+def test_default_mode_is_classic_and_needs_no_model(monkeypatch):
+    monkeypatch.delenv("KETANA_DEMO", raising=False)
+
+    def boom(*a, **k):
+        raise AssertionError("classic mode must not create a model client")
+
+    monkeypatch.setattr(api, "make_client", boom)
+    r = client.post("/api/reading", json={"facts": FACTS, "language": "en"})
+    assert r.status_code == 200
+    d = r.json()
+    assert d["mode"] == "classic" and d["model"] == "" and d["demo"] is False
+    assert d["statements"][0]["fact_ids"] and "not medical" in d["disclaimer"]
+
+
+def test_classic_notice_for_other_languages():
+    r = client.post("/api/reading", json={"facts": FACTS, "language": "hi"})
+    assert r.status_code == 200 and "not available yet" in r.json()["notice"]
+
+
+def test_bad_mode_is_rejected():
+    assert client.post("/api/reading", json={"facts": FACTS, "mode": "magic"}).status_code == 400
+
+
+def test_health_reports_ai_availability(monkeypatch):
+    monkeypatch.delenv("KETANA_DEMO", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    assert client.get("/api/health").json()["ai"] is False
+    monkeypatch.setenv("KETANA_DEMO", "1")
+    assert client.get("/api/health").json()["ai"] is True
+
+
+def test_classic_keeps_every_planet_passage_even_for_a_full_chart():
+    planets = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
+    signs = ["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius"]
+    facts = [{"id": "lagna.sign", "text": "Lagna is Gemini", "values": {"sign": "Gemini"}}]
+    for pl, sg in zip(planets, signs):
+        facts.append({"id": f"{pl.lower()}.sign", "text": f"{pl} is in {sg}", "values": {"sign": sg}})
+        facts.append({"id": f"{pl.lower()}.nakshatra", "text": f"{pl} is in Ashwini, pada 1", "values": {"nakshatra": "Ashwini"}})
+        facts.append({"id": f"{pl.lower()}.house", "text": f"{pl} is in house 3", "values": {"house": 3}})
+    d = client.post("/api/reading", json={"facts": facts, "language": "en"}).json()
+    got = {p["id"] for p in d["passages"]}
+    for pl in planets:
+        assert f"planet.{pl.lower()}" in got, pl
+    text = " ".join(s["text"] for s in d["statements"])
+    assert "(See also the note on house 3 above.)" in text

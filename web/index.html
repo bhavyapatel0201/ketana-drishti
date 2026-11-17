@@ -76,7 +76,8 @@ svg .ctr{font-size:13px;fill:var(--muted)}
 .rform label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--muted)}
 .rform input,.rform select{min-height:44px;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card,transparent);color:var(--ink);font:inherit}
 .rform .grow{flex:1 1 220px}
-.rlist{padding-left:1.2em;display:grid;gap:12px;margin:12px 0}
+.rform [hidden]{display:none}
+.rlist{padding-left:2.2em;display:grid;gap:12px;margin:12px 0}
 .chip{display:inline-block;margin:4px 6px 0 0;padding:2px 8px;border:1px solid var(--line);border-radius:999px;font-size:.78rem;color:var(--muted);cursor:help}
 .rnote{font-size:.85rem;color:var(--muted);margin-top:10px}
 .pchip{border-style:dashed}
@@ -176,7 +177,10 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
           <label>Language
             <select id="rlang"><option value="en">English</option><option value="hi">हिन्दी</option><option value="gu">ગુજરાતી</option></select>
           </label>
-          <label class="grow">Question (optional)
+          <label id="rmodeWrap" hidden>Style
+            <select id="rmode"><option value="classic">Classic (no AI)</option><option value="ai">AI-written</option></select>
+          </label>
+          <label class="grow" id="rqWrap" hidden>Question (optional)
             <input id="rq" maxlength="200" placeholder="e.g. What stands out about my mind and career style?">
           </label>
           <button type="button" class="btn" id="rgo">Generate reading</button>
@@ -410,7 +414,8 @@ async function generateReading(){
   if(!state.facts.length){st.textContent="A reading needs a chart made by the server (not the sample or a loaded file without facts).";return}
   const base=$("api").value.trim().replace(/\/$/,"");
   const scal=o=>{const r={};Object.keys(o||{}).forEach(k=>{const v=o[k];if(v===null||["string","number"].includes(typeof v))r[k]=v});return r};
-  const body={facts:state.facts.map(f=>({id:f.id,text:f.text,values:scal(f.values)})),language:$("rlang").value,question:$("rq").value.trim()||null};
+  const mode=$("rmodeWrap").hidden?"classic":$("rmode").value;
+  const body={facts:state.facts.map(f=>({id:f.id,text:f.text,values:scal(f.values)})),language:$("rlang").value,question:mode==="ai"?($("rq").value.trim()||null):null,mode:mode};
   $("rgo").disabled=true; st.textContent="Writing the reading…";
   try{
     const r=await fetch(base+"/api/reading",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
@@ -428,7 +433,9 @@ async function generateReading(){
       (s.passage_ids||[]).forEach(id=>li.appendChild(el("span",{class:"chip pchip",title:"Traditional meaning: "+id},id)));
       ol.appendChild(li)});
     out.appendChild(ol);
-    if(d.passages&&d.passages.length){
+    if(d.mode==="classic") out.appendChild(el("p",{class:"rnote"},"Classic reading: built from the computed facts and traditional passages, with no AI. Each line says which facts and passages it uses."));
+    if(d.notice) out.appendChild(el("p",{class:"rnote"},d.notice));
+    if(d.mode!=="classic"&&d.passages&&d.passages.length){
       const det=el("details",{class:"rnote"}); det.appendChild(el("summary",null,"Traditional meanings used ("+d.passages.length+")"));
       d.passages.forEach(p=>det.appendChild(el("p",null,p.id+": "+p.text)));
       out.appendChild(det)}
@@ -523,6 +530,11 @@ $("sN").addEventListener("click",()=>{state.style="north";$("sN").setAttribute("
 $("sS").addEventListener("click",()=>{state.style="south";$("sS").setAttribute("aria-pressed","true");$("sN").setAttribute("aria-pressed","false");if(state.model)drawChart()});
 [1,2,3,4].forEach(i=>$("t"+i).addEventListener("click",()=>setTab(i)));
 $("rgo").addEventListener("click",generateReading);
+$("rmode").addEventListener("change",()=>{$("rqWrap").hidden=$("rmode").value!=="ai"});
+(async()=>{ // offer the AI style only when the server has a model available
+  try{const base=$("api").value.trim().replace(/\/$/,"");const r=await fetch(base+"/api/health");const d=await r.json();
+    if(d&&d.ai){$("rmodeWrap").hidden=false}}catch(_){}
+})();
 $("dl").addEventListener("click",()=>{
   const blob=new Blob([JSON.stringify(state.chart,null,2)],{type:"application/json"}); const a=el("a");
   a.href=URL.createObjectURL(blob); a.download="chart.json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
