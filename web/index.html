@@ -43,6 +43,9 @@ input[type=date],input[type=time]{min-width:0;font-size:.95rem;padding:10px 8px}
 .status.err{color:var(--bad)} .status.ok{color:var(--good)}
 details{margin-top:12px;font-size:.9rem} summary{cursor:pointer;color:var(--muted)}
 .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.profrow{display:flex;gap:8px}
+.profrow select{flex:1 1 auto;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);min-height:44px}
+.profrow .btn{flex:0 0 auto}
 .combo{position:relative}
 #placeList{position:absolute;z-index:20;left:0;right:0;margin:4px 0 0;padding:4px;list-style:none;background:var(--card);border:1px solid var(--line);border-radius:10px;max-height:260px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 #placeList[hidden]{display:none}
@@ -113,6 +116,14 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
   <section class="card form-card" aria-labelledby="fh">
     <h2 id="fh">Birth details</h2>
     <form id="form" novalidate>
+      <div id="profBlock" hidden>
+        <label for="profSel">Saved people</label>
+        <div class="profrow">
+          <select id="profSel" aria-label="Saved people"></select>
+          <button type="button" class="btn" id="profLoad">Load</button>
+          <button type="button" class="btn" id="profDel">Delete</button>
+        </div>
+      </div>
       <label for="name">Name (optional)</label>
       <input id="name" type="text" maxlength="80" autocomplete="off">
       <div class="row">
@@ -140,6 +151,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
       <input id="asof" type="date">
       <button class="btn primary" id="go" type="submit">Generate chart</button>
       <div class="btn-row">
+        <button type="button" class="btn" id="profSave">Save these details</button>
         <button type="button" class="btn" id="sample">Try sample</button>
         <button type="button" class="btn" id="loadBtn">Load chart JSON</button>
       </div>
@@ -149,7 +161,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
         <summary>Advanced</summary>
         <label for="api">Server URL</label>
         <input id="api" type="url" placeholder="same server (default)">
-        <p class="hint">Leave empty when this page is served by the Ketana Drishti server. Birth details go only to that server; place suggestions come from Open-Meteo and a typed place name is looked up with OpenStreetMap Nominatim; only the place text is sent.</p>
+        <p class="hint">Leave empty when this page is served by the Ketana Drishti server. Birth details go only to that server; place suggestions come from Open-Meteo and a typed place name is looked up with OpenStreetMap Nominatim; only the place text is sent. Saved people stay in this browser only (never sent anywhere) and can be deleted here at any time.</p>
       </details>
     </form>
   </section>
@@ -491,6 +503,57 @@ function coordMode(on){useCoords=on;$("placeBlock").hidden=on;$("coordBlock").hi
 $("toCoords").addEventListener("click",()=>coordMode(true));
 $("toPlace").addEventListener("click",()=>coordMode(false));
 $("asof").value=new Date().toISOString().slice(0,10);
+
+/* ---------- saved people (this browser only) ---------- */
+/*PROFILES-START*/
+const PROF_KEY="ketana.profiles.v1", PROF_MAX=20;
+function profilesLoad(store){
+  try{const a=JSON.parse((store||localStorage).getItem(PROF_KEY)||"[]");
+    return Array.isArray(a)?a.filter(p=>p&&typeof p.id==="string"&&typeof p.date==="string"&&typeof p.time==="string").slice(0,PROF_MAX):[]}
+  catch(e){return[]}
+}
+function profilesSave(list,store){
+  try{(store||localStorage).setItem(PROF_KEY,JSON.stringify(list.slice(0,PROF_MAX)));return true}catch(e){return false}
+}
+function profileKey(p){return [p.name||"",p.date,p.time].join("|").toLowerCase()}
+function profileUpsert(list,p){
+  const i=list.findIndex(x=>profileKey(x)===profileKey(p));
+  if(i>=0){p.id=list[i].id;list[i]=p}else{p.id="p"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);list.unshift(p)}
+  return list.slice(0,PROF_MAX);
+}
+function profileLabel(p){return (p.name||"Unnamed")+" · "+p.date+(p.label?" · "+p.label:"")}
+/*PROFILES-END*/
+function profRefresh(selectId){
+  const list=profilesLoad(), sel=$("profSel"); sel.replaceChildren();
+  list.forEach(p=>{const o=el("option",{value:p.id},profileLabel(p));sel.appendChild(o)});
+  $("profBlock").hidden=!list.length; if(selectId)sel.value=selectId;
+}
+$("profSave").addEventListener("click",()=>{
+  const date=$("date").value,time=$("time").value;
+  if(!date||!time){setStatus("Enter the date and time of birth first, then save.","err");return}
+  const p={name:$("name").value.trim(),date,time:time.length===5?time+":00":time,useCoords};
+  if(useCoords){const lat=parseFloat($("lat").value),lon=parseFloat($("lon").value);
+    if(!(lat>=-90&&lat<=90)||!(lon>=-180&&lon<=180)){setStatus("Enter a valid latitude and longitude first, then save.","err");return}
+    p.lat=lat;p.lon=lon;p.label=lat.toFixed(2)+", "+lon.toFixed(2)}
+  else{const place=$("place").value.trim(); if(!place){setStatus("Enter the place of birth first, then save.","err");return}
+    p.label=place; if(chosen&&chosen.label===place){p.lat=chosen.lat;p.lon=chosen.lon}}
+  const list=profileUpsert(profilesLoad(),p);
+  if(!profilesSave(list)){setStatus("This browser would not let the page save. Private windows often block it.","err");return}
+  profRefresh(list.find(x=>profileKey(x)===profileKey(p)).id); setStatus("Saved in this browser only.","ok");
+});
+$("profLoad").addEventListener("click",()=>{
+  const p=profilesLoad().find(x=>x.id===$("profSel").value); if(!p)return;
+  $("name").value=p.name||""; $("date").value=p.date; $("time").value=p.time;
+  coordMode(!!p.useCoords);
+  if(p.useCoords){$("lat").value=p.lat;$("lon").value=p.lon;chosen=null;placeHint("")}
+  else{$("place").value=p.label||""; if(p.lat!==undefined){chosen={label:p.label,lat:p.lat,lon:p.lon,timezone:""};placeHint("Saved place: "+p.label+" ("+p.lat.toFixed(3)+", "+p.lon.toFixed(3)+")")}else{chosen=null;placeHint("")}}
+  setStatus("Loaded. Press Generate chart.","ok");
+});
+$("profDel").addEventListener("click",()=>{
+  const id=$("profSel").value; if(!id)return;
+  profilesSave(profilesLoad().filter(x=>x.id!==id)); profRefresh(); setStatus("Deleted from this browser.","ok");
+});
+profRefresh();
 
 /* ---------- place suggestions ---------- */
 let chosen=null, placeTimer=null, placeAbort=null, placeItems=[], placeIdx=-1;
