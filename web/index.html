@@ -43,6 +43,8 @@ input[type=date],input[type=time]{min-width:0;font-size:.95rem;padding:10px 8px}
 .status.err{color:var(--bad)} .status.ok{color:var(--good)}
 details{margin-top:12px;font-size:.9rem} summary{cursor:pointer;color:var(--muted)}
 .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.sitelang{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:.85rem}
+.sitelang select{padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);min-height:36px}
 .profrow{display:flex;gap:8px}
 .profrow select{flex:1 1 auto;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);min-height:44px}
 .profrow .btn{flex:0 0 auto}
@@ -110,114 +112,116 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
 <body>
 <header>
   <h1>Ketana Drishti</h1>
-  <p class="tag">Grounded readings: compute first, cite everything. Vedic (sidereal) birth chart, Lahiri ayanamsa.</p>
+  <p class="tag" data-i="tag"></p>
+  <label class="sitelang" for="siteLang"><span data-i="siteLang"></span> <select id="siteLang"><option value="en">English</option><option value="hi">हिन्दी</option><option value="gu">ગુજરાતી</option></select></label>
 </header>
 <main>
   <section class="card form-card" aria-labelledby="fh">
-    <h2 id="fh">Birth details</h2>
+    <h2 id="fh" data-i="birthDetails"></h2>
     <form id="form" novalidate>
       <div id="profBlock" hidden>
-        <label for="profSel">Saved people</label>
+        <label for="profSel" data-i="savedPeople"></label>
         <div class="profrow">
-          <select id="profSel" aria-label="Saved people"></select>
-          <button type="button" class="btn" id="profLoad">Load</button>
-          <button type="button" class="btn" id="profDel">Delete</button>
+          <select id="profSel" data-ia="ariaSaved"></select>
+          <button type="button" class="btn" id="profLoad" data-i="load"></button>
+          <button type="button" class="btn" id="profDel" data-i="delete"></button>
         </div>
       </div>
-      <label for="name">Name (optional)</label>
+      <label for="name" data-i="nameOpt"></label>
       <input id="name" type="text" maxlength="80" autocomplete="off">
       <div class="row">
-        <div><label for="date">Date of birth</label><input id="date" type="date" required min="1900-01-01"></div>
-        <div><label for="time">Time of birth</label><input id="time" type="time" step="1" required></div>
+        <div><label for="date" data-i="dob"></label><input id="date" type="date" required min="1900-01-01"></div>
+        <div><label for="time" data-i="tob"></label><input id="time" type="time" step="1" required></div>
       </div>
       <div id="placeBlock">
-        <label for="place">Place of birth</label>
+        <label for="place" data-i="pob"></label>
         <div class="combo">
-          <input id="place" type="text" placeholder="City, Country" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="placeList" aria-autocomplete="list">
+          <input id="place" type="text" data-ip="phPlace" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="placeList" aria-autocomplete="list">
           <ul id="placeList" role="listbox" hidden></ul>
         </div>
         <p class="hint" id="placeHint" hidden></p>
-        <button type="button" class="link" id="toCoords">Enter latitude and longitude instead</button>
+        <button type="button" class="link" id="toCoords" data-i="toCoords"></button>
       </div>
       <div id="coordBlock" hidden>
         <div class="row">
-          <div><label for="lat">Latitude</label><input id="lat" type="number" step="any" min="-90" max="90" placeholder="23.03"></div>
-          <div><label for="lon">Longitude</label><input id="lon" type="number" step="any" min="-180" max="180" placeholder="72.58"></div>
+          <div><label for="lat" data-i="lat"></label><input id="lat" type="number" step="any" min="-90" max="90" placeholder="23.03"></div>
+          <div><label for="lon" data-i="lon"></label><input id="lon" type="number" step="any" min="-180" max="180" placeholder="72.58"></div>
         </div>
-        <p class="hint">North and East are positive; South and West are negative.</p>
-        <button type="button" class="link" id="toPlace">Use a place name instead</button>
+        <p class="hint" data-i="northEast"></p>
+        <button type="button" class="link" id="toPlace" data-i="toPlace"></button>
       </div>
-      <label for="asof">Dasha as of</label>
+      <label for="asof" data-i="dashaAsOf"></label>
       <input id="asof" type="date">
-      <button class="btn primary" id="go" type="submit">Generate chart</button>
+      <button class="btn primary" id="go" type="submit" data-i="generate"></button>
       <div class="btn-row">
-        <button type="button" class="btn" id="profSave">Save these details</button>
-        <button type="button" class="btn" id="sample">Try sample</button>
-        <button type="button" class="btn" id="loadBtn">Load chart JSON</button>
+        <button type="button" class="btn" id="profSave" data-i="saveDetails"></button>
+        <button type="button" class="btn" id="sample" data-i="trySample"></button>
+        <button type="button" class="btn" id="loadBtn" data-i="loadJson"></button>
       </div>
       <input id="file" type="file" accept="application/json,.json" hidden>
       <div id="status" class="status" role="status" aria-live="polite"></div>
       <details>
-        <summary>Advanced</summary>
-        <label for="api">Server URL</label>
-        <input id="api" type="url" placeholder="same server (default)">
-        <p class="hint">Leave empty when this page is served by the Ketana Drishti server. Birth details go only to that server; place suggestions come from Open-Meteo and a typed place name is looked up with OpenStreetMap Nominatim; only the place text is sent. Saved people stay in this browser only (never sent anywhere) and can be deleted here at any time.</p>
+        <summary data-i="advanced"></summary>
+        <label for="api" data-i="serverUrl"></label>
+        <input id="api" type="url" data-ip="phApi">
+        <p class="hint" data-i="privacyHint"></p>
       </details>
     </form>
   </section>
 
   <section class="card" id="result" aria-labelledby="rh">
-    <h2 id="rh">Your chart</h2>
-    <div id="empty" class="empty">Enter your birth details and press <b>Generate chart</b>, or press <b>Try sample</b> to explore.</div>
+    <h2 id="rh" data-i="yourChart"></h2>
+    <div id="empty" class="empty" data-i="emptyMsg"></div>
     <div id="out" hidden>
       <div class="chart-head">
         <div><strong id="title"></strong><p class="meta" id="meta"></p></div>
-        <div class="seg" role="group" aria-label="Chart style">
-          <button type="button" id="sN" aria-pressed="true">North Indian</button>
-          <button type="button" id="sS" aria-pressed="false">South Indian</button>
+        <div class="seg" role="group" data-ia="ariaChartStyle">
+          <button type="button" id="sN" aria-pressed="true" data-i="northInd"></button>
+          <button type="button" id="sS" aria-pressed="false" data-i="southInd"></button>
         </div>
       </div>
       <div class="chartwrap">
         <div>
           <div id="chartHost"></div>
-          <p class="legend">↑ exalted · ↓ debilitated · ● own sign · ◆ moolatrikona · ᴿ retrograde. Tap a house or planet for details.</p>
+          <p class="legend" data-i="legend"></p>
         </div>
         <div class="detail" id="detail" aria-live="polite"></div>
       </div>
-      <div class="tabs" role="tablist" aria-label="Chart data">
-        <button role="tab" id="t1" aria-selected="true" aria-controls="p1">Planets</button>
-        <button role="tab" id="t2" aria-selected="false" aria-controls="p2">Facts</button>
-        <button role="tab" id="t3" aria-selected="false" aria-controls="p3">Dasha</button>
-        <button role="tab" id="t4" aria-selected="false" aria-controls="p4">Reading</button>
+      <div class="tabs" role="tablist" data-ia="ariaChartData">
+        <button role="tab" id="t1" aria-selected="true" aria-controls="p1" data-i="tabPlanets"></button>
+        <button role="tab" id="t2" aria-selected="false" aria-controls="p2" data-i="tabFacts"></button>
+        <button role="tab" id="t3" aria-selected="false" aria-controls="p3" data-i="tabDasha"></button>
+        <button role="tab" id="t4" aria-selected="false" aria-controls="p4" data-i="tabReading"></button>
       </div>
       <div id="p1" role="tabpanel" aria-labelledby="t1"></div>
       <div id="p2" role="tabpanel" aria-labelledby="t2" hidden></div>
       <div id="p3" role="tabpanel" aria-labelledby="t3" hidden></div>
       <div id="p4" role="tabpanel" aria-labelledby="t4" hidden>
         <div class="rform">
-          <label>Language
+          <label><span data-i="language"></span>
             <select id="rlang"><option value="en">English</option><option value="hi">हिन्दी</option><option value="gu">ગુજરાતી</option></select>
           </label>
-          <label id="rmodeWrap" hidden>Style
-            <select id="rmode"><option value="classic">Classic (no AI)</option><option value="ai">AI-written</option></select>
+          <label id="rmodeWrap" hidden><span data-i="style"></span>
+            <select id="rmode"><option value="classic" data-i="styleClassic"></option><option value="ai" data-i="styleAi"></option></select>
           </label>
-          <label class="grow" id="rqWrap" hidden>Question (optional)
-            <input id="rq" maxlength="200" placeholder="e.g. What stands out about my mind and career style?">
+          <label class="grow" id="rqWrap" hidden><span data-i="question"></span>
+            <input id="rq" maxlength="200" data-ip="phQuestion">
           </label>
-          <button type="button" class="btn" id="rgo">Generate reading</button>
+          <button type="button" class="btn" id="rgo" data-i="genReading"></button>
         </div>
         <p class="hint" id="rstatus" aria-live="polite"></p>
         <div id="rout"></div>
       </div>
       <div class="btn-row">
-        <button type="button" class="btn" id="dl">Download chart JSON</button>
-        <button type="button" class="btn" id="print">Print</button>
+        <button type="button" class="btn" id="dl" data-i="download"></button>
+        <button type="button" class="btn" id="print" data-i="print"></button>
       </div>
     </div>
   </section>
 </main>
-<footer>For reflection and entertainment only. Astrology has no validated predictive evidence; this tool makes no health, money or relationship predictions.</footer>
+<footer data-i="footer"></footer>
 
+<script src="lang.js"></script>
 <script>
 "use strict";
 const SIGNS=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
@@ -239,6 +243,24 @@ const NORTH={
 };
 const SOUTH={Pisces:[0,0],Aries:[0,1],Taurus:[0,2],Gemini:[0,3],Cancer:[1,3],Leo:[2,3],Virgo:[3,3],Libra:[3,2],Scorpio:[3,1],Sagittarius:[3,0],Capricorn:[2,0],Aquarius:[1,0]};
 const $=id=>document.getElementById(id);
+/* ---------- site language ---------- */
+const LANG_DATA=window.KD_LANG||{ui:{en:{}},names:{}};
+let lang="en"; try{const s=localStorage.getItem("ketana.lang"); if(LANG_DATA.ui[s])lang=s}catch(e){}
+function t(k,v){
+  let s=(LANG_DATA.ui[lang]&&LANG_DATA.ui[lang][k]); if(s===undefined)s=(LANG_DATA.ui.en[k]!==undefined?LANG_DATA.ui.en[k]:k);
+  return v?s.replace(/\{(\w+)\}/g,(m,x)=>v[x]!==undefined?v[x]:m):s;
+}
+function nm(kind,en){
+  if(lang==="en"||!en)return en;
+  const k=String(en).toLowerCase().replace(/[^a-z0-9]/g,"");
+  const m=LANG_DATA.names[kind]&&LANG_DATA.names[kind][lang]; return (m&&m[k])||en;
+}
+function applyStatic(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i]").forEach(n=>{n.textContent=t(n.dataset.i)});
+  document.querySelectorAll("[data-ip]").forEach(n=>{n.setAttribute("placeholder",t(n.dataset.ip))});
+  document.querySelectorAll("[data-ia]").forEach(n=>{n.setAttribute("aria-label",t(n.dataset.ia))});
+}
 const state={chart:null,facts:[],model:null,style:"north",sel:null};
 
 function el(tag,attrs,text){
@@ -356,29 +378,30 @@ function markSelection(){
   else document.querySelectorAll('svg [data-house="'+s.num+'"]').forEach(n=>n.classList.add("sel"));
 }
 function addDl(dl,k,v){dl.appendChild(el("dt",null,k));dl.appendChild(el("dd",null,v))}
+function dgLabel(d){const m={exalted:"dgExalted",debilitated:"dgDebilitated",own_sign:"dgOwnsign",moolatrikona:"dgMoolatrikona"};return m[d]?t(m[d]):""}
+function aspN(a){const n=parseInt(a,10);return t("aspN",{n:n,o:ordinal(n)})}
 function aspText(a){
-  const n=ordinal(parseInt(a.aspect_type,10));
-  return (a.to_planet?a.to_planet:"house "+a.to_house)+" ("+n+")";
+  return (a.to_planet?nm("planet",a.to_planet):t("aspHouse",{n:a.to_house}))+" ("+aspN(a.aspect_type)+")";
 }
 function renderDetail(){
   const box=$("detail"); box.replaceChildren(); const s=state.sel;
-  if(!s){box.appendChild(el("h3",null,"Details"));box.appendChild(el("p",null,"Select a house or a planet in the chart or table."));return}
+  if(!s){box.appendChild(el("h3",null,t("details")));box.appendChild(el("p",null,t("selectHint")));return}
   const dl=el("dl");
   if(s.type==="planet"){
     const p=planetByName(s.name); if(!p)return;
-    box.appendChild(el("h3",null,p.name));
-    addDl(dl,"Sign",p.sign); addDl(dl,"Position",dms(p.deg)); addDl(dl,"Nakshatra",p.nak+", pada "+p.pada);
-    addDl(dl,"House",String(p.house));
-    addDl(dl,"Dignity",DIGN[p.dignity]?DIGN[p.dignity][1]:(p.dignity?p.dignity.replace("_"," "):"none"));
-    addDl(dl,"Motion",p.retro?"retrograde":(p.name==="Rahu"||p.name==="Ketu"?"node":"direct"));
-    const g=p.aspects&&p.aspects.gives; if(g&&g.length) addDl(dl,"Aspects",g.map(aspText).join(", "));
-    const r=p.aspects&&p.aspects.receives; if(r&&r.length) addDl(dl,"Aspected by",r.map(a=>(a.from_planet||"?")+" ("+ordinal(parseInt(a.aspect_type,10))+")").join(", "));
+    box.appendChild(el("h3",null,nm("planet",p.name)));
+    addDl(dl,t("hSign"),nm("sign",p.sign)); addDl(dl,t("hPosition"),dms(p.deg)); addDl(dl,t("hNak"),t("padaN",{nak:nm("nakshatra",p.nak),n:p.pada}));
+    addDl(dl,t("hHouse"),String(p.house));
+    addDl(dl,t("hDignity"),dgLabel(p.dignity)||(p.dignity?p.dignity.replace("_"," "):t("none")));
+    addDl(dl,t("hMotion"),p.retro?t("retro"):(p.name==="Rahu"||p.name==="Ketu"?t("node"):t("direct")));
+    const g=p.aspects&&p.aspects.gives; if(g&&g.length) addDl(dl,t("hAspects"),g.map(aspText).join(", "));
+    const r=p.aspects&&p.aspects.receives; if(r&&r.length) addDl(dl,t("hAspBy"),r.map(a=>nm("planet",a.from_planet||"?")+" ("+aspN(a.aspect_type)+")").join(", "));
   } else {
     const h=state.model.houses.find(x=>x.num===s.num); if(!h)return;
-    box.appendChild(el("h3",null,"House "+h.num+(h.num===1?" (Lagna)":"")));
-    addDl(dl,"Sign",h.sign+" (sign "+(h.signIdx+1)+")");
-    if(h.num===1){addDl(dl,"Lagna",dms(h.deg));addDl(dl,"Nakshatra",h.nak+", pada "+h.pada)}
-    addDl(dl,"Planets",h.planets.length?h.planets.map(p=>p.name).join(", "):"none");
+    box.appendChild(el("h3",null,h.num===1?t("lagnaParen",{x:t("houseN",{n:h.num})}):t("houseN",{n:h.num})));
+    addDl(dl,t("hSign"),t("signN",{s:nm("sign",h.sign),n:h.signIdx+1}));
+    if(h.num===1){addDl(dl,t("hLagna"),dms(h.deg));addDl(dl,t("hNak"),t("padaN",{nak:nm("nakshatra",h.nak),n:h.pada}))}
+    addDl(dl,t("hPlanets"),h.planets.length?h.planets.map(p=>nm("planet",p.name)).join(", "):t("none"));
   }
   box.appendChild(dl);
 }
@@ -387,14 +410,14 @@ function renderDetail(){
 function renderPlanets(){
   const host=$("p1"); host.replaceChildren();
   const wrap=el("div",{class:"tablewrap"}); const t=el("table"); const th=el("thead"); const tr=el("tr");
-  ["Planet","Sign","Position","Nakshatra","House","Status"].forEach(c=>tr.appendChild(el("th",null,c)));
+  ["thPlanet","thSign","thPosition","thNak","thHouse","thStatus"].forEach(c=>tr.appendChild(el("th",null,t(c))));
   th.appendChild(tr); t.appendChild(th); const tb=el("tbody");
   const lag=state.model.lagna, rows=[{name:"Lagna",sign:lag.sign,deg:lag.deg,nak:lag.nak,pada:lag.pada,house:1,status:""}];
   state.model.houses.forEach(h=>h.planets.forEach(p=>rows.push({name:p.name,sign:p.sign,deg:p.deg,nak:p.nak,pada:p.pada,house:p.house,
-    status:[p.retro?"retrograde":"",DIGN[p.dignity]?DIGN[p.dignity][1]:""].filter(Boolean).join(", ")})));
+    status:[p.retro?t("retro"):"",dgLabel(p.dignity)].filter(Boolean).join(", ")})));
   rows.forEach(r=>{
     const row=el("tr",{tabindex:"0"}); if(state.sel&&state.sel.type==="planet"&&state.sel.name===r.name) row.className="sel";
-    [r.name,r.sign,dms(r.deg),r.nak+" ("+r.pada+")",String(r.house),r.status].forEach(c=>row.appendChild(el("td",null,c)));
+    [nm("planet",r.name),nm("sign",r.sign),dms(r.deg),nm("nakshatra",r.nak)+" ("+r.pada+")",String(r.house),r.status].forEach(c=>row.appendChild(el("td",null,c)));
     const go=()=>select(r.name==="Lagna"?{type:"house",num:1}:{type:"planet",name:r.name});
     row.addEventListener("click",go); row.addEventListener("keydown",ev=>{if(ev.key==="Enter"){go()}});
     tb.appendChild(row);
@@ -403,9 +426,9 @@ function renderPlanets(){
 }
 function renderFacts(q){
   const host=$("p2"); host.replaceChildren();
-  if(!state.facts.length){host.appendChild(el("p",{class:"empty"},"Facts are produced by the server. Generate a chart through the server to see them here."));return}
-  const f=el("input",{type:"search",placeholder:"Filter facts (e.g. moon, retrograde, dasha)","aria-label":"Filter facts"}); f.value=q||"";
-  host.appendChild(f); const ul=el("ul",{class:"facts"}); host.appendChild(ul);
+  if(!state.facts.length){host.appendChild(el("p",{class:"empty"},t("fEmpty")));return}
+  const f=el("input",{type:"search",placeholder:t("fFilter"),"aria-label":t("fFilter")}); f.value=q||"";
+  host.appendChild(f); host.appendChild(el("p",{class:"hint"},t("fNote"))); const ul=el("ul",{class:"facts"}); host.appendChild(ul);
   const draw=()=>{ul.replaceChildren();const k=f.value.trim().toLowerCase();
     state.facts.filter(x=>!k||(x.id+" "+x.text).toLowerCase().includes(k)).forEach(x=>{
       const li=el("li"); li.appendChild(el("div",{class:"id"},x.id)); li.appendChild(el("div",null,x.text)); li.appendChild(el("code",null,x.source)); ul.appendChild(li)})};
@@ -414,16 +437,16 @@ function renderFacts(q){
 function renderDasha(){
   const host=$("p3"); host.replaceChildren();
   const ds=state.facts.filter(f=>f.id.indexOf("dasha.")===0);
-  if(!ds.length){host.appendChild(el("p",{class:"empty"},"Dasha facts are produced by the server."));return}
+  if(!ds.length){host.appendChild(el("p",{class:"empty"},t("dEmpty")));return}
   const cards=el("div",{class:"cards"});
   ds.forEach(f=>{const c=el("div",{class:"c"});
-    const title={"dasha.balance":"Balance at birth","dasha.mahadasha":"Mahadasha","dasha.antardasha":"Antardasha","dasha.pratyantardasha":"Pratyantardasha"}[f.id]||f.id;
+    const title={"dasha.balance":t("dBalance"),"dasha.mahadasha":t("dMaha"),"dasha.antardasha":t("dAntar"),"dasha.pratyantardasha":t("dPraty")}[f.id]||f.id;
     c.appendChild(el("span",null,title));
-    c.appendChild(el("b",null,f.values&&f.values.planet?f.values.planet:""));
-    c.appendChild(el("span",null,f.values&&f.values.start?f.values.start+" to "+f.values.end:(f.values&&f.values.years!==undefined?f.values.years+" years remaining":"")));
+    c.appendChild(el("b",null,f.values&&f.values.planet?nm("planet",f.values.planet):""));
+    c.appendChild(el("span",null,f.values&&f.values.start?t("dRange",{a:f.values.start,b:f.values.end}):(f.values&&f.values.years!==undefined?t("dYears",{y:f.values.years}):"")));
     cards.appendChild(c)});
   host.appendChild(cards);
-  host.appendChild(el("p",{class:"hint"},"Computed from the Moon's longitude (Vimshottari, 365.2422-day years). Periods are shown from the as-of date."));
+  host.appendChild(el("p",{class:"hint"},t("dHint")));
 }
 function setTab(n){
   [1,2,3,4].forEach(i=>{$("t"+i).setAttribute("aria-selected",String(i===n));$("p"+i).hidden=i!==n});
@@ -432,17 +455,17 @@ function setTab(n){
 /* ---------- reading (Phase 3) ---------- */
 async function generateReading(){
   const st=$("rstatus"), out=$("rout"); out.replaceChildren();
-  if(!state.facts.length){st.textContent="A reading needs a chart made by the server (not the sample or a loaded file without facts).";return}
+  if(!state.facts.length){st.textContent=t("rdNeedServer");return}
   const base=$("api").value.trim().replace(/\/$/,"");
   const scal=o=>{const r={};Object.keys(o||{}).forEach(k=>{const v=o[k];if(v===null||["string","number"].includes(typeof v))r[k]=v});return r};
   const mode=$("rmodeWrap").hidden?"classic":$("rmode").value;
   const body={facts:state.facts.map(f=>({id:f.id,text:f.text,values:scal(f.values)})),language:$("rlang").value,question:mode==="ai"?($("rq").value.trim()||null):null,mode:mode};
-  $("rgo").disabled=true; st.textContent="Writing the reading…";
+  $("rgo").disabled=true; st.textContent=t("rdWriting");
   try{
     const r=await fetch(base+"/api/reading",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
     let d=null; try{d=await r.json()}catch(_){}
     if(!r.ok){
-      let msg="The reading could not be made (error "+r.status+").";
+      let msg=t("rdFail",{n:r.status});
       if(d&&typeof d.detail==="string") msg=d.detail;
       st.textContent=msg; return}
     st.textContent="";
@@ -451,20 +474,20 @@ async function generateReading(){
     d.statements.forEach(s=>{
       const li=el("li"); li.appendChild(el("span",null,s.text)); li.appendChild(el("br"));
       s.fact_ids.forEach(id=>li.appendChild(el("span",{class:"chip",title:byId[id]||id},id)));
-      (s.passage_ids||[]).forEach(id=>li.appendChild(el("span",{class:"chip pchip",title:"Traditional meaning: "+id},id)));
+      (s.passage_ids||[]).forEach(id=>li.appendChild(el("span",{class:"chip pchip",title:t("rdTradition",{id:id})},id)));
       ol.appendChild(li)});
     out.appendChild(ol);
-    if(d.mode==="classic") out.appendChild(el("p",{class:"rnote"},d.note||"Classic reading: built from the computed facts and traditional passages, with no AI."));
+    if(d.mode==="classic") out.appendChild(el("p",{class:"rnote"},d.note||t("rdClassicNote")));
     if(d.notice) out.appendChild(el("p",{class:"rnote"},d.notice));
     if(d.mode!=="classic"&&d.passages&&d.passages.length){
-      const det=el("details",{class:"rnote"}); det.appendChild(el("summary",null,"Traditional meanings used ("+d.passages.length+")"));
+      const det=el("details",{class:"rnote"}); det.appendChild(el("summary",null,t("rdMeanings",{n:d.passages.length})));
       d.passages.forEach(p=>det.appendChild(el("p",null,p.id+": "+p.text)));
       out.appendChild(det)}
     out.appendChild(el("p",{class:"rnote"},d.disclaimer));
-    if(d.demo) out.appendChild(el("p",{class:"rnote"},"Demo mode: no AI was used. These lines simply restate computed facts."));
-    else if(d.dropped) out.appendChild(el("p",{class:"rnote"},d.dropped+" statement(s) were removed because they did not pass the citation check."));
+    if(d.demo) out.appendChild(el("p",{class:"rnote"},t("rdDemo")));
+    else if(d.dropped) out.appendChild(el("p",{class:"rnote"},t("rdDropped",{n:d.dropped})));
   }catch(e){
-    st.textContent="Could not reach the server."
+    st.textContent=t("rdNoReach")
   } finally {$("rgo").disabled=false}
 }
 
@@ -472,7 +495,7 @@ async function generateReading(){
 function show(chart,facts,titleText){
   state.chart=chart; state.facts=facts||[]; state.model=toModel(chart); state.sel=null;
   $("empty").hidden=true; $("out").hidden=false;
-  $("title").textContent=titleText||"Birth chart";
+  state.titleDefault=!titleText; $("title").textContent=titleText||t("defaultTitle");
   const i=chart._input, parts=[];
   if(i){ if(i.datetime)parts.push(i.datetime.replace("T"," ")); if(i.timezone)parts.push(i.timezone+(i.utc_offset_hours!==undefined?" (UTC"+(i.utc_offset_hours>=0?"+":"")+i.utc_offset_hours+")":""));
     if(i.lat!==undefined)parts.push(Number(i.lat).toFixed(3)+", "+Number(i.lon).toFixed(3)); }
@@ -521,37 +544,37 @@ function profileUpsert(list,p){
   if(i>=0){p.id=list[i].id;list[i]=p}else{p.id="p"+Date.now().toString(36)+Math.random().toString(36).slice(2,6);list.unshift(p)}
   return list.slice(0,PROF_MAX);
 }
-function profileLabel(p){return (p.name||"Unnamed")+" · "+p.date+(p.label?" · "+p.label:"")}
+function profileLabel(p,unnamed){return (p.name||unnamed||"Unnamed")+" · "+p.date+(p.label?" · "+p.label:"")}
 /*PROFILES-END*/
 function profRefresh(selectId){
   const list=profilesLoad(), sel=$("profSel"); sel.replaceChildren();
-  list.forEach(p=>{const o=el("option",{value:p.id},profileLabel(p));sel.appendChild(o)});
+  list.forEach(p=>{const o=el("option",{value:p.id},profileLabel(p,t("unnamed")));sel.appendChild(o)});
   $("profBlock").hidden=!list.length; if(selectId)sel.value=selectId;
 }
 $("profSave").addEventListener("click",()=>{
   const date=$("date").value,time=$("time").value;
-  if(!date||!time){setStatus("Enter the date and time of birth first, then save.","err");return}
+  if(!date||!time){setStatus(t("saveNeedDT"),"err");return}
   const p={name:$("name").value.trim(),date,time:time.length===5?time+":00":time,useCoords};
   if(useCoords){const lat=parseFloat($("lat").value),lon=parseFloat($("lon").value);
-    if(!(lat>=-90&&lat<=90)||!(lon>=-180&&lon<=180)){setStatus("Enter a valid latitude and longitude first, then save.","err");return}
+    if(!(lat>=-90&&lat<=90)||!(lon>=-180&&lon<=180)){setStatus(t("saveNeedCoord"),"err");return}
     p.lat=lat;p.lon=lon;p.label=lat.toFixed(2)+", "+lon.toFixed(2)}
-  else{const place=$("place").value.trim(); if(!place){setStatus("Enter the place of birth first, then save.","err");return}
+  else{const place=$("place").value.trim(); if(!place){setStatus(t("saveNeedPlace"),"err");return}
     p.label=place; if(chosen&&chosen.label===place){p.lat=chosen.lat;p.lon=chosen.lon}}
   const list=profileUpsert(profilesLoad(),p);
-  if(!profilesSave(list)){setStatus("This browser would not let the page save. Private windows often block it.","err");return}
-  profRefresh(list.find(x=>profileKey(x)===profileKey(p)).id); setStatus("Saved in this browser only.","ok");
+  if(!profilesSave(list)){setStatus(t("saveBlocked"),"err");return}
+  profRefresh(list.find(x=>profileKey(x)===profileKey(p)).id); setStatus(t("saved"),"ok");
 });
 $("profLoad").addEventListener("click",()=>{
   const p=profilesLoad().find(x=>x.id===$("profSel").value); if(!p)return;
   $("name").value=p.name||""; $("date").value=p.date; $("time").value=p.time;
   coordMode(!!p.useCoords);
   if(p.useCoords){$("lat").value=p.lat;$("lon").value=p.lon;chosen=null;placeHint("")}
-  else{$("place").value=p.label||""; if(p.lat!==undefined){chosen={label:p.label,lat:p.lat,lon:p.lon,timezone:""};placeHint("Saved place: "+p.label+" ("+p.lat.toFixed(3)+", "+p.lon.toFixed(3)+")")}else{chosen=null;placeHint("")}}
-  setStatus("Loaded. Press Generate chart.","ok");
+  else{$("place").value=p.label||""; if(p.lat!==undefined){chosen={label:p.label,lat:p.lat,lon:p.lon,timezone:""};placeHint(t("hintSavedPlace",{label:p.label,lat:p.lat.toFixed(3),lon:p.lon.toFixed(3)}))}else{chosen=null;placeHint("")}}
+  setStatus(t("loadedPerson"),"ok");
 });
 $("profDel").addEventListener("click",()=>{
   const id=$("profSel").value; if(!id)return;
-  profilesSave(profilesLoad().filter(x=>x.id!==id)); profRefresh(); setStatus("Deleted from this browser.","ok");
+  profilesSave(profilesLoad().filter(x=>x.id!==id)); profRefresh(); setStatus(t("deleted"),"ok");
 });
 profRefresh();
 
@@ -562,7 +585,7 @@ function closeList(){const ul=$("placeList");ul.hidden=true;ul.replaceChildren()
 function markActive(){[...$("placeList").children].forEach((li,i)=>li.setAttribute("aria-selected",i===placeIdx?"true":"false"))}
 function pickPlace(it){
   chosen=it; $("place").value=it.label; closeList();
-  placeHint("Selected: "+it.label+" ("+it.lat.toFixed(3)+", "+it.lon.toFixed(3)+")"+(it.timezone?" · "+it.timezone:""));
+  placeHint(t("hintSelected",{label:it.label,lat:it.lat.toFixed(3),lon:it.lon.toFixed(3)})+(it.timezone?" · "+it.timezone:""));
 }
 function drawList(items){
   const ul=$("placeList"); ul.replaceChildren(); placeItems=items; placeIdx=-1;
@@ -576,9 +599,9 @@ async function lookupPlaces(q){
   try{
     const r=await fetch(base+"/api/places?q="+encodeURIComponent(q),{signal:placeAbort.signal});
     const d=await r.json();
-    if(d.unavailable){closeList();placeHint("Suggestions are unavailable right now. You can still type the place and press Calculate.");return}
+    if(d.unavailable){closeList();placeHint(t("sugUnavailable"));return}
     placeHint(""); drawList(d.results||[]);
-    if(!(d.results||[]).length)placeHint("No suggestions. You can still press Calculate to try this name, or enter latitude and longitude.");
+    if(!(d.results||[]).length)placeHint(t("sugNone"));
   }catch(e){ if(e.name!=="AbortError"){closeList()} }
 }
 $("place").addEventListener("input",()=>{
@@ -599,42 +622,42 @@ $("place").addEventListener("blur",()=>setTimeout(closeList,120));
 $("form").addEventListener("submit",async ev=>{
   ev.preventDefault(); setStatus("");
   const date=$("date").value, time=$("time").value;
-  if(!date||!time){setStatus("Please enter the date and time of birth. If the exact time is unknown, use 12:00 and treat the Lagna with care.","err");return}
+  if(!date||!time){setStatus(t("errDateTime"),"err");return}
   const body={datetime:date+"T"+(time.length===5?time+":00":time),name:$("name").value.trim()||null,as_of:$("asof").value||null};
   if(useCoords){
     const lat=parseFloat($("lat").value),lon=parseFloat($("lon").value);
-    if(!(lat>=-90&&lat<=90)||!(lon>=-180&&lon<=180)){setStatus("Latitude must be between -90 and 90, longitude between -180 and 180.","err");return}
+    if(!(lat>=-90&&lat<=90)||!(lon>=-180&&lon<=180)){setStatus(t("errCoordRange"),"err");return}
     body.lat=lat;body.lon=lon;
   } else {
     const place=$("place").value.trim();
-    if(!place){setStatus("Please enter the place of birth, or switch to latitude and longitude.","err");return}
+    if(!place){setStatus(t("errPlace"),"err");return}
     if(chosen&&chosen.label===place){body.lat=chosen.lat;body.lon=chosen.lon}else{body.place=place}
   }
   const base=$("api").value.trim().replace(/\/$/,"");
-  $("go").disabled=true; setStatus("Calculating chart… the first run can take a minute while ephemeris data downloads.");
+  $("go").disabled=true; setStatus(t("calculating"));
   try{
     const r=await fetch(base+"/api/chart",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
     let data=null; try{data=await r.json()}catch(_){}
     if(!r.ok){
-      let msg="The server could not calculate this chart (error "+r.status+").";
+      let msg=t("errChart",{n:r.status});
       const d=data&&data.detail;
       if(typeof d==="string") msg=d;
       else if(Array.isArray(d)&&d[0]&&d[0].msg) msg=String(d[0].msg).replace(/^Value error, /,"");
       setStatus(msg,"err");return}
-    show(data.chart,data.facts,body.name||"Birth chart"); setStatus("Chart ready.","ok");
+    show(data.chart,data.facts,body.name||t("defaultTitle")); setStatus(t("chartReady"),"ok");
   }catch(e){
-    setStatus("Could not reach the chart server. Start it (uvicorn ketana_drishti.api:app) and open this page from it, or use Try sample / Load chart JSON.","err");
+    setStatus(t("errServer"),"err");
   } finally {$("go").disabled=false}
 });
-$("sample").addEventListener("click",()=>{try{show(sampleChart(),[],"Sample chart");setStatus("Showing abbreviated sample data. Facts and dasha need the server.","ok")}catch(e){setStatus(e.message,"err")}});
+$("sample").addEventListener("click",()=>{try{show(sampleChart(),[],t("sampleTitle"));setStatus(t("sampleShown"),"ok")}catch(e){setStatus(e.message,"err")}});
 $("loadBtn").addEventListener("click",()=>$("file").click());
 $("file").addEventListener("change",async ev=>{
   const f=ev.target.files[0]; if(!f)return;
   try{
     if(f.size>5e6) throw new Error("That file is too large to be a chart.");
     const d=JSON.parse(await f.text()); const chart=d.chart||d;
-    show(chart,d.facts||[],f.name.replace(/\.json$/i,"")); setStatus("Loaded "+f.name+".","ok");
-  }catch(e){setStatus("Could not read that file: "+e.message,"err")}
+    show(chart,d.facts||[],f.name.replace(/\.json$/i,"")); setStatus(t("loadedFile",{name:f.name}),"ok");
+  }catch(e){setStatus(t("errFile",{msg:e.message}),"err")}
   ev.target.value="";
 });
 
@@ -653,6 +676,19 @@ $("dl").addEventListener("click",()=>{
   a.href=URL.createObjectURL(blob); a.download="chart.json"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
 });
 $("print").addEventListener("click",()=>window.print());
+
+/* ---------- site language switch ---------- */
+function applyLang(){
+  applyStatic(); $("siteLang").value=lang; $("rlang").value=lang;
+  profRefresh($("profSel").value);
+  if(state.model){renderDetail();renderPlanets();renderFacts();renderDasha();$("rout").replaceChildren();$("rstatus").textContent="";
+    if(state.titleDefault)$("title").textContent=t("defaultTitle")}
+}
+$("siteLang").addEventListener("change",()=>{
+  lang=$("siteLang").value; try{localStorage.setItem("ketana.lang",lang)}catch(e){}
+  setStatus(""); placeHint(""); applyLang();
+});
+applyLang();
 </script>
 </body>
 </html>
