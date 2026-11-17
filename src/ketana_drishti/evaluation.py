@@ -8,7 +8,8 @@ Per chart it checks:
                  result is identical on a second run;
  3. checker    - a good scripted reading is accepted, and every bad one (unknown
                  id, no fact id, passage only, blocked topic, empty text) is rejected;
- 4. pipeline   - generate_reading accepts the good reading end to end.
+ 4. pipeline   - generate_reading accepts the good reading end to end;
+ 5. classic    - the no-model classic reading passes the same checker and is repeatable.
 Nothing here calls a real model, so it is free and repeatable.
 """
 
@@ -17,6 +18,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
+from .classic import classic_payload
 from .facts import build_facts
 from .llm import FakeClient
 from .reading import ReadingError, check, generate_reading
@@ -93,11 +95,13 @@ class ChartResult:
     checker_missed: list = None
     deterministic: bool = False
     pipeline_ok: bool = False
+    classic_ok: bool = False
 
     @property
     def ok(self) -> bool:
         return (not self.trace and not self.gaps and not self.checker_missed
-                and self.deterministic and self.pipeline_ok and self.passages >= 10)
+                and self.deterministic and self.pipeline_ok and self.classic_ok
+                and self.passages >= 10)
 
 
 def evaluate_chart(chart, as_of, corpus=None) -> ChartResult:
@@ -120,4 +124,7 @@ def evaluate_chart(chart, as_of, corpus=None) -> ChartResult:
         r.pipeline_ok = len(reading.statements) == 1 and not reading.retried
     except ReadingError:
         r.pipeline_ok = False
+    payload = classic_payload(facts, passages)
+    valid, problems = check(payload, facts, passages)
+    r.classic_ok = bool(valid) and not problems and payload == classic_payload(facts, passages)
     return r

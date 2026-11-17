@@ -8,6 +8,7 @@ import os
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, model_validator
@@ -15,9 +16,11 @@ from pydantic import BaseModel, Field, model_validator
 from .chart import build_chart
 from .facts import build_facts
 from .llm import ClaudeClient, FakeClient, LLMError
-from .reading import LANGUAGES, ReadingError, generate_reading
-from .retrieval import load_corpus, retrieve
+from .classic import classic_payload
+from .reading import DISCLAIMER, LANGUAGES, ReadingError, check, generate_reading
+from .retrieval import DEFAULT_LIMIT, load_corpus, retrieve
 
+load_dotenv()
 log = logging.getLogger("ketana_drishti.api")
 WEB_DIR = Path(__file__).resolve().parents[2] / "web"
 
@@ -43,7 +46,8 @@ class ChartRequest(BaseModel):
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok"}
+    ai = demo_enabled() or bool(os.environ.get("ANTHROPIC_API_KEY"))
+    return {"status": "ok", "ai": ai}
 
 
 @app.post("/api/chart")
@@ -75,6 +79,7 @@ class ReadingRequest(BaseModel):
     facts: list[FactIn] = Field(min_length=1, max_length=400)
     language: str = "en"
     question: str | None = Field(default=None, max_length=200)
+    mode: str = "classic"  # "classic" (no model, free) or "ai"
 
 
 @dataclass
@@ -103,13 +108,13 @@ def make_client(facts, passages=None):
 _CORPUS = None
 
 
-def get_passages(facts):
+def get_passages(facts, limit=None):
     """Passages for these facts; an unreadable corpus means a reading without passages."""
     global _CORPUS
     try:
         if _CORPUS is None:
             _CORPUS = load_corpus()
-        return retrieve(facts, _CORPUS)
+        return retrieve(facts, _CORPUS, limit=limit or DEFAULT_LIMIT)
     except Exception:
         log.exception("could not load the passage corpus")
         return []
@@ -119,8 +124,27 @@ def get_passages(facts):
 def reading(req: ReadingRequest):
     if req.language not in LANGUAGES:
         raise HTTPException(400, "Language must be one of: " + ", ".join(sorted(LANGUAGES)) + ".")
+    if req.mode not in ("classic", "ai"):
+        raise HTTPException(400, 'Mode must be "classic" or "ai".')
     facts = [_F(f.id, f.text, f.values) for f in req.facts]
-    passages = get_passages(facts)
+    # A model prompt needs a size cap; the classic reading does not, so it uses every passage.
+    passages = get_passages(facts, limit=500 if req.mode == "classic" else None)
+    if req.mode == "classic":
+        payload = classic_payload(facts, passages)
+        valid, problems = check(payload, facts, passages)
+        if not valid:
+            raise HTTPException(502, "Could not build a classic reading from these facts.")
+        used = {i for s in valid for i in s.passage_ids}
+        return {
+            "mode": "classic",
+            "statements": [{"text": s.text, "fact_ids": s.fact_ids, "passage_ids": s.passage_ids} for s in valid],
+            "passages": [{"id": p.id, "text": p.text, "because": p.because} for p in passages if p.id in used],
+            "disclaimer": DISCLAIMER,
+            "language": "en",
+            "notice": ("Hindi and Gujarati classic readings are not available yet; showing English."
+                       if req.language != "en" else ""),
+            "model": "", "demo": False, "retried": False, "dropped": 0,
+        }
     try:
         client = make_client(facts, passages)
         r = generate_reading(client, facts, language=req.language, question=req.question,
@@ -130,6 +154,8 @@ def reading(req: ReadingRequest):
     except ReadingError as e:
         raise HTTPException(502, str(e))
     return {
+        "mode": "ai",
+        "notice": "",
         "statements": [{"text": s.text, "fact_ids": s.fact_ids, "passage_ids": s.passage_ids}
                        for s in r.statements],
         "passages": [{"id": p.id, "text": p.text, "because": p.because} for p in r.passages],

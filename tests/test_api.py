@@ -19,7 +19,7 @@ def client(monkeypatch):
 
 
 def test_health(client):
-    assert client.get("/api/health").json() == {"status": "ok"}
+    assert client.get("/api/health").json()["status"] == "ok"
 
 
 def test_chart_returns_chart_and_facts(client):

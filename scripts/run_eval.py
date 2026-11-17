@@ -32,7 +32,7 @@ for b in births:
     failed += 0 if r.ok else 1
     note = "ok" if r.ok else "FAIL: " + "; ".join(
         [*(r.trace or [])[:2], *[f"no passage for {g}" for g in (r.gaps or [])[:2]], *(r.checker_missed or []),
-         *([] if r.deterministic else ["not deterministic"]), *([] if r.pipeline_ok else ["pipeline"])])
+         *([] if r.deterministic else ["not deterministic"]), *([] if r.pipeline_ok else ["pipeline"]), *([] if r.classic_ok else ["classic reading"])])
     rows.append(f"| {label} | {r.facts} | {r.passages} | {len(r.trace or [])} | {len(r.gaps or [])} | {len(r.checker_missed or [])} | {note} |")
     report.append({"name": label, "ok": r.ok, "facts": r.facts, "passages": r.passages,
                    "trace_problems": r.trace, "gaps": r.gaps, "checker_missed": r.checker_missed})
