@@ -9,12 +9,13 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, model_validator
 
 from .chart import build_chart
 from .facts import build_facts
+from .places import PlacesUnavailable, search_places
 from .llm import ClaudeClient, FakeClient, LLMError
 from . import i18n
 from .classic import classic_payload
@@ -49,6 +50,16 @@ class ChartRequest(BaseModel):
 def health():
     ai = demo_enabled() or bool(os.environ.get("ANTHROPIC_API_KEY"))
     return {"status": "ok", "ai": ai}
+
+
+@app.get("/api/places")
+def places(q: str = Query("", max_length=120), limit: int = Query(6, ge=1, le=10)):
+    """Type-ahead suggestions for the place of birth. Never an error page: if the
+    lookup service is down, `unavailable` is true and the page falls back to typing."""
+    try:
+        return {"results": search_places(q, limit), "unavailable": False}
+    except PlacesUnavailable:
+        return {"results": [], "unavailable": True}
 
 
 @app.post("/api/chart")

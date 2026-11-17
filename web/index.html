@@ -43,6 +43,11 @@ input[type=date],input[type=time]{min-width:0;font-size:.95rem;padding:10px 8px}
 .status.err{color:var(--bad)} .status.ok{color:var(--good)}
 details{margin-top:12px;font-size:.9rem} summary{cursor:pointer;color:var(--muted)}
 .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.combo{position:relative}
+#placeList{position:absolute;z-index:20;left:0;right:0;margin:4px 0 0;padding:4px;list-style:none;background:var(--card);border:1px solid var(--line);border-radius:10px;max-height:260px;overflow:auto;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#placeList[hidden]{display:none}
+#placeList li{padding:10px 12px;min-height:44px;display:flex;align-items:center;border-radius:8px;cursor:pointer;font-size:.95rem}
+#placeList li[aria-selected=true],#placeList li:hover{background:var(--accent);color:var(--accent-ink)}
 .chart-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .seg button{border:0;background:var(--card);padding:0 14px;min-height:40px;cursor:pointer}
@@ -116,7 +121,11 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
       </div>
       <div id="placeBlock">
         <label for="place">Place of birth</label>
-        <input id="place" type="text" placeholder="City, Country" autocomplete="off">
+        <div class="combo">
+          <input id="place" type="text" placeholder="City, Country" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="placeList" aria-autocomplete="list">
+          <ul id="placeList" role="listbox" hidden></ul>
+        </div>
+        <p class="hint" id="placeHint" hidden></p>
         <button type="button" class="link" id="toCoords">Enter latitude and longitude instead</button>
       </div>
       <div id="coordBlock" hidden>
@@ -140,7 +149,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
         <summary>Advanced</summary>
         <label for="api">Server URL</label>
         <input id="api" type="url" placeholder="same server (default)">
-        <p class="hint">Leave empty when this page is served by the Ketana Drishti server. Birth details go only to that server; the place name is looked up with OpenStreetMap Nominatim.</p>
+        <p class="hint">Leave empty when this page is served by the Ketana Drishti server. Birth details go only to that server; place suggestions come from Open-Meteo and a typed place name is looked up with OpenStreetMap Nominatim; only the place text is sent.</p>
       </details>
     </form>
   </section>
@@ -483,6 +492,47 @@ $("toCoords").addEventListener("click",()=>coordMode(true));
 $("toPlace").addEventListener("click",()=>coordMode(false));
 $("asof").value=new Date().toISOString().slice(0,10);
 
+/* ---------- place suggestions ---------- */
+let chosen=null, placeTimer=null, placeAbort=null, placeItems=[], placeIdx=-1;
+function placeHint(msg){const h=$("placeHint");h.textContent=msg||"";h.hidden=!msg}
+function closeList(){const ul=$("placeList");ul.hidden=true;ul.replaceChildren();placeItems=[];placeIdx=-1;$("place").setAttribute("aria-expanded","false")}
+function markActive(){[...$("placeList").children].forEach((li,i)=>li.setAttribute("aria-selected",i===placeIdx?"true":"false"))}
+function pickPlace(it){
+  chosen=it; $("place").value=it.label; closeList();
+  placeHint("Selected: "+it.label+" ("+it.lat.toFixed(3)+", "+it.lon.toFixed(3)+")"+(it.timezone?" · "+it.timezone:""));
+}
+function drawList(items){
+  const ul=$("placeList"); ul.replaceChildren(); placeItems=items; placeIdx=-1;
+  items.forEach((it,i)=>{const li=el("li",{role:"option",id:"po"+i},it.label);
+    li.addEventListener("mousedown",ev=>{ev.preventDefault();pickPlace(it)}); ul.appendChild(li)});
+  ul.hidden=!items.length; $("place").setAttribute("aria-expanded",String(!!items.length));
+}
+async function lookupPlaces(q){
+  if(placeAbort)placeAbort.abort(); placeAbort=new AbortController();
+  const base=$("api").value.trim().replace(/\/$/,"");
+  try{
+    const r=await fetch(base+"/api/places?q="+encodeURIComponent(q),{signal:placeAbort.signal});
+    const d=await r.json();
+    if(d.unavailable){closeList();placeHint("Suggestions are unavailable right now. You can still type the place and press Calculate.");return}
+    placeHint(""); drawList(d.results||[]);
+    if(!(d.results||[]).length)placeHint("No suggestions. You can still press Calculate to try this name, or enter latitude and longitude.");
+  }catch(e){ if(e.name!=="AbortError"){closeList()} }
+}
+$("place").addEventListener("input",()=>{
+  chosen=null; placeHint(""); clearTimeout(placeTimer);
+  const q=$("place").value.trim();
+  if(q.length<2){closeList();return}
+  placeTimer=setTimeout(()=>lookupPlaces(q),300);
+});
+$("place").addEventListener("keydown",ev=>{
+  if($("placeList").hidden)return;
+  if(ev.key==="ArrowDown"){ev.preventDefault();placeIdx=(placeIdx+1)%placeItems.length;markActive()}
+  else if(ev.key==="ArrowUp"){ev.preventDefault();placeIdx=(placeIdx-1+placeItems.length)%placeItems.length;markActive()}
+  else if(ev.key==="Enter"&&placeIdx>=0){ev.preventDefault();pickPlace(placeItems[placeIdx])}
+  else if(ev.key==="Escape"){closeList()}
+});
+$("place").addEventListener("blur",()=>setTimeout(closeList,120));
+
 $("form").addEventListener("submit",async ev=>{
   ev.preventDefault(); setStatus("");
   const date=$("date").value, time=$("time").value;
@@ -495,7 +545,7 @@ $("form").addEventListener("submit",async ev=>{
   } else {
     const place=$("place").value.trim();
     if(!place){setStatus("Please enter the place of birth, or switch to latitude and longitude.","err");return}
-    body.place=place;
+    if(chosen&&chosen.label===place){body.lat=chosen.lat;body.lon=chosen.lon}else{body.place=place}
   }
   const base=$("api").value.trim().replace(/\/$/,"");
   $("go").disabled=true; setStatus("Calculating chart… the first run can take a minute while ephemeris data downloads.");
