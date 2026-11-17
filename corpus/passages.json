@@ -1,0 +1,621 @@
+{
+ "source": "Original summaries of traditional associations, written for ketana-drishti.",
+ "licence": "MIT (same as the repository)",
+ "passages": [
+  {
+   "id": "planet.sun",
+   "kind": "planet",
+   "key": "Sun",
+   "aliases": [],
+   "text": "The Sun is traditionally associated with the sense of self, vitality, purpose and authority. It also stands for the father and for how a person seeks recognition."
+  },
+  {
+   "id": "planet.moon",
+   "kind": "planet",
+   "key": "Moon",
+   "aliases": [],
+   "text": "The Moon is traditionally associated with the mind, emotions, comfort and nurturing, and with the mother and one's sense of belonging. It describes how a person feels and responds."
+  },
+  {
+   "id": "planet.mars",
+   "kind": "planet",
+   "key": "Mars",
+   "aliases": [],
+   "text": "Mars is traditionally associated with energy, courage, drive and the willingness to act or compete. It shows where effort is applied and where impatience can arise."
+  },
+  {
+   "id": "planet.mercury",
+   "kind": "planet",
+   "key": "Mercury",
+   "aliases": [],
+   "text": "Mercury is traditionally associated with intellect, speech, learning, analysis and trade. It describes how a person thinks, communicates and processes information."
+  },
+  {
+   "id": "planet.jupiter",
+   "kind": "planet",
+   "key": "Jupiter",
+   "aliases": [],
+   "text": "Jupiter is traditionally associated with wisdom, teaching, growth, optimism and guidance. It points to where a person seeks meaning and where support tends to come from."
+  },
+  {
+   "id": "planet.venus",
+   "kind": "planet",
+   "key": "Venus",
+   "aliases": [],
+   "text": "Venus is traditionally associated with relationships, affection, beauty, art and comfort. It describes what a person values and how they enjoy and share things."
+  },
+  {
+   "id": "planet.saturn",
+   "kind": "planet",
+   "key": "Saturn",
+   "aliases": [],
+   "text": "Saturn is traditionally associated with discipline, responsibility, patience and limits. It points to where steady effort over time matters most and where progress feels slow."
+  },
+  {
+   "id": "planet.rahu",
+   "kind": "planet",
+   "key": "Rahu",
+   "aliases": [],
+   "text": "Rahu is a shadow point (the Moon's ascending node), traditionally associated with ambition, appetite, unconventional paths and the foreign or unfamiliar. It marks where a person reaches beyond the usual."
+  },
+  {
+   "id": "planet.ketu",
+   "kind": "planet",
+   "key": "Ketu",
+   "aliases": [],
+   "text": "Ketu is a shadow point (the Moon's descending node), traditionally associated with detachment, introspection and tendencies carried from the past. It marks where a person looks inward rather than outward."
+  },
+  {
+   "id": "sign.aries",
+   "kind": "sign",
+   "key": "Aries",
+   "aliases": [
+    "Mesha"
+   ],
+   "text": "Aries (Mesha) is a cardinal fire sign ruled by Mars. It is traditionally linked with initiative, directness and a pioneering, quick-starting style."
+  },
+  {
+   "id": "sign.taurus",
+   "kind": "sign",
+   "key": "Taurus",
+   "aliases": [
+    "Vrishabha"
+   ],
+   "text": "Taurus (Vrishabha) is a fixed earth sign ruled by Venus. It is linked with steadiness, patience, sensory enjoyment and a preference for security."
+  },
+  {
+   "id": "sign.gemini",
+   "kind": "sign",
+   "key": "Gemini",
+   "aliases": [
+    "Mithuna"
+   ],
+   "text": "Gemini (Mithuna) is a mutable air sign ruled by Mercury. It is linked with curiosity, communication, versatility and quick learning."
+  },
+  {
+   "id": "sign.cancer",
+   "kind": "sign",
+   "key": "Cancer",
+   "aliases": [
+    "Karka"
+   ],
+   "text": "Cancer (Karka) is a cardinal water sign ruled by the Moon. It is linked with care, memory, emotional sensitivity and protectiveness toward home and family."
+  },
+  {
+   "id": "sign.leo",
+   "kind": "sign",
+   "key": "Leo",
+   "aliases": [
+    "Simha"
+   ],
+   "text": "Leo (Simha) is a fixed fire sign ruled by the Sun. It is linked with confidence, warmth, leadership and a wish to be seen and appreciated."
+  },
+  {
+   "id": "sign.virgo",
+   "kind": "sign",
+   "key": "Virgo",
+   "aliases": [
+    "Kanya"
+   ],
+   "text": "Virgo (Kanya) is a mutable earth sign ruled by Mercury. It is linked with precision, service, practical analysis and attention to detail."
+  },
+  {
+   "id": "sign.libra",
+   "kind": "sign",
+   "key": "Libra",
+   "aliases": [
+    "Tula"
+   ],
+   "text": "Libra (Tula) is a cardinal air sign ruled by Venus. It is linked with balance, fairness, cooperation and a sense of aesthetics."
+  },
+  {
+   "id": "sign.scorpio",
+   "kind": "sign",
+   "key": "Scorpio",
+   "aliases": [
+    "Vrischika"
+   ],
+   "text": "Scorpio (Vrishchika) is a fixed water sign ruled by Mars. It is linked with intensity, depth, perseverance and an interest in what lies beneath the surface."
+  },
+  {
+   "id": "sign.sagittarius",
+   "kind": "sign",
+   "key": "Sagittarius",
+   "aliases": [
+    "Dhanu"
+   ],
+   "text": "Sagittarius (Dhanu) is a mutable fire sign ruled by Jupiter. It is linked with optimism, philosophy, exploration and the pursuit of meaning."
+  },
+  {
+   "id": "sign.capricorn",
+   "kind": "sign",
+   "key": "Capricorn",
+   "aliases": [
+    "Makara"
+   ],
+   "text": "Capricorn (Makara) is a cardinal earth sign ruled by Saturn. It is linked with ambition, discipline, structure and long-term planning."
+  },
+  {
+   "id": "sign.aquarius",
+   "kind": "sign",
+   "key": "Aquarius",
+   "aliases": [
+    "Kumbha"
+   ],
+   "text": "Aquarius (Kumbha) is a fixed air sign ruled by Saturn. It is linked with independence, ideas, community and an unconventional outlook."
+  },
+  {
+   "id": "sign.pisces",
+   "kind": "sign",
+   "key": "Pisces",
+   "aliases": [
+    "Meena"
+   ],
+   "text": "Pisces (Meena) is a mutable water sign ruled by Jupiter. It is linked with imagination, compassion, intuition and a tendency to dissolve boundaries."
+  },
+  {
+   "id": "house.1",
+   "kind": "house",
+   "key": "1",
+   "aliases": [],
+   "text": "The 1st house (Lagna) concerns the self: temperament, body, outlook and how a person meets the world."
+  },
+  {
+   "id": "house.2",
+   "kind": "house",
+   "key": "2",
+   "aliases": [],
+   "text": "The 2nd house concerns resources, speech, food, the family of origin and what a person values and holds on to."
+  },
+  {
+   "id": "house.3",
+   "kind": "house",
+   "key": "3",
+   "aliases": [],
+   "text": "The 3rd house concerns effort, courage, skills, siblings and everyday communication."
+  },
+  {
+   "id": "house.4",
+   "kind": "house",
+   "key": "4",
+   "aliases": [],
+   "text": "The 4th house concerns home, roots, the mother, inner peace and one's private foundation."
+  },
+  {
+   "id": "house.5",
+   "kind": "house",
+   "key": "5",
+   "aliases": [],
+   "text": "The 5th house concerns creativity, learning, intelligence, children and what a person does for joy."
+  },
+  {
+   "id": "house.6",
+   "kind": "house",
+   "key": "6",
+   "aliases": [],
+   "text": "The 6th house concerns daily work, service, routines and the obstacles a person learns to work through."
+  },
+  {
+   "id": "house.7",
+   "kind": "house",
+   "key": "7",
+   "aliases": [],
+   "text": "The 7th house concerns one-to-one partnership, close collaboration and how a person relates to others as equals."
+  },
+  {
+   "id": "house.8",
+   "kind": "house",
+   "key": "8",
+   "aliases": [],
+   "text": "The 8th house concerns transformation, endings and beginnings, shared resources and hidden or deeply private matters."
+  },
+  {
+   "id": "house.9",
+   "kind": "house",
+   "key": "9",
+   "aliases": [],
+   "text": "The 9th house (dharma) concerns beliefs, higher learning, teachers, ethics and long journeys."
+  },
+  {
+   "id": "house.10",
+   "kind": "house",
+   "key": "10",
+   "aliases": [],
+   "text": "The 10th house concerns vocation, public role, responsibility and how a person is seen in their work."
+  },
+  {
+   "id": "house.11",
+   "kind": "house",
+   "key": "11",
+   "aliases": [],
+   "text": "The 11th house concerns gains, networks, friendships and the fulfilment of aspirations."
+  },
+  {
+   "id": "house.12",
+   "kind": "house",
+   "key": "12",
+   "aliases": [],
+   "text": "The 12th house concerns withdrawal, solitude, letting go, rest, spiritual practice and life far from home."
+  },
+  {
+   "id": "nakshatra.ashwini",
+   "kind": "nakshatra",
+   "key": "Ashwini",
+   "aliases": [
+    "Aswini"
+   ],
+   "text": "Ashwini is ruled by Ketu and presided over by the Ashwini Kumaras, the divine physicians; its symbol is a horse's head. It is traditionally linked with swiftness, initiative and a wish to start things."
+  },
+  {
+   "id": "nakshatra.bharani",
+   "kind": "nakshatra",
+   "key": "Bharani",
+   "aliases": [],
+   "text": "Bharani is ruled by Venus and presided over by Yama, keeper of order; its symbol is the yoni, a symbol of bearing and containing. It is traditionally linked with restraint, endurance and intensity of feeling."
+  },
+  {
+   "id": "nakshatra.krittika",
+   "kind": "nakshatra",
+   "key": "Krittika",
+   "aliases": [
+    "Kritika",
+    "Krithika"
+   ],
+   "text": "Krittika is ruled by the Sun and presided over by Agni, the sacred fire; its symbol is a razor or flame. It is traditionally linked with sharpness, purification and discernment."
+  },
+  {
+   "id": "nakshatra.rohini",
+   "kind": "nakshatra",
+   "key": "Rohini",
+   "aliases": [],
+   "text": "Rohini is ruled by the Moon and presided over by Prajapati, the creator; its symbol is a cart or chariot. It is traditionally linked with growth, creativity, charm and appreciation of beauty."
+  },
+  {
+   "id": "nakshatra.mrigashira",
+   "kind": "nakshatra",
+   "key": "Mrigashira",
+   "aliases": [
+    "Mrigasira",
+    "Mrigashirsha",
+    "Mrigasheersha"
+   ],
+   "text": "Mrigashira is ruled by Mars and presided over by Soma, the moon deity; its symbol is a deer's head. It is traditionally linked with seeking, curiosity and a restless search."
+  },
+  {
+   "id": "nakshatra.ardra",
+   "kind": "nakshatra",
+   "key": "Ardra",
+   "aliases": [
+    "Aardra",
+    "Arudra"
+   ],
+   "text": "Ardra is ruled by Rahu and presided over by Rudra, the storm god; its symbol is a teardrop. It is traditionally linked with upheaval followed by renewal, and strong feeling."
+  },
+  {
+   "id": "nakshatra.punarvasu",
+   "kind": "nakshatra",
+   "key": "Punarvasu",
+   "aliases": [],
+   "text": "Punarvasu is ruled by Jupiter and presided over by Aditi, mother of the gods; its symbol is a quiver of arrows. It is traditionally linked with return, renewal and optimism."
+  },
+  {
+   "id": "nakshatra.pushya",
+   "kind": "nakshatra",
+   "key": "Pushya",
+   "aliases": [
+    "Pushyami",
+    "Poosam"
+   ],
+   "text": "Pushya is ruled by Saturn and presided over by Brihaspati, the teacher of the gods; its symbol is a flower or a cow's udder. It is traditionally linked with nourishment, care and support for others."
+  },
+  {
+   "id": "nakshatra.ashlesha",
+   "kind": "nakshatra",
+   "key": "Ashlesha",
+   "aliases": [
+    "Aslesha",
+    "Ashlesa"
+   ],
+   "text": "Ashlesha is ruled by Mercury and presided over by the Nagas, serpent beings; its symbol is a coiled serpent. It is traditionally linked with intuition, penetrating insight and a tendency to hold on."
+  },
+  {
+   "id": "nakshatra.magha",
+   "kind": "nakshatra",
+   "key": "Magha",
+   "aliases": [
+    "Makha"
+   ],
+   "text": "Magha is ruled by Ketu and presided over by the Pitris, the ancestors; its symbol is a throne. It is traditionally linked with lineage, dignity and a sense of authority."
+  },
+  {
+   "id": "nakshatra.purvaphalguni",
+   "kind": "nakshatra",
+   "key": "Purva Phalguni",
+   "aliases": [
+    "Purvaphalguni",
+    "Poorva Phalguni",
+    "Pubba"
+   ],
+   "text": "Purva Phalguni is ruled by Venus and presided over by Bhaga, giver of enjoyment; its symbol is the front legs of a bed or a hammock. It is traditionally linked with enjoyment, rest and creative self-expression."
+  },
+  {
+   "id": "nakshatra.uttaraphalguni",
+   "kind": "nakshatra",
+   "key": "Uttara Phalguni",
+   "aliases": [
+    "Uttaraphalguni"
+   ],
+   "text": "Uttara Phalguni is ruled by the Sun and presided over by Aryaman, god of agreements; its symbol is the back legs of a bed. It is traditionally linked with patronage, steady commitment and helpfulness."
+  },
+  {
+   "id": "nakshatra.hasta",
+   "kind": "nakshatra",
+   "key": "Hasta",
+   "aliases": [],
+   "text": "Hasta is ruled by the Moon and presided over by Savitar, the inspiring sun deity; its symbol is a hand. It is traditionally linked with skill, craftsmanship and dexterity."
+  },
+  {
+   "id": "nakshatra.chitra",
+   "kind": "nakshatra",
+   "key": "Chitra",
+   "aliases": [
+    "Chithra"
+   ],
+   "text": "Chitra is ruled by Mars and presided over by Tvashtar, the divine architect; its symbol is a bright jewel. It is traditionally linked with design, artistry and a love of well-made things."
+  },
+  {
+   "id": "nakshatra.swati",
+   "kind": "nakshatra",
+   "key": "Swati",
+   "aliases": [
+    "Svati"
+   ],
+   "text": "Swati is ruled by Rahu and presided over by Vayu, the wind; its symbol is a young shoot swaying in the wind. It is traditionally linked with independence, flexibility and a need for room to move."
+  },
+  {
+   "id": "nakshatra.vishakha",
+   "kind": "nakshatra",
+   "key": "Vishakha",
+   "aliases": [
+    "Visakha",
+    "Vishaka"
+   ],
+   "text": "Vishakha is ruled by Jupiter and presided over by Indra and Agni together; its symbol is a triumphal arch or potter's wheel. It is traditionally linked with determination and strong focus on a goal."
+  },
+  {
+   "id": "nakshatra.anuradha",
+   "kind": "nakshatra",
+   "key": "Anuradha",
+   "aliases": [],
+   "text": "Anuradha is ruled by Saturn and presided over by Mitra, god of friendship; its symbol is a lotus. It is traditionally linked with friendship, devotion and cooperation."
+  },
+  {
+   "id": "nakshatra.jyeshtha",
+   "kind": "nakshatra",
+   "key": "Jyeshtha",
+   "aliases": [
+    "Jyestha",
+    "Jyeshta"
+   ],
+   "text": "Jyeshtha is ruled by Mercury and presided over by Indra, chief of the gods; its symbol is a circular amulet or an umbrella. It is traditionally linked with seniority, protectiveness and a sense of responsibility."
+  },
+  {
+   "id": "nakshatra.mula",
+   "kind": "nakshatra",
+   "key": "Mula",
+   "aliases": [
+    "Moola",
+    "Mool"
+   ],
+   "text": "Mula is ruled by Ketu and presided over by Nirriti, goddess of dissolution; its symbol is a bunch of roots. It is traditionally linked with going to the root of things, investigation and uprooting."
+  },
+  {
+   "id": "nakshatra.purvaashadha",
+   "kind": "nakshatra",
+   "key": "Purva Ashadha",
+   "aliases": [
+    "Purvaashadha",
+    "Purva Shadha",
+    "Purvashadha",
+    "Poorvashada"
+   ],
+   "text": "Purva Ashadha is ruled by Venus and presided over by Apas, the waters; its symbol is a fan or winnowing basket. It is traditionally linked with invigoration, persuasion and an unbeaten spirit."
+  },
+  {
+   "id": "nakshatra.uttaraashadha",
+   "kind": "nakshatra",
+   "key": "Uttara Ashadha",
+   "aliases": [
+    "Uttaraashadha",
+    "Uttara Shadha",
+    "Uttarashadha"
+   ],
+   "text": "Uttara Ashadha is ruled by the Sun and presided over by the Vishvadevas, the universal gods; its symbol is an elephant's tusk or the planks of a bed. It is traditionally linked with lasting achievement and loyalty to principle."
+  },
+  {
+   "id": "nakshatra.shravana",
+   "kind": "nakshatra",
+   "key": "Shravana",
+   "aliases": [
+    "Sravana",
+    "Shravan"
+   ],
+   "text": "Shravana is ruled by the Moon and presided over by Vishnu, the preserver; its symbol is an ear or three footprints. It is traditionally linked with listening, learning and passing knowledge on."
+  },
+  {
+   "id": "nakshatra.dhanishta",
+   "kind": "nakshatra",
+   "key": "Dhanishta",
+   "aliases": [
+    "Dhanishtha",
+    "Dhanista",
+    "Shravishtha"
+   ],
+   "text": "Dhanishta is ruled by Mars and presided over by the eight Vasus, gods of abundance; its symbol is a drum. It is traditionally linked with rhythm, abundance and a sense of timing."
+  },
+  {
+   "id": "nakshatra.shatabhisha",
+   "kind": "nakshatra",
+   "key": "Shatabhisha",
+   "aliases": [
+    "Satabhisha",
+    "Shatabhishak",
+    "Shatataraka"
+   ],
+   "text": "Shatabhisha is ruled by Rahu and presided over by Varuna, lord of the cosmic waters; its symbol is an empty circle. It is traditionally linked with healing, secrecy, solitude and research."
+  },
+  {
+   "id": "nakshatra.purvabhadrapada",
+   "kind": "nakshatra",
+   "key": "Purva Bhadrapada",
+   "aliases": [
+    "Purvabhadrapada",
+    "Purva Bhadra",
+    "Poorvabhadra"
+   ],
+   "text": "Purva Bhadrapada is ruled by Jupiter and presided over by Aja Ekapada, the one-footed goat; its symbol is swords or the front legs of a cot. It is traditionally linked with intensity, idealism and the urge to transform."
+  },
+  {
+   "id": "nakshatra.uttarabhadrapada",
+   "kind": "nakshatra",
+   "key": "Uttara Bhadrapada",
+   "aliases": [
+    "Uttarabhadrapada",
+    "Uttara Bhadra"
+   ],
+   "text": "Uttara Bhadrapada is ruled by Saturn and presided over by Ahir Budhnya, the serpent of the deep; its symbol is the back legs of a cot or twins. It is traditionally linked with depth, calm and restraint."
+  },
+  {
+   "id": "nakshatra.revati",
+   "kind": "nakshatra",
+   "key": "Revati",
+   "aliases": [],
+   "text": "Revati is ruled by Mercury and presided over by Pushan, protector of travellers; its symbol is a fish or a drum. It is traditionally linked with care, protection and a sense of completion."
+  },
+  {
+   "id": "dignity.exalted",
+   "kind": "dignity",
+   "key": "exalted",
+   "aliases": [],
+   "text": "A planet is called exalted when it sits in the sign where, in the tradition, it expresses its nature most strongly and easily."
+  },
+  {
+   "id": "dignity.debilitated",
+   "kind": "dignity",
+   "key": "debilitated",
+   "aliases": [],
+   "text": "A planet is called debilitated when it sits in the sign opposite its exaltation, where, in the tradition, its themes find expression with more effort or in less obvious ways."
+  },
+  {
+   "id": "dignity.ownsign",
+   "kind": "dignity",
+   "key": "own_sign",
+   "aliases": [],
+   "text": "A planet in its own sign is considered comfortable and self-reliant, expressing its themes in a natural way."
+  },
+  {
+   "id": "dignity.moolatrikona",
+   "kind": "dignity",
+   "key": "moolatrikona",
+   "aliases": [],
+   "text": "Moolatrikona is a stretch of a sign where a planet is considered especially well placed, ranking between exaltation and own sign in traditional strength."
+  },
+  {
+   "id": "dasha.ketu",
+   "kind": "dasha",
+   "key": "Ketu",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Ketu lasts 7 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: detachment, introspection and letting go) come to the foreground."
+  },
+  {
+   "id": "dasha.venus",
+   "kind": "dasha",
+   "key": "Venus",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Venus lasts 20 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: relationships, comfort, art and enjoyment) come to the foreground."
+  },
+  {
+   "id": "dasha.sun",
+   "kind": "dasha",
+   "key": "Sun",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Sun lasts 6 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: purpose, vitality and recognition) come to the foreground."
+  },
+  {
+   "id": "dasha.moon",
+   "kind": "dasha",
+   "key": "Moon",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Moon lasts 10 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: emotions, home and nurturing) come to the foreground."
+  },
+  {
+   "id": "dasha.mars",
+   "kind": "dasha",
+   "key": "Mars",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Mars lasts 7 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: energy, drive and action) come to the foreground."
+  },
+  {
+   "id": "dasha.rahu",
+   "kind": "dasha",
+   "key": "Rahu",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Rahu lasts 18 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: ambition, appetite and unconventional paths) come to the foreground."
+  },
+  {
+   "id": "dasha.jupiter",
+   "kind": "dasha",
+   "key": "Jupiter",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Jupiter lasts 16 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: learning, growth and guidance) come to the foreground."
+  },
+  {
+   "id": "dasha.saturn",
+   "kind": "dasha",
+   "key": "Saturn",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Saturn lasts 19 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: discipline, responsibility and patience) come to the foreground."
+  },
+  {
+   "id": "dasha.mercury",
+   "kind": "dasha",
+   "key": "Mercury",
+   "aliases": [],
+   "text": "In the Vimshottari system the major period of Mercury lasts 17 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: learning, communication and trade) come to the foreground."
+  },
+  {
+   "id": "concept.lagna",
+   "kind": "concept",
+   "key": "lagna",
+   "aliases": [],
+   "text": "The Lagna (ascendant) is the sign rising on the eastern horizon at the moment of birth. It sets the frame of the chart: it is the 1st house, and every other house is counted from it."
+  },
+  {
+   "id": "concept.drishti",
+   "kind": "concept",
+   "key": "drishti",
+   "aliases": [],
+   "text": "Drishti means 'sight'. In Jyotish, planets are said to look at other houses and planets and to add their influence to what they see. Aspects are counted in houses from the planet."
+  }
+ ]
+}

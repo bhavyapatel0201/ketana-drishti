@@ -16,6 +16,7 @@ from .chart import build_chart
 from .facts import build_facts
 from .llm import ClaudeClient, FakeClient, LLMError
 from .reading import LANGUAGES, ReadingError, generate_reading
+from .retrieval import load_corpus, retrieve
 
 log = logging.getLogger("ketana_drishti.api")
 WEB_DIR = Path(__file__).resolve().parents[2] / "web"
@@ -67,6 +68,7 @@ def chart(req: ChartRequest):
 class FactIn(BaseModel):
     id: str = Field(min_length=1, max_length=80)
     text: str = Field(min_length=1, max_length=500)
+    values: dict[str, str | int | float | None] = Field(default_factory=dict)
 
 
 class ReadingRequest(BaseModel):
@@ -79,36 +81,58 @@ class ReadingRequest(BaseModel):
 class _F:
     id: str
     text: str
+    values: dict
 
 
 def demo_enabled() -> bool:
     return os.environ.get("KETANA_DEMO", "").strip() == "1"
 
 
-def make_client(facts):
+def make_client(facts, passages=None):
     """Real Claude client, or a free scripted one when KETANA_DEMO=1."""
     if demo_enabled():
         picked = [f for f in facts][:3]
-        return FakeClient([{"statements": [
-            {"text": "Demo mode (no AI used): " + f.text, "fact_ids": [f.id]} for f in picked
-        ]}])
+        stmts = []
+        for f in picked:
+            pids = [p.id for p in (passages or []) if f.id in p.because][:1]
+            stmts.append({"text": "Demo mode (no AI used): " + f.text, "fact_ids": [f.id], "passage_ids": pids})
+        return FakeClient([{"statements": stmts}])
     return ClaudeClient()
+
+
+_CORPUS = None
+
+
+def get_passages(facts):
+    """Passages for these facts; an unreadable corpus means a reading without passages."""
+    global _CORPUS
+    try:
+        if _CORPUS is None:
+            _CORPUS = load_corpus()
+        return retrieve(facts, _CORPUS)
+    except Exception:
+        log.exception("could not load the passage corpus")
+        return []
 
 
 @app.post("/api/reading")
 def reading(req: ReadingRequest):
     if req.language not in LANGUAGES:
         raise HTTPException(400, "Language must be one of: " + ", ".join(sorted(LANGUAGES)) + ".")
-    facts = [_F(f.id, f.text) for f in req.facts]
+    facts = [_F(f.id, f.text, f.values) for f in req.facts]
+    passages = get_passages(facts)
     try:
-        client = make_client(facts)
-        r = generate_reading(client, facts, language=req.language, question=req.question)
+        client = make_client(facts, passages)
+        r = generate_reading(client, facts, language=req.language, question=req.question,
+                             passages=passages)
     except LLMError as e:
         raise HTTPException(503, str(e))
     except ReadingError as e:
         raise HTTPException(502, str(e))
     return {
-        "statements": [{"text": s.text, "fact_ids": s.fact_ids} for s in r.statements],
+        "statements": [{"text": s.text, "fact_ids": s.fact_ids, "passage_ids": s.passage_ids}
+                       for s in r.statements],
+        "passages": [{"id": p.id, "text": p.text, "because": p.because} for p in r.passages],
         "disclaimer": r.disclaimer,
         "language": r.language,
         "model": r.model,

@@ -79,6 +79,7 @@ svg .ctr{font-size:13px;fill:var(--muted)}
 .rlist{padding-left:1.2em;display:grid;gap:12px;margin:12px 0}
 .chip{display:inline-block;margin:4px 6px 0 0;padding:2px 8px;border:1px solid var(--line);border-radius:999px;font-size:.78rem;color:var(--muted);cursor:help}
 .rnote{font-size:.85rem;color:var(--muted);margin-top:10px}
+.pchip{border-style:dashed}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
@@ -408,7 +409,8 @@ async function generateReading(){
   const st=$("rstatus"), out=$("rout"); out.replaceChildren();
   if(!state.facts.length){st.textContent="A reading needs a chart made by the server (not the sample or a loaded file without facts).";return}
   const base=$("api").value.trim().replace(/\/$/,"");
-  const body={facts:state.facts.map(f=>({id:f.id,text:f.text})),language:$("rlang").value,question:$("rq").value.trim()||null};
+  const scal=o=>{const r={};Object.keys(o||{}).forEach(k=>{const v=o[k];if(v===null||["string","number"].includes(typeof v))r[k]=v});return r};
+  const body={facts:state.facts.map(f=>({id:f.id,text:f.text,values:scal(f.values)})),language:$("rlang").value,question:$("rq").value.trim()||null};
   $("rgo").disabled=true; st.textContent="Writing the reading…";
   try{
     const r=await fetch(base+"/api/reading",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
@@ -423,8 +425,13 @@ async function generateReading(){
     d.statements.forEach(s=>{
       const li=el("li"); li.appendChild(el("span",null,s.text)); li.appendChild(el("br"));
       s.fact_ids.forEach(id=>li.appendChild(el("span",{class:"chip",title:byId[id]||id},id)));
+      (s.passage_ids||[]).forEach(id=>li.appendChild(el("span",{class:"chip pchip",title:"Traditional meaning: "+id},id)));
       ol.appendChild(li)});
     out.appendChild(ol);
+    if(d.passages&&d.passages.length){
+      const det=el("details",{class:"rnote"}); det.appendChild(el("summary",null,"Traditional meanings used ("+d.passages.length+")"));
+      d.passages.forEach(p=>det.appendChild(el("p",null,p.id+": "+p.text)));
+      out.appendChild(det)}
     out.appendChild(el("p",{class:"rnote"},d.disclaimer));
     if(d.demo) out.appendChild(el("p",{class:"rnote"},"Demo mode: no AI was used. These lines simply restate computed facts."));
     else if(d.dropped) out.appendChild(el("p",{class:"rnote"},d.dropped+" statement(s) were removed because they did not pass the citation check."));

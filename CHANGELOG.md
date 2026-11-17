@@ -46,3 +46,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/); versions follow 
 - Dasha balance at birth is about 9 days shorter than Jagannatha Hora's (lord matches).
 - A 43 arcsecond difference can move a planet across a pada boundary.
 - First run downloads about 60 MB of ephemeris data (planets and the Hipparcos catalog).
+
+## [0.4.0] - 2026-11-17
+
+### Added
+- Reference corpus (`corpus/passages.json`): 75 short passages in original wording covering planets, signs, houses, nakshatras, dignities, dasha lords, Lagna and drishti.
+- Retrieval from facts (`retrieval.py`): deterministic key match with aliases for spelling variants; no embeddings. Ranked Lagna, Moon, Sun, running dasha first; capped at 30.
+- Readings cite passages as well as facts. Every statement must still cite at least one fact; a passage alone is rejected.
+- `/api/reading` returns the passages used; the Reading tab shows them.
+- Evaluation (`evaluation.py`, `scripts/run_eval.py`, `eval/births.json`): 24 charts; checks that each fact traces to the chart, retrieval has no gaps and is repeatable, and every kind of bad reading is rejected. Results in `docs/eval-results-v0.4.0.md`.
+- ADR-0005 (corpus and retrieval).
+
+### Fixed
+- The topic guardrail rejected the zodiac sign Cancer and the word "investigation". Cancer is now allowed (only lower-case "cancer" is blocked) and "invest" no longer matches "investigation".
+
+### Notes
+- Chroma and embeddings are deferred (ADR-0005).
+- The corpus is a draft for review by someone who knows Jyotish.
