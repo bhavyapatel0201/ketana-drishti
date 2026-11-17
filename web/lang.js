@@ -123,7 +123,8 @@ window.KD_LANG = {
    "dHint": "Computed from the Moon's longitude (Vimshottari, 365.2422-day years). Periods are shown from the as-of date.",
    "fEmpty": "Facts are produced by the server. Generate a chart through the server to see them here.",
    "fFilter": "Filter facts (e.g. moon, retrograde, dasha)",
-   "fNote": "Facts are shown in English because they are the exact sources each reading line cites."
+   "fNote": "Facts are shown in English because they are the exact sources each reading line cites.",
+   "errPage": "The chart was calculated, but the page could not show it ({msg}). Please report this."
   },
   "hi": {
    "tag": "आधारित पठन: पहले गणना, फिर हर बात का स्रोत। वैदिक (निरयण) जन्म कुंडली, लाहिरी अयनांश।",
@@ -248,7 +249,8 @@ window.KD_LANG = {
    "dHint": "चंद्र के देशांतर से गणना (विंशोत्तरी, 365.2422 दिन का वर्ष)। अवधियाँ चुनी हुई तिथि से दिखाई गई हैं।",
    "fEmpty": "तथ्य सर्वर बनाता है। उन्हें यहाँ देखने के लिए सर्वर से कुंडली बनाएँ।",
    "fFilter": "तथ्य छाँटें (जैसे moon, retrograde, dasha)",
-   "fNote": "तथ्य अंग्रेज़ी में दिखाए गए हैं क्योंकि हर पठन-पंक्ति इन्हीं सटीक स्रोतों का हवाला देती है।"
+   "fNote": "तथ्य अंग्रेज़ी में दिखाए गए हैं क्योंकि हर पठन-पंक्ति इन्हीं सटीक स्रोतों का हवाला देती है।",
+   "errPage": "कुंडली की गणना हो गई, पर पृष्ठ उसे दिखा नहीं सका ({msg})। कृपया इसकी सूचना दें।"
   },
   "gu": {
    "tag": "આધારિત વાચન: પહેલા ગણતરી, પછી દરેક વાતનો સ્રોત. વૈદિક (નિરયન) જન્મકુંડળી, લાહિરી અયનાંશ.",
@@ -373,7 +375,8 @@ window.KD_LANG = {
    "dHint": "ચંદ્રના રેખાંશ પરથી ગણતરી (વિંશોત્તરી, 365.2422 દિવસનું વર્ષ). સમયગાળા પસંદ કરેલી તારીખથી બતાવ્યા છે.",
    "fEmpty": "તથ્યો સર્વર બનાવે છે. તેમને અહીં જોવા માટે સર્વરથી કુંડળી બનાવો.",
    "fFilter": "તથ્યો ગાળો (દા.ત. moon, retrograde, dasha)",
-   "fNote": "તથ્યો અંગ્રેજીમાં બતાવ્યા છે કારણ કે દરેક વાચન-પંક્તિ આ જ ચોક્કસ સ્રોતોનો હવાલો આપે છે."
+   "fNote": "તથ્યો અંગ્રેજીમાં બતાવ્યા છે કારણ કે દરેક વાચન-પંક્તિ આ જ ચોક્કસ સ્રોતોનો હવાલો આપે છે.",
+   "errPage": "કુંડળીની ગણતરી થઈ ગઈ, પણ પાનું તેને બતાવી શક્યું નહીં ({msg}). કૃપા કરીને તેની જાણ કરો."
   }
  },
  "names": {

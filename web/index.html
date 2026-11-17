@@ -131,7 +131,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
       <input id="name" type="text" maxlength="80" autocomplete="off">
       <div class="row">
         <div><label for="date" data-i="dob"></label><input id="date" type="date" required min="1900-01-01"></div>
-        <div><label for="time" data-i="tob"></label><input id="time" type="time" step="1" required></div>
+        <div><label for="time" data-i="tob"></label><input id="time" type="time" required></div>
       </div>
       <div id="placeBlock">
         <label for="place" data-i="pob"></label>
@@ -163,7 +163,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--muted);fon
       <details>
         <summary data-i="advanced"></summary>
         <label for="api" data-i="serverUrl"></label>
-        <input id="api" type="url" data-ip="phApi">
+        <input id="api" type="url" data-ip="phApi" autocomplete="off" spellcheck="false">
         <p class="hint" data-i="privacyHint"></p>
       </details>
     </form>
@@ -409,9 +409,9 @@ function renderDetail(){
 /* ---------- tables and panels ---------- */
 function renderPlanets(){
   const host=$("p1"); host.replaceChildren();
-  const wrap=el("div",{class:"tablewrap"}); const t=el("table"); const th=el("thead"); const tr=el("tr");
+  const wrap=el("div",{class:"tablewrap"}); const tbl=el("table"); const th=el("thead"); const tr=el("tr");
   ["thPlanet","thSign","thPosition","thNak","thHouse","thStatus"].forEach(c=>tr.appendChild(el("th",null,t(c))));
-  th.appendChild(tr); t.appendChild(th); const tb=el("tbody");
+  th.appendChild(tr); tbl.appendChild(th); const tb=el("tbody");
   const lag=state.model.lagna, rows=[{name:"Lagna",sign:lag.sign,deg:lag.deg,nak:lag.nak,pada:lag.pada,house:1,status:""}];
   state.model.houses.forEach(h=>h.planets.forEach(p=>rows.push({name:p.name,sign:p.sign,deg:p.deg,nak:p.nak,pada:p.pada,house:p.house,
     status:[p.retro?t("retro"):"",dgLabel(p.dignity)].filter(Boolean).join(", ")})));
@@ -422,7 +422,7 @@ function renderPlanets(){
     row.addEventListener("click",go); row.addEventListener("keydown",ev=>{if(ev.key==="Enter"){go()}});
     tb.appendChild(row);
   });
-  t.appendChild(tb); wrap.appendChild(t); host.appendChild(wrap);
+  tbl.appendChild(tb); wrap.appendChild(tbl); host.appendChild(wrap);
 }
 function renderFacts(q){
   const host=$("p2"); host.replaceChildren();
@@ -635,8 +635,11 @@ $("form").addEventListener("submit",async ev=>{
   }
   const base=$("api").value.trim().replace(/\/$/,"");
   $("go").disabled=true; setStatus(t("calculating"));
+  let r;
   try{
-    const r=await fetch(base+"/api/chart",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+    r=await fetch(base+"/api/chart",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  }catch(e){ setStatus(t("errServer"),"err"); $("go").disabled=false; return }
+  try{
     let data=null; try{data=await r.json()}catch(_){}
     if(!r.ok){
       let msg=t("errChart",{n:r.status});
@@ -646,7 +649,8 @@ $("form").addEventListener("submit",async ev=>{
       setStatus(msg,"err");return}
     show(data.chart,data.facts,body.name||t("defaultTitle")); setStatus(t("chartReady"),"ok");
   }catch(e){
-    setStatus(t("errServer"),"err");
+    console.error(e);
+    setStatus(t("errPage",{msg:(e&&e.message)||String(e)}),"err");
   } finally {$("go").disabled=false}
 });
 $("sample").addEventListener("click",()=>{try{show(sampleChart(),[],t("sampleTitle"));setStatus(t("sampleShown"),"ok")}catch(e){setStatus(e.message,"err")}});

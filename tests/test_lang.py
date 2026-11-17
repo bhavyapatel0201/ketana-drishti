@@ -67,3 +67,13 @@ def test_server_serves_lang_file():
     from ketana_drishti import api
     r = TestClient(api.app).get("/lang.js")
     assert r.status_code == 200 and "KD_LANG" in r.text
+
+
+def test_no_local_variable_shadows_the_translation_function():
+    """`t` is the translation function; a local `const t=` in a function that calls t() breaks the page."""
+    script = HTML.split("<script>")[-1]
+    for m in re.finditer(r"(?:const|let|var)\s+t\s*=", script):
+        start = script.rfind("function ", 0, m.start())
+        end = script.find("\nfunction ", m.start())
+        body = script[start:end if end != -1 else len(script)]
+        assert not re.search(r"(?<![\w.$])t\(", body), "t() is shadowed in: " + body[:60]
