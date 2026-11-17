@@ -5,3 +5,5 @@ __pycache__/
 outputs/
 hip_main.dat
 *.bsp
+
+*.egg-info/

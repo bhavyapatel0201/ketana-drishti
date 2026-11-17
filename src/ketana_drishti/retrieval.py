@@ -26,6 +26,10 @@ class Passage:
     key: str
     text: str
     because: list = field(default_factory=list)  # ids of the facts that brought it in
+    translations: dict = field(default_factory=dict)  # {"hi": text, "gu": text}
+
+    def text_for(self, lang: str) -> str:
+        return self.translations.get(lang) or self.text
 
 
 class Corpus:
@@ -42,6 +46,13 @@ class Corpus:
 
     def find(self, kind: str, key) -> str | None:
         return self.index.get((kind, norm(key)))
+
+    def name(self, kind: str, key, lang: str) -> str:
+        """Localized name of a planet, sign or nakshatra (falls back to the given key)."""
+        pid = self.find(kind, key)
+        if lang == "en" or pid is None:
+            return str(key)
+        return self.by_id[pid].get(f"name_{lang}") or str(key)
 
 
 def load_corpus(path=None) -> Corpus:
@@ -95,7 +106,8 @@ def retrieve(facts, corpus: Corpus | None = None, limit: int = DEFAULT_LIMIT) ->
             rank = (_priority(f), order)
             if pid not in found:
                 p = corpus.by_id[pid]
-                found[pid] = [rank, Passage(pid, p["kind"], p["key"], p["text"], [f.id])]
+                tr = {l: p[f"text_{l}"] for l in ("hi", "gu") if p.get(f"text_{l}")}
+                found[pid] = [rank, Passage(pid, p["kind"], p["key"], p["text"], [f.id], tr)]
             else:
                 found[pid][0] = min(found[pid][0], rank)
                 if f.id not in found[pid][1].because:

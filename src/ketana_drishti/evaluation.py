@@ -9,7 +9,7 @@ Per chart it checks:
  3. checker    - a good scripted reading is accepted, and every bad one (unknown
                  id, no fact id, passage only, blocked topic, empty text) is rejected;
  4. pipeline   - generate_reading accepts the good reading end to end;
- 5. classic    - the no-model classic reading passes the same checker and is repeatable.
+ 5. classic    - the no-model classic reading (English, Hindi, Gujarati) passes the same checker and is repeatable.
 Nothing here calls a real model, so it is free and repeatable.
 """
 
@@ -124,7 +124,10 @@ def evaluate_chart(chart, as_of, corpus=None) -> ChartResult:
         r.pipeline_ok = len(reading.statements) == 1 and not reading.retried
     except ReadingError:
         r.pipeline_ok = False
-    payload = classic_payload(facts, passages)
-    valid, problems = check(payload, facts, passages)
-    r.classic_ok = bool(valid) and not problems and payload == classic_payload(facts, passages)
+    r.classic_ok = True
+    for lang in ("en", "hi", "gu"):
+        payload = classic_payload(facts, passages, lang=lang, corpus=corpus)
+        valid, problems = check(payload, facts, passages)
+        if not valid or problems or payload != classic_payload(facts, passages, lang=lang, corpus=corpus):
+            r.classic_ok = False
     return r

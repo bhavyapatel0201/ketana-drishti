@@ -16,8 +16,9 @@ from pydantic import BaseModel, Field, model_validator
 from .chart import build_chart
 from .facts import build_facts
 from .llm import ClaudeClient, FakeClient, LLMError
+from . import i18n
 from .classic import classic_payload
-from .reading import DISCLAIMER, LANGUAGES, ReadingError, check, generate_reading
+from .reading import LANGUAGES, ReadingError, check, generate_reading
 from .retrieval import DEFAULT_LIMIT, load_corpus, retrieve
 
 load_dotenv()
@@ -108,6 +109,13 @@ def make_client(facts, passages=None):
 _CORPUS = None
 
 
+def _corpus():
+    global _CORPUS
+    if _CORPUS is None:
+        _CORPUS = load_corpus()
+    return _CORPUS
+
+
 def get_passages(facts, limit=None):
     """Passages for these facts; an unreadable corpus means a reading without passages."""
     global _CORPUS
@@ -130,7 +138,7 @@ def reading(req: ReadingRequest):
     # A model prompt needs a size cap; the classic reading does not, so it uses every passage.
     passages = get_passages(facts, limit=500 if req.mode == "classic" else None)
     if req.mode == "classic":
-        payload = classic_payload(facts, passages)
+        payload = classic_payload(facts, passages, lang=req.language, corpus=_corpus())
         valid, problems = check(payload, facts, passages)
         if not valid:
             raise HTTPException(502, "Could not build a classic reading from these facts.")
@@ -139,10 +147,10 @@ def reading(req: ReadingRequest):
             "mode": "classic",
             "statements": [{"text": s.text, "fact_ids": s.fact_ids, "passage_ids": s.passage_ids} for s in valid],
             "passages": [{"id": p.id, "text": p.text, "because": p.because} for p in passages if p.id in used],
-            "disclaimer": DISCLAIMER,
-            "language": "en",
-            "notice": ("Hindi and Gujarati classic readings are not available yet; showing English."
-                       if req.language != "en" else ""),
+            "disclaimer": i18n.DISCLAIMERS[req.language],
+            "language": req.language,
+            "note": i18n.NOTES[req.language],
+            "notice": "",
             "model": "", "demo": False, "retried": False, "dropped": 0,
         }
     try:

@@ -79,9 +79,13 @@ def test_default_mode_is_classic_and_needs_no_model(monkeypatch):
     assert d["statements"][0]["fact_ids"] and "not medical" in d["disclaimer"]
 
 
-def test_classic_notice_for_other_languages():
-    r = client.post("/api/reading", json={"facts": FACTS, "language": "hi"})
-    assert r.status_code == 200 and "not available yet" in r.json()["notice"]
+def test_classic_in_hindi_and_gujarati():
+    for lang, word in (("hi", "क्लासिक"), ("gu", "ક્લાસિક")):
+        r = client.post("/api/reading", json={"facts": FACTS, "language": lang})
+        d = r.json()
+        assert r.status_code == 200 and d["language"] == lang and word in d["note"]
+        assert d["disclaimer"] != "" and "not medical" not in d["disclaimer"]
+        assert "Moon is in" not in d["statements"][0]["text"] + d["statements"][-1]["text"]
 
 
 def test_bad_mode_is_rejected():

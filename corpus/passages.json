@@ -7,63 +7,99 @@
    "kind": "planet",
    "key": "Sun",
    "aliases": [],
-   "text": "The Sun is traditionally associated with the sense of self, vitality, purpose and authority. It also stands for the father and for how a person seeks recognition."
+   "text": "The Sun is traditionally associated with the sense of self, vitality, purpose and authority. It also stands for the father and for how a person seeks recognition.",
+   "text_hi": "सूर्य पारंपरिक रूप से आत्म-बोध, जीवन-शक्ति, उद्देश्य और अधिकार से जुड़ा है। यह पिता का और इस बात का भी कारक है कि व्यक्ति मान-सम्मान कैसे चाहता है।",
+   "text_gu": "સૂર્ય પરંપરાગત રીતે આત્મબોધ, જીવનશક્તિ, ધ્યેય અને અધિકાર સાથે જોડાયેલો છે. તે પિતાનો અને વ્યક્તિ માન-સન્માન કેવી રીતે ઇચ્છે છે તેનો પણ કારક છે.",
+   "name_hi": "सूर्य",
+   "name_gu": "સૂર્ય"
   },
   {
    "id": "planet.moon",
    "kind": "planet",
    "key": "Moon",
    "aliases": [],
-   "text": "The Moon is traditionally associated with the mind, emotions, comfort and nurturing, and with the mother and one's sense of belonging. It describes how a person feels and responds."
+   "text": "The Moon is traditionally associated with the mind, emotions, comfort and nurturing, and with the mother and one's sense of belonging. It describes how a person feels and responds.",
+   "text_hi": "चंद्र पारंपरिक रूप से मन, भावनाओं, सुख-चैन और पोषण से तथा माता और अपनत्व की भावना से जुड़ा है। यह बताता है कि व्यक्ति कैसा महसूस करता है और कैसे प्रतिक्रिया देता है।",
+   "text_gu": "ચંદ્ર પરંપરાગત રીતે મન, લાગણીઓ, સુખ-ચેન અને પોષણ સાથે તથા માતા અને પોતાપણાની ભાવના સાથે જોડાયેલો છે. તે બતાવે છે કે વ્યક્તિ કેવું અનુભવે છે અને કેવી પ્રતિક્રિયા આપે છે.",
+   "name_hi": "चंद्र",
+   "name_gu": "ચંદ્ર"
   },
   {
    "id": "planet.mars",
    "kind": "planet",
    "key": "Mars",
    "aliases": [],
-   "text": "Mars is traditionally associated with energy, courage, drive and the willingness to act or compete. It shows where effort is applied and where impatience can arise."
+   "text": "Mars is traditionally associated with energy, courage, drive and the willingness to act or compete. It shows where effort is applied and where impatience can arise.",
+   "text_hi": "मंगल पारंपरिक रूप से ऊर्जा, साहस, प्रेरणा और कर्म या प्रतिस्पर्धा की इच्छा से जुड़ा है। यह दिखाता है कि प्रयास कहाँ लगता है और अधीरता कहाँ उभर सकती है।",
+   "text_gu": "મંગળ પરંપરાગત રીતે ઊર્જા, સાહસ, પ્રેરણા અને કર્મ કે સ્પર્ધાની ઇચ્છા સાથે જોડાયેલો છે. તે બતાવે છે કે પ્રયત્ન ક્યાં લાગે છે અને અધીરાઈ ક્યાં ઊભરી શકે છે.",
+   "name_hi": "मंगल",
+   "name_gu": "મંગળ"
   },
   {
    "id": "planet.mercury",
    "kind": "planet",
    "key": "Mercury",
    "aliases": [],
-   "text": "Mercury is traditionally associated with intellect, speech, learning, analysis and trade. It describes how a person thinks, communicates and processes information."
+   "text": "Mercury is traditionally associated with intellect, speech, learning, analysis and trade. It describes how a person thinks, communicates and processes information.",
+   "text_hi": "बुध पारंपरिक रूप से बुद्धि, वाणी, सीखने, विश्लेषण और व्यापार से जुड़ा है। यह बताता है कि व्यक्ति कैसे सोचता, संवाद करता और जानकारी को समझता है।",
+   "text_gu": "બુધ પરંપરાગત રીતે બુદ્ધિ, વાણી, શીખવા, વિશ્લેષણ અને વેપાર સાથે જોડાયેલો છે. તે બતાવે છે કે વ્યક્તિ કેવી રીતે વિચારે છે, સંવાદ કરે છે અને માહિતી સમજે છે.",
+   "name_hi": "बुध",
+   "name_gu": "બુધ"
   },
   {
    "id": "planet.jupiter",
    "kind": "planet",
    "key": "Jupiter",
    "aliases": [],
-   "text": "Jupiter is traditionally associated with wisdom, teaching, growth, optimism and guidance. It points to where a person seeks meaning and where support tends to come from."
+   "text": "Jupiter is traditionally associated with wisdom, teaching, growth, optimism and guidance. It points to where a person seeks meaning and where support tends to come from.",
+   "text_hi": "गुरु पारंपरिक रूप से ज्ञान, शिक्षण, वृद्धि, आशावाद और मार्गदर्शन से जुड़ा है। यह संकेत देता है कि व्यक्ति अर्थ कहाँ खोजता है और सहारा प्रायः कहाँ से मिलता है।",
+   "text_gu": "ગુરુ પરંપરાગત રીતે જ્ઞાન, શિક્ષણ, વૃદ્ધિ, આશાવાદ અને માર્ગદર્શન સાથે જોડાયેલો છે. તે સંકેત આપે છે કે વ્યક્તિ અર્થ ક્યાં શોધે છે અને ટેકો મોટે ભાગે ક્યાંથી મળે છે.",
+   "name_hi": "गुरु",
+   "name_gu": "ગુરુ"
   },
   {
    "id": "planet.venus",
    "kind": "planet",
    "key": "Venus",
    "aliases": [],
-   "text": "Venus is traditionally associated with relationships, affection, beauty, art and comfort. It describes what a person values and how they enjoy and share things."
+   "text": "Venus is traditionally associated with relationships, affection, beauty, art and comfort. It describes what a person values and how they enjoy and share things.",
+   "text_hi": "शुक्र पारंपरिक रूप से संबंधों, स्नेह, सौंदर्य, कला और सुख-सुविधा से जुड़ा है। यह बताता है कि व्यक्ति किसे महत्व देता है और चीज़ों का आनंद व साझा कैसे करता है।",
+   "text_gu": "શુક્ર પરંપરાગત રીતે સંબંધો, સ્નેહ, સૌંદર્ય, કલા અને સુખ-સગવડ સાથે જોડાયેલો છે. તે બતાવે છે કે વ્યક્તિ શેને મહત્ત્વ આપે છે અને વસ્તુઓનો આનંદ કેવી રીતે માણે અને વહેંચે છે.",
+   "name_hi": "शुक्र",
+   "name_gu": "શુક્ર"
   },
   {
    "id": "planet.saturn",
    "kind": "planet",
    "key": "Saturn",
    "aliases": [],
-   "text": "Saturn is traditionally associated with discipline, responsibility, patience and limits. It points to where steady effort over time matters most and where progress feels slow."
+   "text": "Saturn is traditionally associated with discipline, responsibility, patience and limits. It points to where steady effort over time matters most and where progress feels slow.",
+   "text_hi": "शनि पारंपरिक रूप से अनुशासन, ज़िम्मेदारी, धैर्य और सीमाओं से जुड़ा है। यह बताता है कि लंबे समय तक स्थिर प्रयास कहाँ सबसे ज़रूरी है और प्रगति कहाँ धीमी लगती है।",
+   "text_gu": "શનિ પરંપરાગત રીતે શિસ્ત, જવાબદારી, ધીરજ અને મર્યાદાઓ સાથે જોડાયેલો છે. તે બતાવે છે કે લાંબા સમય સુધી સ્થિર પ્રયત્ન ક્યાં સૌથી જરૂરી છે અને પ્રગતિ ક્યાં ધીમી લાગે છે.",
+   "name_hi": "शनि",
+   "name_gu": "શનિ"
   },
   {
    "id": "planet.rahu",
    "kind": "planet",
    "key": "Rahu",
    "aliases": [],
-   "text": "Rahu is a shadow point (the Moon's ascending node), traditionally associated with ambition, appetite, unconventional paths and the foreign or unfamiliar. It marks where a person reaches beyond the usual."
+   "text": "Rahu is a shadow point (the Moon's ascending node), traditionally associated with ambition, appetite, unconventional paths and the foreign or unfamiliar. It marks where a person reaches beyond the usual.",
+   "text_hi": "राहु एक छाया बिंदु (चंद्र का आरोही पात) है, जो पारंपरिक रूप से महत्वाकांक्षा, लालसा, अपरंपरागत मार्गों और विदेशी या अपरिचित से जुड़ा है। यह दिखाता है कि व्यक्ति सामान्य से आगे कहाँ पहुँचना चाहता है।",
+   "text_gu": "રાહુ એક છાયા બિંદુ (ચંદ્રનો આરોહી પાત) છે, જે પરંપરાગત રીતે મહત્ત્વાકાંક્ષા, લાલસા, અપરંપરાગત માર્ગો અને વિદેશી કે અપરિચિત સાથે જોડાયેલો છે. તે બતાવે છે કે વ્યક્તિ સામાન્યથી આગળ ક્યાં પહોંચવા માગે છે.",
+   "name_hi": "राहु",
+   "name_gu": "રાહુ"
   },
   {
    "id": "planet.ketu",
    "kind": "planet",
    "key": "Ketu",
    "aliases": [],
-   "text": "Ketu is a shadow point (the Moon's descending node), traditionally associated with detachment, introspection and tendencies carried from the past. It marks where a person looks inward rather than outward."
+   "text": "Ketu is a shadow point (the Moon's descending node), traditionally associated with detachment, introspection and tendencies carried from the past. It marks where a person looks inward rather than outward.",
+   "text_hi": "केतु एक छाया बिंदु (चंद्र का अवरोही पात) है, जो पारंपरिक रूप से वैराग्य, आत्मचिंतन और अतीत से लाई प्रवृत्तियों से जुड़ा है। यह दिखाता है कि व्यक्ति कहाँ बाहर के बजाय भीतर देखता है।",
+   "text_gu": "કેતુ એક છાયા બિંદુ (ચંદ્રનો અવરોહી પાત) છે, જે પરંપરાગત રીતે વૈરાગ્ય, આત્મચિંતન અને ભૂતકાળમાંથી લાવેલી વૃત્તિઓ સાથે જોડાયેલો છે. તે બતાવે છે કે વ્યક્તિ ક્યાં બહારને બદલે અંદર જુએ છે.",
+   "name_hi": "केतु",
+   "name_gu": "કેતુ"
   },
   {
    "id": "sign.aries",
@@ -72,7 +108,11 @@
    "aliases": [
     "Mesha"
    ],
-   "text": "Aries (Mesha) is a cardinal fire sign ruled by Mars. It is traditionally linked with initiative, directness and a pioneering, quick-starting style."
+   "text": "Aries (Mesha) is a cardinal fire sign ruled by Mars. It is traditionally linked with initiative, directness and a pioneering, quick-starting style.",
+   "text_hi": "मेष (Aries) एक चर अग्नि राशि है, जिसका स्वामी मंगल है। इसे पहल, सीधेपन और तुरंत शुरुआत करने वाली शैली से जोड़ा जाता है।",
+   "text_gu": "મેષ (Aries) એક ચર અગ્નિ રાશિ છે, જેનો સ્વામી મંગળ છે. તેને પહેલ, સીધાપણું અને તરત શરૂઆત કરતી શૈલી સાથે જોડવામાં આવે છે.",
+   "name_hi": "मेष",
+   "name_gu": "મેષ"
   },
   {
    "id": "sign.taurus",
@@ -81,7 +121,11 @@
    "aliases": [
     "Vrishabha"
    ],
-   "text": "Taurus (Vrishabha) is a fixed earth sign ruled by Venus. It is linked with steadiness, patience, sensory enjoyment and a preference for security."
+   "text": "Taurus (Vrishabha) is a fixed earth sign ruled by Venus. It is linked with steadiness, patience, sensory enjoyment and a preference for security.",
+   "text_hi": "वृषभ (Taurus) एक स्थिर पृथ्वी राशि है, जिसका स्वामी शुक्र है। इसे स्थिरता, धैर्य, इंद्रिय-सुख और सुरक्षा की पसंद से जोड़ा जाता है।",
+   "text_gu": "વૃષભ (Taurus) એક સ્થિર પૃથ્વી રાશિ છે, જેનો સ્વામી શુક્ર છે. તેને સ્થિરતા, ધીરજ, ઇન્દ્રિય-સુખ અને સુરક્ષાની પસંદગી સાથે જોડવામાં આવે છે.",
+   "name_hi": "वृषभ",
+   "name_gu": "વૃષભ"
   },
   {
    "id": "sign.gemini",
@@ -90,7 +134,11 @@
    "aliases": [
     "Mithuna"
    ],
-   "text": "Gemini (Mithuna) is a mutable air sign ruled by Mercury. It is linked with curiosity, communication, versatility and quick learning."
+   "text": "Gemini (Mithuna) is a mutable air sign ruled by Mercury. It is linked with curiosity, communication, versatility and quick learning.",
+   "text_hi": "मिथुन (Gemini) एक द्विस्वभाव वायु राशि है, जिसका स्वामी बुध है। इसे जिज्ञासा, संवाद, बहुमुखी प्रतिभा और तेज़ सीखने से जोड़ा जाता है।",
+   "text_gu": "મિથુન (Gemini) એક દ્વિસ્વભાવ વાયુ રાશિ છે, જેનો સ્વામી બુધ છે. તેને જિજ્ઞાસા, સંવાદ, બહુમુખી પ્રતિભા અને ઝડપી શીખવા સાથે જોડવામાં આવે છે.",
+   "name_hi": "मिथुन",
+   "name_gu": "મિથુન"
   },
   {
    "id": "sign.cancer",
@@ -99,7 +147,11 @@
    "aliases": [
     "Karka"
    ],
-   "text": "Cancer (Karka) is a cardinal water sign ruled by the Moon. It is linked with care, memory, emotional sensitivity and protectiveness toward home and family."
+   "text": "Cancer (Karka) is a cardinal water sign ruled by the Moon. It is linked with care, memory, emotional sensitivity and protectiveness toward home and family.",
+   "text_hi": "कर्क (Cancer) एक चर जल राशि है, जिसका स्वामी चंद्र है। इसे देखभाल, स्मृति, भावनात्मक संवेदनशीलता और घर-परिवार के प्रति संरक्षण-भाव से जोड़ा जाता है।",
+   "text_gu": "કર્ક (Cancer) એક ચર જળ રાશિ છે, જેનો સ્વામી ચંદ્ર છે. તેને કાળજી, સ્મૃતિ, ભાવનાત્મક સંવેદનશીલતા અને ઘર-પરિવાર પ્રત્યે રક્ષણભાવ સાથે જોડવામાં આવે છે.",
+   "name_hi": "कर्क",
+   "name_gu": "કર્ક"
   },
   {
    "id": "sign.leo",
@@ -108,7 +160,11 @@
    "aliases": [
     "Simha"
    ],
-   "text": "Leo (Simha) is a fixed fire sign ruled by the Sun. It is linked with confidence, warmth, leadership and a wish to be seen and appreciated."
+   "text": "Leo (Simha) is a fixed fire sign ruled by the Sun. It is linked with confidence, warmth, leadership and a wish to be seen and appreciated.",
+   "text_hi": "सिंह (Leo) एक स्थिर अग्नि राशि है, जिसका स्वामी सूर्य है। इसे आत्मविश्वास, गर्मजोशी, नेतृत्व और देखे व सराहे जाने की चाह से जोड़ा जाता है।",
+   "text_gu": "સિંહ (Leo) એક સ્થિર અગ્નિ રાશિ છે, જેનો સ્વામી સૂર્ય છે. તેને આત્મવિશ્વાસ, હૂંફ, નેતૃત્વ અને જોવાય તથા વખણાય તેવી ઇચ્છા સાથે જોડવામાં આવે છે.",
+   "name_hi": "सिंह",
+   "name_gu": "સિંહ"
   },
   {
    "id": "sign.virgo",
@@ -117,7 +173,11 @@
    "aliases": [
     "Kanya"
    ],
-   "text": "Virgo (Kanya) is a mutable earth sign ruled by Mercury. It is linked with precision, service, practical analysis and attention to detail."
+   "text": "Virgo (Kanya) is a mutable earth sign ruled by Mercury. It is linked with precision, service, practical analysis and attention to detail.",
+   "text_hi": "कन्या (Virgo) एक द्विस्वभाव पृथ्वी राशि है, जिसका स्वामी बुध है। इसे सटीकता, सेवा, व्यावहारिक विश्लेषण और बारीकियों पर ध्यान से जोड़ा जाता है।",
+   "text_gu": "કન્યા (Virgo) એક દ્વિસ્વભાવ પૃથ્વી રાશિ છે, જેનો સ્વામી બુધ છે. તેને ચોકસાઈ, સેવા, વ્યવહારુ વિશ્લેષણ અને બારીકાઈ પર ધ્યાન સાથે જોડવામાં આવે છે.",
+   "name_hi": "कन्या",
+   "name_gu": "કન્યા"
   },
   {
    "id": "sign.libra",
@@ -126,7 +186,11 @@
    "aliases": [
     "Tula"
    ],
-   "text": "Libra (Tula) is a cardinal air sign ruled by Venus. It is linked with balance, fairness, cooperation and a sense of aesthetics."
+   "text": "Libra (Tula) is a cardinal air sign ruled by Venus. It is linked with balance, fairness, cooperation and a sense of aesthetics.",
+   "text_hi": "तुला (Libra) एक चर वायु राशि है, जिसका स्वामी शुक्र है। इसे संतुलन, निष्पक्षता, सहयोग और सौंदर्य-बोध से जोड़ा जाता है।",
+   "text_gu": "તુલા (Libra) એક ચર વાયુ રાશિ છે, જેનો સ્વામી શુક્ર છે. તેને સંતુલન, નિષ્પક્ષતા, સહકાર અને સૌંદર્યબોધ સાથે જોડવામાં આવે છે.",
+   "name_hi": "तुला",
+   "name_gu": "તુલા"
   },
   {
    "id": "sign.scorpio",
@@ -135,7 +199,11 @@
    "aliases": [
     "Vrischika"
    ],
-   "text": "Scorpio (Vrishchika) is a fixed water sign ruled by Mars. It is linked with intensity, depth, perseverance and an interest in what lies beneath the surface."
+   "text": "Scorpio (Vrishchika) is a fixed water sign ruled by Mars. It is linked with intensity, depth, perseverance and an interest in what lies beneath the surface.",
+   "text_hi": "वृश्चिक (Scorpio) एक स्थिर जल राशि है, जिसका स्वामी मंगल है। इसे तीव्रता, गहराई, दृढ़ता और सतह के नीचे की बातों में रुचि से जोड़ा जाता है।",
+   "text_gu": "વૃશ્ચિક (Scorpio) એક સ્થિર જળ રાશિ છે, જેનો સ્વામી મંગળ છે. તેને તીવ્રતા, ઊંડાણ, દૃઢતા અને સપાટીની નીચેની બાબતોમાં રસ સાથે જોડવામાં આવે છે.",
+   "name_hi": "वृश्चिक",
+   "name_gu": "વૃશ્ચિક"
   },
   {
    "id": "sign.sagittarius",
@@ -144,7 +212,11 @@
    "aliases": [
     "Dhanu"
    ],
-   "text": "Sagittarius (Dhanu) is a mutable fire sign ruled by Jupiter. It is linked with optimism, philosophy, exploration and the pursuit of meaning."
+   "text": "Sagittarius (Dhanu) is a mutable fire sign ruled by Jupiter. It is linked with optimism, philosophy, exploration and the pursuit of meaning.",
+   "text_hi": "धनु (Sagittarius) एक द्विस्वभाव अग्नि राशि है, जिसका स्वामी गुरु है। इसे आशावाद, दर्शन, खोज-यात्रा और अर्थ की तलाश से जोड़ा जाता है।",
+   "text_gu": "ધનુ (Sagittarius) એક દ્વિસ્વભાવ અગ્નિ રાશિ છે, જેનો સ્વામી ગુરુ છે. તેને આશાવાદ, તત્ત્વજ્ઞાન, ખોજ-યાત્રા અને અર્થની શોધ સાથે જોડવામાં આવે છે.",
+   "name_hi": "धनु",
+   "name_gu": "ધનુ"
   },
   {
    "id": "sign.capricorn",
@@ -153,7 +225,11 @@
    "aliases": [
     "Makara"
    ],
-   "text": "Capricorn (Makara) is a cardinal earth sign ruled by Saturn. It is linked with ambition, discipline, structure and long-term planning."
+   "text": "Capricorn (Makara) is a cardinal earth sign ruled by Saturn. It is linked with ambition, discipline, structure and long-term planning.",
+   "text_hi": "मकर (Capricorn) एक चर पृथ्वी राशि है, जिसका स्वामी शनि है। इसे महत्वाकांक्षा, अनुशासन, संरचना और दीर्घकालीन योजना से जोड़ा जाता है।",
+   "text_gu": "મકર (Capricorn) એક ચર પૃથ્વી રાશિ છે, જેનો સ્વામી શનિ છે. તેને મહત્ત્વાકાંક્ષા, શિસ્ત, માળખું અને લાંબા ગાળાનું આયોજન સાથે જોડવામાં આવે છે.",
+   "name_hi": "मकर",
+   "name_gu": "મકર"
   },
   {
    "id": "sign.aquarius",
@@ -162,7 +238,11 @@
    "aliases": [
     "Kumbha"
    ],
-   "text": "Aquarius (Kumbha) is a fixed air sign ruled by Saturn. It is linked with independence, ideas, community and an unconventional outlook."
+   "text": "Aquarius (Kumbha) is a fixed air sign ruled by Saturn. It is linked with independence, ideas, community and an unconventional outlook.",
+   "text_hi": "कुंभ (Aquarius) एक स्थिर वायु राशि है, जिसका स्वामी शनि है। इसे स्वतंत्रता, विचारों, समुदाय और अपरंपरागत दृष्टिकोण से जोड़ा जाता है।",
+   "text_gu": "કુંભ (Aquarius) એક સ્થિર વાયુ રાશિ છે, જેનો સ્વામી શનિ છે. તેને સ્વતંત્રતા, વિચારો, સમુદાય અને અપરંપરાગત દૃષ્ટિકોણ સાથે જોડવામાં આવે છે.",
+   "name_hi": "कुंभ",
+   "name_gu": "કુંભ"
   },
   {
    "id": "sign.pisces",
@@ -171,91 +251,119 @@
    "aliases": [
     "Meena"
    ],
-   "text": "Pisces (Meena) is a mutable water sign ruled by Jupiter. It is linked with imagination, compassion, intuition and a tendency to dissolve boundaries."
+   "text": "Pisces (Meena) is a mutable water sign ruled by Jupiter. It is linked with imagination, compassion, intuition and a tendency to dissolve boundaries.",
+   "text_hi": "मीन (Pisces) एक द्विस्वभाव जल राशि है, जिसका स्वामी गुरु है। इसे कल्पना, करुणा, अंतर्ज्ञान और सीमाओं को घुला देने की प्रवृत्ति से जोड़ा जाता है।",
+   "text_gu": "મીન (Pisces) એક દ્વિસ્વભાવ જળ રાશિ છે, જેનો સ્વામી ગુરુ છે. તેને કલ્પના, કરુણા, અંતર્જ્ઞાન અને સીમાઓ ઓગાળી દેવાની વૃત્તિ સાથે જોડવામાં આવે છે.",
+   "name_hi": "मीन",
+   "name_gu": "મીન"
   },
   {
    "id": "house.1",
    "kind": "house",
    "key": "1",
    "aliases": [],
-   "text": "The 1st house (Lagna) concerns the self: temperament, body, outlook and how a person meets the world."
+   "text": "The 1st house (Lagna) concerns the self: temperament, body, outlook and how a person meets the world.",
+   "text_hi": "पहला भाव (लग्न) स्वयं से जुड़ा है: स्वभाव, शरीर, दृष्टिकोण और व्यक्ति दुनिया से कैसे मिलता है।",
+   "text_gu": "પહેલો ભાવ (લગ્ન) સ્વ સાથે જોડાયેલો છે: સ્વભાવ, શરીર, દૃષ્ટિકોણ અને વ્યક્તિ દુનિયાને કેવી રીતે મળે છે."
   },
   {
    "id": "house.2",
    "kind": "house",
    "key": "2",
    "aliases": [],
-   "text": "The 2nd house concerns resources, speech, food, the family of origin and what a person values and holds on to."
+   "text": "The 2nd house concerns resources, speech, food, the family of origin and what a person values and holds on to.",
+   "text_hi": "दूसरा भाव संसाधनों, वाणी, भोजन, मूल परिवार और उन चीज़ों से जुड़ा है जिन्हें व्यक्ति मूल्य देता और थामे रखता है।",
+   "text_gu": "બીજો ભાવ સંસાધનો, વાણી, ભોજન, મૂળ પરિવાર અને જે વસ્તુઓને વ્યક્તિ મૂલ્ય આપે અને પકડી રાખે તેની સાથે જોડાયેલો છે."
   },
   {
    "id": "house.3",
    "kind": "house",
    "key": "3",
    "aliases": [],
-   "text": "The 3rd house concerns effort, courage, skills, siblings and everyday communication."
+   "text": "The 3rd house concerns effort, courage, skills, siblings and everyday communication.",
+   "text_hi": "तीसरा भाव प्रयास, साहस, कौशल, भाई-बहनों और रोज़मर्रा के संवाद से जुड़ा है।",
+   "text_gu": "ત્રીજો ભાવ પ્રયત્ન, સાહસ, કુશળતા, ભાઈ-બહેનો અને રોજબરોજના સંવાદ સાથે જોડાયેલો છે."
   },
   {
    "id": "house.4",
    "kind": "house",
    "key": "4",
    "aliases": [],
-   "text": "The 4th house concerns home, roots, the mother, inner peace and one's private foundation."
+   "text": "The 4th house concerns home, roots, the mother, inner peace and one's private foundation.",
+   "text_hi": "चौथा भाव घर, जड़ों, माता, मन की शांति और व्यक्ति की निजी नींव से जुड़ा है।",
+   "text_gu": "ચોથો ભાવ ઘર, મૂળ, માતા, મનની શાંતિ અને વ્યક્તિના અંગત પાયા સાથે જોડાયેલો છે."
   },
   {
    "id": "house.5",
    "kind": "house",
    "key": "5",
    "aliases": [],
-   "text": "The 5th house concerns creativity, learning, intelligence, children and what a person does for joy."
+   "text": "The 5th house concerns creativity, learning, intelligence, children and what a person does for joy.",
+   "text_hi": "पाँचवाँ भाव रचनात्मकता, विद्या, बुद्धि, संतान और आनंद के लिए किए गए कार्यों से जुड़ा है।",
+   "text_gu": "પાંચમો ભાવ સર્જનાત્મકતા, વિદ્યા, બુદ્ધિ, સંતાન અને આનંદ માટે કરાતા કાર્યો સાથે જોડાયેલો છે."
   },
   {
    "id": "house.6",
    "kind": "house",
    "key": "6",
    "aliases": [],
-   "text": "The 6th house concerns daily work, service, routines and the obstacles a person learns to work through."
+   "text": "The 6th house concerns daily work, service, routines and the obstacles a person learns to work through.",
+   "text_hi": "छठा भाव रोज़ के काम, सेवा, दिनचर्या और उन बाधाओं से जुड़ा है जिनसे व्यक्ति निपटना सीखता है।",
+   "text_gu": "છઠ્ઠો ભાવ રોજના કામ, સેવા, દિનચર્યા અને જે અવરોધોનો સામનો કરવાનું વ્યક્તિ શીખે છે તેની સાથે જોડાયેલો છે."
   },
   {
    "id": "house.7",
    "kind": "house",
    "key": "7",
    "aliases": [],
-   "text": "The 7th house concerns one-to-one partnership, close collaboration and how a person relates to others as equals."
+   "text": "The 7th house concerns one-to-one partnership, close collaboration and how a person relates to others as equals.",
+   "text_hi": "सातवाँ भाव आमने-सामने की साझेदारी, निकट सहयोग और दूसरों से बराबरी के स्तर पर संबंध से जुड़ा है।",
+   "text_gu": "સાતમો ભાવ સામસામેની ભાગીદારી, નિકટ સહયોગ અને બીજાઓ સાથે સમાન સ્તરે સંબંધ સાથે જોડાયેલો છે."
   },
   {
    "id": "house.8",
    "kind": "house",
    "key": "8",
    "aliases": [],
-   "text": "The 8th house concerns transformation, endings and beginnings, shared resources and hidden or deeply private matters."
+   "text": "The 8th house concerns transformation, endings and beginnings, shared resources and hidden or deeply private matters.",
+   "text_hi": "आठवाँ भाव रूपांतरण, अंत और आरंभ, साझा संसाधनों और छिपी या गहरी निजी बातों से जुड़ा है।",
+   "text_gu": "આઠમો ભાવ રૂપાંતર, અંત અને આરંભ, વહેંચાયેલાં સંસાધનો અને છુપાયેલી કે ઊંડી અંગત બાબતો સાથે જોડાયેલો છે."
   },
   {
    "id": "house.9",
    "kind": "house",
    "key": "9",
    "aliases": [],
-   "text": "The 9th house (dharma) concerns beliefs, higher learning, teachers, ethics and long journeys."
+   "text": "The 9th house (dharma) concerns beliefs, higher learning, teachers, ethics and long journeys.",
+   "text_hi": "नौवाँ भाव (धर्म) आस्था, उच्च शिक्षा, गुरुजन, नैतिकता और लंबी यात्राओं से जुड़ा है।",
+   "text_gu": "નવમો ભાવ (ધર્મ) શ્રદ્ધા, ઉચ્ચ શિક્ષણ, ગુરુજનો, નીતિમત્તા અને લાંબી યાત્રાઓ સાથે જોડાયેલો છે."
   },
   {
    "id": "house.10",
    "kind": "house",
    "key": "10",
    "aliases": [],
-   "text": "The 10th house concerns vocation, public role, responsibility and how a person is seen in their work."
+   "text": "The 10th house concerns vocation, public role, responsibility and how a person is seen in their work.",
+   "text_hi": "दसवाँ भाव कर्म-क्षेत्र, सार्वजनिक भूमिका, ज़िम्मेदारी और काम में व्यक्ति की छवि से जुड़ा है।",
+   "text_gu": "દસમો ભાવ કર્મક્ષેત્ર, જાહેર ભૂમિકા, જવાબદારી અને કામમાં વ્યક્તિની છબી સાથે જોડાયેલો છે."
   },
   {
    "id": "house.11",
    "kind": "house",
    "key": "11",
    "aliases": [],
-   "text": "The 11th house concerns gains, networks, friendships and the fulfilment of aspirations."
+   "text": "The 11th house concerns gains, networks, friendships and the fulfilment of aspirations.",
+   "text_hi": "ग्यारहवाँ भाव लाभ, संपर्क-जाल, मित्रता और आकांक्षाओं की पूर्ति से जुड़ा है।",
+   "text_gu": "અગિયારમો ભાવ લાભ, સંપર્ક-જાળ, મૈત્રી અને આકાંક્ષાઓની પૂર્તિ સાથે જોડાયેલો છે."
   },
   {
    "id": "house.12",
    "kind": "house",
    "key": "12",
    "aliases": [],
-   "text": "The 12th house concerns withdrawal, solitude, letting go, rest, spiritual practice and life far from home."
+   "text": "The 12th house concerns withdrawal, solitude, letting go, rest, spiritual practice and life far from home.",
+   "text_hi": "बारहवाँ भाव एकांत, पीछे हटने, छोड़ने, विश्राम, आध्यात्मिक साधना और घर से दूर जीवन से जुड़ा है।",
+   "text_gu": "બારમો ભાવ એકાંત, પાછળ હટવા, છોડવા, આરામ, આધ્યાત્મિક સાધના અને ઘરથી દૂરના જીવન સાથે જોડાયેલો છે."
   },
   {
    "id": "nakshatra.ashwini",
@@ -264,14 +372,22 @@
    "aliases": [
     "Aswini"
    ],
-   "text": "Ashwini is ruled by Ketu and presided over by the Ashwini Kumaras, the divine physicians; its symbol is a horse's head. It is traditionally linked with swiftness, initiative and a wish to start things."
+   "text": "Ashwini is ruled by Ketu and presided over by the Ashwini Kumaras, the divine physicians; its symbol is a horse's head. It is traditionally linked with swiftness, initiative and a wish to start things.",
+   "text_hi": "अश्विनी के स्वामी केतु हैं और अधिष्ठाता देवता अश्विनी कुमार (देवताओं के चिकित्सक) हैं; इसका प्रतीक घोड़े का सिर है। परंपरा में इसे तेज़ी, पहल और शुरुआत करने की इच्छा से जोड़ा जाता है।",
+   "text_gu": "અશ્વિનીના સ્વામી કેતુ છે અને અધિષ્ઠાતા દેવતા અશ્વિની કુમારો (દેવોના વૈદ્ય) છે; તેનું પ્રતીક ઘોડાનું મસ્તક છે. પરંપરામાં તેને ઝડપ, પહેલ અને શરૂઆત કરવાની ઇચ્છા સાથે જોડવામાં આવે છે.",
+   "name_hi": "अश्विनी",
+   "name_gu": "અશ્વિની"
   },
   {
    "id": "nakshatra.bharani",
    "kind": "nakshatra",
    "key": "Bharani",
    "aliases": [],
-   "text": "Bharani is ruled by Venus and presided over by Yama, keeper of order; its symbol is the yoni, a symbol of bearing and containing. It is traditionally linked with restraint, endurance and intensity of feeling."
+   "text": "Bharani is ruled by Venus and presided over by Yama, keeper of order; its symbol is the yoni, a symbol of bearing and containing. It is traditionally linked with restraint, endurance and intensity of feeling.",
+   "text_hi": "भरणी के स्वामी शुक्र हैं और अधिष्ठाता देवता यम (व्यवस्था के रक्षक) हैं; इसका प्रतीक योनि (धारण करने का प्रतीक) है। परंपरा में इसे संयम, सहनशीलता और भावनाओं की तीव्रता से जोड़ा जाता है।",
+   "text_gu": "ભરણીના સ્વામી શુક્ર છે અને અધિષ્ઠાતા દેવતા યમ (વ્યવસ્થાના રક્ષક) છે; તેનું પ્રતીક યોનિ (ધારણ કરવાનું પ્રતીક) છે. પરંપરામાં તેને સંયમ, સહનશક્તિ અને લાગણીઓની તીવ્રતા સાથે જોડવામાં આવે છે.",
+   "name_hi": "भरणी",
+   "name_gu": "ભરણી"
   },
   {
    "id": "nakshatra.krittika",
@@ -281,14 +397,22 @@
     "Kritika",
     "Krithika"
    ],
-   "text": "Krittika is ruled by the Sun and presided over by Agni, the sacred fire; its symbol is a razor or flame. It is traditionally linked with sharpness, purification and discernment."
+   "text": "Krittika is ruled by the Sun and presided over by Agni, the sacred fire; its symbol is a razor or flame. It is traditionally linked with sharpness, purification and discernment.",
+   "text_hi": "कृत्तिका के स्वामी सूर्य हैं और अधिष्ठाता देवता अग्नि (पवित्र अग्नि) हैं; इसका प्रतीक उस्तरा या ज्वाला है। परंपरा में इसे तीक्ष्णता, शुद्धि और विवेक से जोड़ा जाता है।",
+   "text_gu": "કૃત્તિકાના સ્વામી સૂર્ય છે અને અધિષ્ઠાતા દેવતા અગ્નિ (પવિત્ર અગ્નિ) છે; તેનું પ્રતીક અસ્ત્રો અથવા જ્વાળા છે. પરંપરામાં તેને તીક્ષ્ણતા, શુદ્ધિ અને વિવેક સાથે જોડવામાં આવે છે.",
+   "name_hi": "कृत्तिका",
+   "name_gu": "કૃત્તિકા"
   },
   {
    "id": "nakshatra.rohini",
    "kind": "nakshatra",
    "key": "Rohini",
    "aliases": [],
-   "text": "Rohini is ruled by the Moon and presided over by Prajapati, the creator; its symbol is a cart or chariot. It is traditionally linked with growth, creativity, charm and appreciation of beauty."
+   "text": "Rohini is ruled by the Moon and presided over by Prajapati, the creator; its symbol is a cart or chariot. It is traditionally linked with growth, creativity, charm and appreciation of beauty.",
+   "text_hi": "रोहिणी के स्वामी चंद्र हैं और अधिष्ठाता देवता प्रजापति (सृष्टिकर्ता) हैं; इसका प्रतीक गाड़ी या रथ है। परंपरा में इसे वृद्धि, रचनात्मकता, आकर्षण और सौंदर्य की सराहना से जोड़ा जाता है।",
+   "text_gu": "રોહિણીના સ્વામી ચંદ્ર છે અને અધિષ્ઠાતા દેવતા પ્રજાપતિ (સર્જનહાર) છે; તેનું પ્રતીક ગાડું અથવા રથ છે. પરંપરામાં તેને વૃદ્ધિ, સર્જનાત્મકતા, આકર્ષણ અને સૌંદર્યની કદર સાથે જોડવામાં આવે છે.",
+   "name_hi": "रोहिणी",
+   "name_gu": "રોહિણી"
   },
   {
    "id": "nakshatra.mrigashira",
@@ -299,7 +423,11 @@
     "Mrigashirsha",
     "Mrigasheersha"
    ],
-   "text": "Mrigashira is ruled by Mars and presided over by Soma, the moon deity; its symbol is a deer's head. It is traditionally linked with seeking, curiosity and a restless search."
+   "text": "Mrigashira is ruled by Mars and presided over by Soma, the moon deity; its symbol is a deer's head. It is traditionally linked with seeking, curiosity and a restless search.",
+   "text_hi": "मृगशिरा के स्वामी मंगल हैं और अधिष्ठाता देवता सोम (चंद्र देवता) हैं; इसका प्रतीक हिरण का सिर है। परंपरा में इसे खोज, जिज्ञासा और बेचैन तलाश से जोड़ा जाता है।",
+   "text_gu": "મૃગશીર્ષના સ્વામી મંગળ છે અને અધિષ્ઠાતા દેવતા સોમ (ચંદ્ર દેવ) છે; તેનું પ્રતીક હરણનું મસ્તક છે. પરંપરામાં તેને શોધ, જિજ્ઞાસા અને બેચેન ખોજ સાથે જોડવામાં આવે છે.",
+   "name_hi": "मृगशिरा",
+   "name_gu": "મૃગશીર્ષ"
   },
   {
    "id": "nakshatra.ardra",
@@ -309,14 +437,22 @@
     "Aardra",
     "Arudra"
    ],
-   "text": "Ardra is ruled by Rahu and presided over by Rudra, the storm god; its symbol is a teardrop. It is traditionally linked with upheaval followed by renewal, and strong feeling."
+   "text": "Ardra is ruled by Rahu and presided over by Rudra, the storm god; its symbol is a teardrop. It is traditionally linked with upheaval followed by renewal, and strong feeling.",
+   "text_hi": "आर्द्रा के स्वामी राहु हैं और अधिष्ठाता देवता रुद्र (तूफ़ान के देवता) हैं; इसका प्रतीक आँसू की बूँद है। परंपरा में इसे उथल-पुथल के बाद नवीनीकरण और गहरी भावनाएँ से जोड़ा जाता है।",
+   "text_gu": "આર્દ્રાના સ્વામી રાહુ છે અને અધિષ્ઠાતા દેવતા રુદ્ર (તોફાનના દેવ) છે; તેનું પ્રતીક આંસુનું ટીપું છે. પરંપરામાં તેને ઉથલપાથલ પછી નવસર્જન અને ઊંડી લાગણીઓ સાથે જોડવામાં આવે છે.",
+   "name_hi": "आर्द्रा",
+   "name_gu": "આર્દ્રા"
   },
   {
    "id": "nakshatra.punarvasu",
    "kind": "nakshatra",
    "key": "Punarvasu",
    "aliases": [],
-   "text": "Punarvasu is ruled by Jupiter and presided over by Aditi, mother of the gods; its symbol is a quiver of arrows. It is traditionally linked with return, renewal and optimism."
+   "text": "Punarvasu is ruled by Jupiter and presided over by Aditi, mother of the gods; its symbol is a quiver of arrows. It is traditionally linked with return, renewal and optimism.",
+   "text_hi": "पुनर्वसु के स्वामी गुरु हैं और अधिष्ठाता देवता अदिति (देवताओं की माता) हैं; इसका प्रतीक बाणों का तरकश है। परंपरा में इसे वापसी, नवीनीकरण और आशावाद से जोड़ा जाता है।",
+   "text_gu": "પુનર્વસુના સ્વામી ગુરુ છે અને અધિષ્ઠાતા દેવતા અદિતિ (દેવોની માતા) છે; તેનું પ્રતીક બાણોનો ભાથો છે. પરંપરામાં તેને પુનરાગમન, નવસર્જન અને આશાવાદ સાથે જોડવામાં આવે છે.",
+   "name_hi": "पुनर्वसु",
+   "name_gu": "પુનર્વસુ"
   },
   {
    "id": "nakshatra.pushya",
@@ -326,7 +462,11 @@
     "Pushyami",
     "Poosam"
    ],
-   "text": "Pushya is ruled by Saturn and presided over by Brihaspati, the teacher of the gods; its symbol is a flower or a cow's udder. It is traditionally linked with nourishment, care and support for others."
+   "text": "Pushya is ruled by Saturn and presided over by Brihaspati, the teacher of the gods; its symbol is a flower or a cow's udder. It is traditionally linked with nourishment, care and support for others.",
+   "text_hi": "पुष्य के स्वामी शनि हैं और अधिष्ठाता देवता बृहस्पति (देवताओं के गुरु) हैं; इसका प्रतीक फूल या गाय का थन है। परंपरा में इसे पोषण, देखभाल और दूसरों को सहारा देना से जोड़ा जाता है।",
+   "text_gu": "પુષ્યના સ્વામી શનિ છે અને અધિષ્ઠાતા દેવતા બૃહસ્પતિ (દેવોના ગુરુ) છે; તેનું પ્રતીક ફૂલ અથવા ગાયનું આંચળ છે. પરંપરામાં તેને પોષણ, કાળજી અને બીજાને ટેકો આપવો સાથે જોડવામાં આવે છે.",
+   "name_hi": "पुष्य",
+   "name_gu": "પુષ્ય"
   },
   {
    "id": "nakshatra.ashlesha",
@@ -336,7 +476,11 @@
     "Aslesha",
     "Ashlesa"
    ],
-   "text": "Ashlesha is ruled by Mercury and presided over by the Nagas, serpent beings; its symbol is a coiled serpent. It is traditionally linked with intuition, penetrating insight and a tendency to hold on."
+   "text": "Ashlesha is ruled by Mercury and presided over by the Nagas, serpent beings; its symbol is a coiled serpent. It is traditionally linked with intuition, penetrating insight and a tendency to hold on.",
+   "text_hi": "आश्लेषा के स्वामी बुध हैं और अधिष्ठाता देवता नाग (सर्प देवता) हैं; इसका प्रतीक कुंडली मारे सर्प है। परंपरा में इसे अंतर्ज्ञान, गहरी पैठ और पकड़ बनाए रखने की प्रवृत्ति से जोड़ा जाता है।",
+   "text_gu": "આશ્લેષાના સ્વામી બુધ છે અને અધિષ્ઠાતા દેવતા નાગ (સર્પ દેવતાઓ) છે; તેનું પ્રતીક કુંડળી વાળેલો સર્પ છે. પરંપરામાં તેને અંતર્જ્ઞાન, ઊંડી સમજ અને પકડી રાખવાની વૃત્તિ સાથે જોડવામાં આવે છે.",
+   "name_hi": "आश्लेषा",
+   "name_gu": "આશ્લેષા"
   },
   {
    "id": "nakshatra.magha",
@@ -345,7 +489,11 @@
    "aliases": [
     "Makha"
    ],
-   "text": "Magha is ruled by Ketu and presided over by the Pitris, the ancestors; its symbol is a throne. It is traditionally linked with lineage, dignity and a sense of authority."
+   "text": "Magha is ruled by Ketu and presided over by the Pitris, the ancestors; its symbol is a throne. It is traditionally linked with lineage, dignity and a sense of authority.",
+   "text_hi": "मघा के स्वामी केतु हैं और अधिष्ठाता देवता पितर (पूर्वज) हैं; इसका प्रतीक सिंहासन है। परंपरा में इसे वंश-परंपरा, गरिमा और अधिकार की भावना से जोड़ा जाता है।",
+   "text_gu": "મઘાના સ્વામી કેતુ છે અને અધિષ્ઠાતા દેવતા પિતૃઓ (પૂર્વજો) છે; તેનું પ્રતીક સિંહાસન છે. પરંપરામાં તેને વંશપરંપરા, ગરિમા અને અધિકારની ભાવના સાથે જોડવામાં આવે છે.",
+   "name_hi": "मघा",
+   "name_gu": "મઘા"
   },
   {
    "id": "nakshatra.purvaphalguni",
@@ -356,7 +504,11 @@
     "Poorva Phalguni",
     "Pubba"
    ],
-   "text": "Purva Phalguni is ruled by Venus and presided over by Bhaga, giver of enjoyment; its symbol is the front legs of a bed or a hammock. It is traditionally linked with enjoyment, rest and creative self-expression."
+   "text": "Purva Phalguni is ruled by Venus and presided over by Bhaga, giver of enjoyment; its symbol is the front legs of a bed or a hammock. It is traditionally linked with enjoyment, rest and creative self-expression.",
+   "text_hi": "पूर्वा फाल्गुनी के स्वामी शुक्र हैं और अधिष्ठाता देवता भग (आनंद के दाता) हैं; इसका प्रतीक पलंग के अगले पाए या झूला है। परंपरा में इसे आनंद, विश्राम और रचनात्मक अभिव्यक्ति से जोड़ा जाता है।",
+   "text_gu": "પૂર્વા ફાલ્ગુનીના સ્વામી શુક્ર છે અને અધિષ્ઠાતા દેવતા ભગ (આનંદના દાતા) છે; તેનું પ્રતીક પલંગના આગળના પાયા અથવા ઝૂલો છે. પરંપરામાં તેને આનંદ, આરામ અને સર્જનાત્મક અભિવ્યક્તિ સાથે જોડવામાં આવે છે.",
+   "name_hi": "पूर्वा फाल्गुनी",
+   "name_gu": "પૂર્વા ફાલ્ગુની"
   },
   {
    "id": "nakshatra.uttaraphalguni",
@@ -365,14 +517,22 @@
    "aliases": [
     "Uttaraphalguni"
    ],
-   "text": "Uttara Phalguni is ruled by the Sun and presided over by Aryaman, god of agreements; its symbol is the back legs of a bed. It is traditionally linked with patronage, steady commitment and helpfulness."
+   "text": "Uttara Phalguni is ruled by the Sun and presided over by Aryaman, god of agreements; its symbol is the back legs of a bed. It is traditionally linked with patronage, steady commitment and helpfulness.",
+   "text_hi": "उत्तरा फाल्गुनी के स्वामी सूर्य हैं और अधिष्ठाता देवता अर्यमा (अनुबंधों के देवता) हैं; इसका प्रतीक पलंग के पिछले पाए है। परंपरा में इसे संरक्षण, स्थिर निष्ठा और सहायकता से जोड़ा जाता है।",
+   "text_gu": "ઉત્તરા ફાલ્ગુનીના સ્વામી સૂર્ય છે અને અધિષ્ઠાતા દેવતા અર્યમા (કરારોના દેવ) છે; તેનું પ્રતીક પલંગના પાછળના પાયા છે. પરંપરામાં તેને આશ્રય, સ્થિર નિષ્ઠા અને મદદગાર સ્વભાવ સાથે જોડવામાં આવે છે.",
+   "name_hi": "उत्तरा फाल्गुनी",
+   "name_gu": "ઉત્તરા ફાલ્ગુની"
   },
   {
    "id": "nakshatra.hasta",
    "kind": "nakshatra",
    "key": "Hasta",
    "aliases": [],
-   "text": "Hasta is ruled by the Moon and presided over by Savitar, the inspiring sun deity; its symbol is a hand. It is traditionally linked with skill, craftsmanship and dexterity."
+   "text": "Hasta is ruled by the Moon and presided over by Savitar, the inspiring sun deity; its symbol is a hand. It is traditionally linked with skill, craftsmanship and dexterity.",
+   "text_hi": "हस्त के स्वामी चंद्र हैं और अधिष्ठाता देवता सविता (प्रेरक सूर्य देवता) हैं; इसका प्रतीक हाथ है। परंपरा में इसे कौशल, शिल्प और हाथ की निपुणता से जोड़ा जाता है।",
+   "text_gu": "હસ્તના સ્વામી ચંદ્ર છે અને અધિષ્ઠાતા દેવતા સવિતા (પ્રેરક સૂર્યદેવ) છે; તેનું પ્રતીક હાથ છે. પરંપરામાં તેને કુશળતા, કારીગરી અને હાથની નિપુણતા સાથે જોડવામાં આવે છે.",
+   "name_hi": "हस्त",
+   "name_gu": "હસ્ત"
   },
   {
    "id": "nakshatra.chitra",
@@ -381,7 +541,11 @@
    "aliases": [
     "Chithra"
    ],
-   "text": "Chitra is ruled by Mars and presided over by Tvashtar, the divine architect; its symbol is a bright jewel. It is traditionally linked with design, artistry and a love of well-made things."
+   "text": "Chitra is ruled by Mars and presided over by Tvashtar, the divine architect; its symbol is a bright jewel. It is traditionally linked with design, artistry and a love of well-made things.",
+   "text_hi": "चित्रा के स्वामी मंगल हैं और अधिष्ठाता देवता त्वष्टा (दिव्य शिल्पी) हैं; इसका प्रतीक चमकता रत्न है। परंपरा में इसे रचना, कलात्मकता और सुघड़ वस्तुओं का प्रेम से जोड़ा जाता है।",
+   "text_gu": "ચિત્રાના સ્વામી મંગળ છે અને અધિષ્ઠાતા દેવતા ત્વષ્ટા (દિવ્ય શિલ્પી) છે; તેનું પ્રતીક ચમકતું રત્ન છે. પરંપરામાં તેને રચના, કલાત્મકતા અને સુઘડ વસ્તુઓ પ્રત્યે પ્રેમ સાથે જોડવામાં આવે છે.",
+   "name_hi": "चित्रा",
+   "name_gu": "ચિત્રા"
   },
   {
    "id": "nakshatra.swati",
@@ -390,7 +554,11 @@
    "aliases": [
     "Svati"
    ],
-   "text": "Swati is ruled by Rahu and presided over by Vayu, the wind; its symbol is a young shoot swaying in the wind. It is traditionally linked with independence, flexibility and a need for room to move."
+   "text": "Swati is ruled by Rahu and presided over by Vayu, the wind; its symbol is a young shoot swaying in the wind. It is traditionally linked with independence, flexibility and a need for room to move.",
+   "text_hi": "स्वाति के स्वामी राहु हैं और अधिष्ठाता देवता वायु (पवन देव) हैं; इसका प्रतीक हवा में लहराता नया अंकुर है। परंपरा में इसे स्वतंत्रता, लचीलापन और खुले स्थान की आवश्यकता से जोड़ा जाता है।",
+   "text_gu": "સ્વાતિના સ્વામી રાહુ છે અને અધિષ્ઠાતા દેવતા વાયુ (પવનદેવ) છે; તેનું પ્રતીક પવનમાં લહેરાતો કૂણો અંકુર છે. પરંપરામાં તેને સ્વતંત્રતા, લવચીકતા અને ખુલ્લી જગ્યાની જરૂર સાથે જોડવામાં આવે છે.",
+   "name_hi": "स्वाति",
+   "name_gu": "સ્વાતિ"
   },
   {
    "id": "nakshatra.vishakha",
@@ -400,14 +568,22 @@
     "Visakha",
     "Vishaka"
    ],
-   "text": "Vishakha is ruled by Jupiter and presided over by Indra and Agni together; its symbol is a triumphal arch or potter's wheel. It is traditionally linked with determination and strong focus on a goal."
+   "text": "Vishakha is ruled by Jupiter and presided over by Indra and Agni together; its symbol is a triumphal arch or potter's wheel. It is traditionally linked with determination and strong focus on a goal.",
+   "text_hi": "विशाखा के स्वामी गुरु हैं और अधिष्ठाता देवता इंद्र और अग्नि हैं; इसका प्रतीक विजय-द्वार या कुम्हार का चाक है। परंपरा में इसे दृढ़ संकल्प और लक्ष्य पर गहरा ध्यान से जोड़ा जाता है।",
+   "text_gu": "વિશાખાના સ્વામી ગુરુ છે અને અધિષ્ઠાતા દેવતા ઇન્દ્ર અને અગ્નિ છે; તેનું પ્રતીક વિજય દ્વાર અથવા કુંભારનો ચાક છે. પરંપરામાં તેને દૃઢ સંકલ્પ અને લક્ષ્ય પર ઊંડું ધ્યાન સાથે જોડવામાં આવે છે.",
+   "name_hi": "विशाखा",
+   "name_gu": "વિશાખા"
   },
   {
    "id": "nakshatra.anuradha",
    "kind": "nakshatra",
    "key": "Anuradha",
    "aliases": [],
-   "text": "Anuradha is ruled by Saturn and presided over by Mitra, god of friendship; its symbol is a lotus. It is traditionally linked with friendship, devotion and cooperation."
+   "text": "Anuradha is ruled by Saturn and presided over by Mitra, god of friendship; its symbol is a lotus. It is traditionally linked with friendship, devotion and cooperation.",
+   "text_hi": "अनुराधा के स्वामी शनि हैं और अधिष्ठाता देवता मित्र (मित्रता के देवता) हैं; इसका प्रतीक कमल है। परंपरा में इसे मित्रता, भक्ति और सहयोग से जोड़ा जाता है।",
+   "text_gu": "અનુરાધાના સ્વામી શનિ છે અને અધિષ્ઠાતા દેવતા મિત્ર (મૈત્રીના દેવ) છે; તેનું પ્રતીક કમળ છે. પરંપરામાં તેને મૈત્રી, ભક્તિ અને સહકાર સાથે જોડવામાં આવે છે.",
+   "name_hi": "अनुराधा",
+   "name_gu": "અનુરાધા"
   },
   {
    "id": "nakshatra.jyeshtha",
@@ -417,7 +593,11 @@
     "Jyestha",
     "Jyeshta"
    ],
-   "text": "Jyeshtha is ruled by Mercury and presided over by Indra, chief of the gods; its symbol is a circular amulet or an umbrella. It is traditionally linked with seniority, protectiveness and a sense of responsibility."
+   "text": "Jyeshtha is ruled by Mercury and presided over by Indra, chief of the gods; its symbol is a circular amulet or an umbrella. It is traditionally linked with seniority, protectiveness and a sense of responsibility.",
+   "text_hi": "ज्येष्ठा के स्वामी बुध हैं और अधिष्ठाता देवता इंद्र (देवताओं के राजा) हैं; इसका प्रतीक गोल ताबीज़ या छत्र है। परंपरा में इसे वरिष्ठता, संरक्षण-भाव और ज़िम्मेदारी की भावना से जोड़ा जाता है।",
+   "text_gu": "જ્યેષ્ઠાના સ્વામી બુધ છે અને અધિષ્ઠાતા દેવતા ઇન્દ્ર (દેવોના રાજા) છે; તેનું પ્રતીક ગોળ તાવીજ અથવા છત્ર છે. પરંપરામાં તેને વરિષ્ઠતા, રક્ષણભાવ અને જવાબદારીની ભાવના સાથે જોડવામાં આવે છે.",
+   "name_hi": "ज्येष्ठा",
+   "name_gu": "જ્યેષ્ઠા"
   },
   {
    "id": "nakshatra.mula",
@@ -427,7 +607,11 @@
     "Moola",
     "Mool"
    ],
-   "text": "Mula is ruled by Ketu and presided over by Nirriti, goddess of dissolution; its symbol is a bunch of roots. It is traditionally linked with going to the root of things, investigation and uprooting."
+   "text": "Mula is ruled by Ketu and presided over by Nirriti, goddess of dissolution; its symbol is a bunch of roots. It is traditionally linked with going to the root of things, investigation and uprooting.",
+   "text_hi": "मूल के स्वामी केतु हैं और अधिष्ठाता देवता निरृति (विघटन की देवी) हैं; इसका प्रतीक जड़ों का गुच्छा है। परंपरा में इसे चीज़ों की जड़ तक पहुँचना, खोजबीन और उखाड़ना से जोड़ा जाता है।",
+   "text_gu": "મૂળના સ્વામી કેતુ છે અને અધિષ્ઠાતા દેવતા નિરૃતિ (વિઘટનની દેવી) છે; તેનું પ્રતીક મૂળિયાંનો ગુચ્છો છે. પરંપરામાં તેને વસ્તુના મૂળ સુધી પહોંચવું, તપાસ અને ઉખેડવું સાથે જોડવામાં આવે છે.",
+   "name_hi": "मूल",
+   "name_gu": "મૂળ"
   },
   {
    "id": "nakshatra.purvaashadha",
@@ -439,7 +623,11 @@
     "Purvashadha",
     "Poorvashada"
    ],
-   "text": "Purva Ashadha is ruled by Venus and presided over by Apas, the waters; its symbol is a fan or winnowing basket. It is traditionally linked with invigoration, persuasion and an unbeaten spirit."
+   "text": "Purva Ashadha is ruled by Venus and presided over by Apas, the waters; its symbol is a fan or winnowing basket. It is traditionally linked with invigoration, persuasion and an unbeaten spirit.",
+   "text_hi": "पूर्वाषाढ़ा के स्वामी शुक्र हैं और अधिष्ठाता देवता आपः (जल) हैं; इसका प्रतीक सूप या पंखा है। परंपरा में इसे स्फूर्ति, समझाने की क्षमता और अपराजित भाव से जोड़ा जाता है।",
+   "text_gu": "પૂર્વાષાઢાના સ્વામી શુક્ર છે અને અધિષ્ઠાતા દેવતા આપઃ (જળ) છે; તેનું પ્રતીક સૂપડું અથવા પંખો છે. પરંપરામાં તેને સ્ફૂર્તિ, સમજાવવાની ક્ષમતા અને અજેય ભાવ સાથે જોડવામાં આવે છે.",
+   "name_hi": "पूर्वाषाढ़ा",
+   "name_gu": "પૂર્વાષાઢા"
   },
   {
    "id": "nakshatra.uttaraashadha",
@@ -450,7 +638,11 @@
     "Uttara Shadha",
     "Uttarashadha"
    ],
-   "text": "Uttara Ashadha is ruled by the Sun and presided over by the Vishvadevas, the universal gods; its symbol is an elephant's tusk or the planks of a bed. It is traditionally linked with lasting achievement and loyalty to principle."
+   "text": "Uttara Ashadha is ruled by the Sun and presided over by the Vishvadevas, the universal gods; its symbol is an elephant's tusk or the planks of a bed. It is traditionally linked with lasting achievement and loyalty to principle.",
+   "text_hi": "उत्तराषाढ़ा के स्वामी सूर्य हैं और अधिष्ठाता देवता विश्वेदेव (सार्वभौम देवता) हैं; इसका प्रतीक हाथी का दाँत या पलंग के तख़्ते है। परंपरा में इसे स्थायी उपलब्धि और सिद्धांतों के प्रति निष्ठा से जोड़ा जाता है।",
+   "text_gu": "ઉત્તરાષાઢાના સ્વામી સૂર્ય છે અને અધિષ્ઠાતા દેવતા વિશ્વેદેવ (સર્વ દેવતાઓ) છે; તેનું પ્રતીક હાથીદાંત અથવા પલંગના પાટિયાં છે. પરંપરામાં તેને સ્થાયી સિદ્ધિ અને સિદ્ધાંતો પ્રત્યે નિષ્ઠા સાથે જોડવામાં આવે છે.",
+   "name_hi": "उत्तराषाढ़ा",
+   "name_gu": "ઉત્તરાષાઢા"
   },
   {
    "id": "nakshatra.shravana",
@@ -460,7 +652,11 @@
     "Sravana",
     "Shravan"
    ],
-   "text": "Shravana is ruled by the Moon and presided over by Vishnu, the preserver; its symbol is an ear or three footprints. It is traditionally linked with listening, learning and passing knowledge on."
+   "text": "Shravana is ruled by the Moon and presided over by Vishnu, the preserver; its symbol is an ear or three footprints. It is traditionally linked with listening, learning and passing knowledge on.",
+   "text_hi": "श्रवण के स्वामी चंद्र हैं और अधिष्ठाता देवता विष्णु (पालनकर्ता) हैं; इसका प्रतीक कान या तीन पदचिह्न है। परंपरा में इसे सुनना, सीखना और ज्ञान आगे बढ़ाना से जोड़ा जाता है।",
+   "text_gu": "શ્રવણના સ્વામી ચંદ્ર છે અને અધિષ્ઠાતા દેવતા વિષ્ણુ (પાલનહાર) છે; તેનું પ્રતીક કાન અથવા ત્રણ પગલાં છે. પરંપરામાં તેને સાંભળવું, શીખવું અને જ્ઞાન આગળ વધારવું સાથે જોડવામાં આવે છે.",
+   "name_hi": "श्रवण",
+   "name_gu": "શ્રવણ"
   },
   {
    "id": "nakshatra.dhanishta",
@@ -471,7 +667,11 @@
     "Dhanista",
     "Shravishtha"
    ],
-   "text": "Dhanishta is ruled by Mars and presided over by the eight Vasus, gods of abundance; its symbol is a drum. It is traditionally linked with rhythm, abundance and a sense of timing."
+   "text": "Dhanishta is ruled by Mars and presided over by the eight Vasus, gods of abundance; its symbol is a drum. It is traditionally linked with rhythm, abundance and a sense of timing.",
+   "text_hi": "धनिष्ठा के स्वामी मंगल हैं और अधिष्ठाता देवता अष्ट वसु (समृद्धि के देवता) हैं; इसका प्रतीक ढोल है। परंपरा में इसे लय, समृद्धि और समय की समझ से जोड़ा जाता है।",
+   "text_gu": "ધનિષ્ઠાના સ્વામી મંગળ છે અને અધિષ્ઠાતા દેવતા અષ્ટ વસુ (સમૃદ્ધિના દેવતાઓ) છે; તેનું પ્રતીક ઢોલ છે. પરંપરામાં તેને લય, સમૃદ્ધિ અને સમયની સમજ સાથે જોડવામાં આવે છે.",
+   "name_hi": "धनिष्ठा",
+   "name_gu": "ધનિષ્ઠા"
   },
   {
    "id": "nakshatra.shatabhisha",
@@ -482,7 +682,11 @@
     "Shatabhishak",
     "Shatataraka"
    ],
-   "text": "Shatabhisha is ruled by Rahu and presided over by Varuna, lord of the cosmic waters; its symbol is an empty circle. It is traditionally linked with healing, secrecy, solitude and research."
+   "text": "Shatabhisha is ruled by Rahu and presided over by Varuna, lord of the cosmic waters; its symbol is an empty circle. It is traditionally linked with healing, secrecy, solitude and research.",
+   "text_hi": "शतभिषा के स्वामी राहु हैं और अधिष्ठाता देवता वरुण (जल के अधिपति) हैं; इसका प्रतीक खाली वृत्त है। परंपरा में इसे उपचार, गोपनीयता, एकांत और शोध से जोड़ा जाता है।",
+   "text_gu": "શતભિષાના સ્વામી રાહુ છે અને અધિષ્ઠાતા દેવતા વરુણ (જળના અધિપતિ) છે; તેનું પ્રતીક ખાલી વર્તુળ છે. પરંપરામાં તેને ઉપચાર, ગુપ્તતા, એકાંત અને સંશોધન સાથે જોડવામાં આવે છે.",
+   "name_hi": "शतभिषा",
+   "name_gu": "શતભિષા"
   },
   {
    "id": "nakshatra.purvabhadrapada",
@@ -493,7 +697,11 @@
     "Purva Bhadra",
     "Poorvabhadra"
    ],
-   "text": "Purva Bhadrapada is ruled by Jupiter and presided over by Aja Ekapada, the one-footed goat; its symbol is swords or the front legs of a cot. It is traditionally linked with intensity, idealism and the urge to transform."
+   "text": "Purva Bhadrapada is ruled by Jupiter and presided over by Aja Ekapada, the one-footed goat; its symbol is swords or the front legs of a cot. It is traditionally linked with intensity, idealism and the urge to transform.",
+   "text_hi": "पूर्वा भाद्रपद के स्वामी गुरु हैं और अधिष्ठाता देवता अज एकपाद हैं; इसका प्रतीक तलवारें या खाट के अगले पाए है। परंपरा में इसे तीव्रता, आदर्शवाद और रूपांतरण की इच्छा से जोड़ा जाता है।",
+   "text_gu": "પૂર્વા ભાદ્રપદના સ્વામી ગુરુ છે અને અધિષ્ઠાતા દેવતા અજ એકપાદ છે; તેનું પ્રતીક તલવારો અથવા ખાટલાના આગળના પાયા છે. પરંપરામાં તેને તીવ્રતા, આદર્શવાદ અને રૂપાંતરની ઇચ્છા સાથે જોડવામાં આવે છે.",
+   "name_hi": "पूर्वा भाद्रपद",
+   "name_gu": "પૂર્વા ભાદ્રપદ"
   },
   {
    "id": "nakshatra.uttarabhadrapada",
@@ -503,119 +711,162 @@
     "Uttarabhadrapada",
     "Uttara Bhadra"
    ],
-   "text": "Uttara Bhadrapada is ruled by Saturn and presided over by Ahir Budhnya, the serpent of the deep; its symbol is the back legs of a cot or twins. It is traditionally linked with depth, calm and restraint."
+   "text": "Uttara Bhadrapada is ruled by Saturn and presided over by Ahir Budhnya, the serpent of the deep; its symbol is the back legs of a cot or twins. It is traditionally linked with depth, calm and restraint.",
+   "text_hi": "उत्तरा भाद्रपद के स्वामी शनि हैं और अधिष्ठाता देवता अहिर्बुध्न्य (गहराई का सर्प) हैं; इसका प्रतीक खाट के पिछले पाए या जुड़वाँ है। परंपरा में इसे गहराई, शांति और संयम से जोड़ा जाता है।",
+   "text_gu": "ઉત્તરા ભાદ્રપદના સ્વામી શનિ છે અને અધિષ્ઠાતા દેવતા અહિર્બુધ્ન્ય (ઊંડાણનો સર્પ) છે; તેનું પ્રતીક ખાટલાના પાછળના પાયા અથવા જોડિયા છે. પરંપરામાં તેને ઊંડાણ, શાંતિ અને સંયમ સાથે જોડવામાં આવે છે.",
+   "name_hi": "उत्तरा भाद्रपद",
+   "name_gu": "ઉત્તરા ભાદ્રપદ"
   },
   {
    "id": "nakshatra.revati",
    "kind": "nakshatra",
    "key": "Revati",
    "aliases": [],
-   "text": "Revati is ruled by Mercury and presided over by Pushan, protector of travellers; its symbol is a fish or a drum. It is traditionally linked with care, protection and a sense of completion."
+   "text": "Revati is ruled by Mercury and presided over by Pushan, protector of travellers; its symbol is a fish or a drum. It is traditionally linked with care, protection and a sense of completion.",
+   "text_hi": "रेवती के स्वामी बुध हैं और अधिष्ठाता देवता पूषन् (यात्रियों के रक्षक) हैं; इसका प्रतीक मछली या ढोल है। परंपरा में इसे देखभाल, सुरक्षा और पूर्णता का भाव से जोड़ा जाता है।",
+   "text_gu": "રેવતીના સ્વામી બુધ છે અને અધિષ્ઠાતા દેવતા પૂષન્ (મુસાફરોના રક્ષક) છે; તેનું પ્રતીક માછલી અથવા ઢોલ છે. પરંપરામાં તેને કાળજી, રક્ષણ અને પૂર્ણતાનો ભાવ સાથે જોડવામાં આવે છે.",
+   "name_hi": "रेवती",
+   "name_gu": "રેવતી"
   },
   {
    "id": "dignity.exalted",
    "kind": "dignity",
    "key": "exalted",
    "aliases": [],
-   "text": "A planet is called exalted when it sits in the sign where, in the tradition, it expresses its nature most strongly and easily."
+   "text": "A planet is called exalted when it sits in the sign where, in the tradition, it expresses its nature most strongly and easily.",
+   "text_hi": "जब कोई ग्रह उस राशि में होता है जहाँ परंपरा के अनुसार वह अपना स्वभाव सबसे प्रबल और सहज रूप से व्यक्त करता है, तो उसे उच्च कहा जाता है।",
+   "text_gu": "જ્યારે કોઈ ગ્રહ એવી રાશિમાં હોય જ્યાં પરંપરા મુજબ તે પોતાનો સ્વભાવ સૌથી પ્રબળ અને સહજ રીતે વ્યક્ત કરે, ત્યારે તેને ઉચ્ચનો કહેવાય છે."
   },
   {
    "id": "dignity.debilitated",
    "kind": "dignity",
    "key": "debilitated",
    "aliases": [],
-   "text": "A planet is called debilitated when it sits in the sign opposite its exaltation, where, in the tradition, its themes find expression with more effort or in less obvious ways."
+   "text": "A planet is called debilitated when it sits in the sign opposite its exaltation, where, in the tradition, its themes find expression with more effort or in less obvious ways.",
+   "text_hi": "जब कोई ग्रह अपनी उच्च राशि से विपरीत राशि में होता है, तो उसे नीच कहा जाता है; परंपरा के अनुसार वहाँ उसके विषय अधिक प्रयास से या कम स्पष्ट रूप में व्यक्त होते हैं।",
+   "text_gu": "જ્યારે કોઈ ગ્રહ પોતાની ઉચ્ચ રાશિથી વિરુદ્ધ રાશિમાં હોય, ત્યારે તેને નીચનો કહેવાય છે; પરંપરા મુજબ ત્યાં તેના વિષયો વધુ પ્રયત્ને અથવા ઓછા સ્પષ્ટ રૂપે વ્યક્ત થાય છે."
   },
   {
    "id": "dignity.ownsign",
    "kind": "dignity",
    "key": "own_sign",
    "aliases": [],
-   "text": "A planet in its own sign is considered comfortable and self-reliant, expressing its themes in a natural way."
+   "text": "A planet in its own sign is considered comfortable and self-reliant, expressing its themes in a natural way.",
+   "text_hi": "अपनी राशि में स्थित ग्रह सहज और आत्मनिर्भर माना जाता है और अपने विषयों को स्वाभाविक रूप से व्यक्त करता है।",
+   "text_gu": "પોતાની રાશિમાં રહેલો ગ્રહ સહજ અને આત્મનિર્ભર ગણાય છે અને પોતાના વિષયોને સ્વાભાવિક રીતે વ્યક્ત કરે છે."
   },
   {
    "id": "dignity.moolatrikona",
    "kind": "dignity",
    "key": "moolatrikona",
    "aliases": [],
-   "text": "Moolatrikona is a stretch of a sign where a planet is considered especially well placed, ranking between exaltation and own sign in traditional strength."
+   "text": "Moolatrikona is a stretch of a sign where a planet is considered especially well placed, ranking between exaltation and own sign in traditional strength.",
+   "text_hi": "मूलत्रिकोण राशि का वह भाग है जहाँ ग्रह विशेष रूप से अच्छी स्थिति में माना जाता है; पारंपरिक बल में यह उच्च और स्वराशि के बीच आता है।",
+   "text_gu": "મૂળત્રિકોણ રાશિનો એ ભાગ છે જ્યાં ગ્રહ ખાસ સારી સ્થિતિમાં ગણાય છે; પરંપરાગત બળમાં તે ઉચ્ચ અને સ્વરાશિની વચ્ચે આવે છે."
   },
   {
    "id": "dasha.ketu",
    "kind": "dasha",
    "key": "Ketu",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Ketu lasts 7 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: detachment, introspection and letting go) come to the foreground."
+   "text": "In the Vimshottari system the major period of Ketu lasts 7 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: detachment, introspection and letting go) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में केतु की महादशा 7 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (वैराग्य, आत्मचिंतन और छोड़ने) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં કેતુની મહાદશા 7 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (વૈરાગ્ય, આત્મચિંતન અને છોડવા) સામે આવે છે."
   },
   {
    "id": "dasha.venus",
    "kind": "dasha",
    "key": "Venus",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Venus lasts 20 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: relationships, comfort, art and enjoyment) come to the foreground."
+   "text": "In the Vimshottari system the major period of Venus lasts 20 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: relationships, comfort, art and enjoyment) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में शुक्र की महादशा 20 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (संबंधों, सुख-सुविधा, कला और आनंद) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં શુક્રની મહાદશા 20 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (સંબંધો, સુખ-સગવડ, કલા અને આનંદ) સામે આવે છે."
   },
   {
    "id": "dasha.sun",
    "kind": "dasha",
    "key": "Sun",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Sun lasts 6 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: purpose, vitality and recognition) come to the foreground."
+   "text": "In the Vimshottari system the major period of Sun lasts 6 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: purpose, vitality and recognition) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में सूर्य की महादशा 6 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (उद्देश्य, जीवन-शक्ति और मान-सम्मान) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં સૂર્યની મહાદશા 6 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (ધ્યેય, જીવનશક્તિ અને માન-સન્માન) સામે આવે છે."
   },
   {
    "id": "dasha.moon",
    "kind": "dasha",
    "key": "Moon",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Moon lasts 10 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: emotions, home and nurturing) come to the foreground."
+   "text": "In the Vimshottari system the major period of Moon lasts 10 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: emotions, home and nurturing) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में चंद्र की महादशा 10 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (भावनाओं, घर और पोषण) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં ચંદ્રની મહાદશા 10 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (લાગણીઓ, ઘર અને પોષણ) સામે આવે છે."
   },
   {
    "id": "dasha.mars",
    "kind": "dasha",
    "key": "Mars",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Mars lasts 7 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: energy, drive and action) come to the foreground."
+   "text": "In the Vimshottari system the major period of Mars lasts 7 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: energy, drive and action) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में मंगल की महादशा 7 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (ऊर्जा, प्रेरणा और कर्म) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં મંગળની મહાદશા 7 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (ઊર્જા, પ્રેરણા અને કર્મ) સામે આવે છે."
   },
   {
    "id": "dasha.rahu",
    "kind": "dasha",
    "key": "Rahu",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Rahu lasts 18 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: ambition, appetite and unconventional paths) come to the foreground."
+   "text": "In the Vimshottari system the major period of Rahu lasts 18 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: ambition, appetite and unconventional paths) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में राहु की महादशा 18 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (महत्वाकांक्षा, लालसा और अपरंपरागत मार्गों) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં રાહુની મહાદશા 18 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (મહત્ત્વાકાંક્ષા, લાલસા અને અપરંપરાગત માર્ગો) સામે આવે છે."
   },
   {
    "id": "dasha.jupiter",
    "kind": "dasha",
    "key": "Jupiter",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Jupiter lasts 16 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: learning, growth and guidance) come to the foreground."
+   "text": "In the Vimshottari system the major period of Jupiter lasts 16 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: learning, growth and guidance) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में गुरु की महादशा 16 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (शिक्षा, वृद्धि और मार्गदर्शन) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં ગુરુની મહાદશા 16 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (શિક્ષણ, વૃદ્ધિ અને માર્ગદર્શન) સામે આવે છે."
   },
   {
    "id": "dasha.saturn",
    "kind": "dasha",
    "key": "Saturn",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Saturn lasts 19 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: discipline, responsibility and patience) come to the foreground."
+   "text": "In the Vimshottari system the major period of Saturn lasts 19 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: discipline, responsibility and patience) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में शनि की महादशा 19 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (अनुशासन, ज़िम्मेदारी और धैर्य) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં શનિની મહાદશા 19 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (શિસ્ત, જવાબદારી અને ધીરજ) સામે આવે છે."
   },
   {
    "id": "dasha.mercury",
    "kind": "dasha",
    "key": "Mercury",
    "aliases": [],
-   "text": "In the Vimshottari system the major period of Mercury lasts 17 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: learning, communication and trade) come to the foreground."
+   "text": "In the Vimshottari system the major period of Mercury lasts 17 years. Periods ruled by a planet are traditionally read as times when that planet's themes (here: learning, communication and trade) come to the foreground.",
+   "text_hi": "विंशोत्तरी पद्धति में बुध की महादशा 17 वर्ष की होती है। जिस ग्रह की दशा चलती है, परंपरा उसे ऐसा समय मानती है जब उस ग्रह के विषय (शिक्षा, संवाद और व्यापार) सामने आते हैं।",
+   "text_gu": "વિંશોત્તરી પદ્ધતિમાં બુધની મહાદશા 17 વર્ષની હોય છે. જે ગ્રહની દશા ચાલે, પરંપરા તેને એવો સમય માને છે જ્યારે તે ગ્રહના વિષયો (શિક્ષણ, સંવાદ અને વેપાર) સામે આવે છે."
   },
   {
    "id": "concept.lagna",
    "kind": "concept",
    "key": "lagna",
    "aliases": [],
-   "text": "The Lagna (ascendant) is the sign rising on the eastern horizon at the moment of birth. It sets the frame of the chart: it is the 1st house, and every other house is counted from it."
+   "text": "The Lagna (ascendant) is the sign rising on the eastern horizon at the moment of birth. It sets the frame of the chart: it is the 1st house, and every other house is counted from it.",
+   "text_hi": "लग्न (उदय राशि) जन्म के क्षण पूर्वी क्षितिज पर उदित होने वाली राशि है। यह कुंडली का ढाँचा तय करता है: यही पहला भाव है और बाकी सभी भाव इसी से गिने जाते हैं।",
+   "text_gu": "લગ્ન (ઉદય રાશિ) જન્મના ક્ષણે પૂર્વ ક્ષિતિજ પર ઊગતી રાશિ છે. તે કુંડળીનું માળખું નક્કી કરે છે: તે પહેલો ભાવ છે અને બાકીના બધા ભાવ તેનાથી ગણાય છે.",
+   "name_hi": "लग्न",
+   "name_gu": "લગ્ન"
   },
   {
    "id": "concept.drishti",
    "kind": "concept",
    "key": "drishti",
    "aliases": [],
-   "text": "Drishti means 'sight'. In Jyotish, planets are said to look at other houses and planets and to add their influence to what they see. Aspects are counted in houses from the planet."
+   "text": "Drishti means 'sight'. In Jyotish, planets are said to look at other houses and planets and to add their influence to what they see. Aspects are counted in houses from the planet.",
+   "text_hi": "दृष्टि का अर्थ है 'देखना'। ज्योतिष में माना जाता है कि ग्रह अन्य भावों और ग्रहों को देखते हैं और जिसे देखते हैं उस पर अपना प्रभाव डालते हैं। दृष्टियाँ ग्रह से भावों की गिनती से तय होती हैं।",
+   "text_gu": "દૃષ્ટિ એટલે 'જોવું'. જ્યોતિષમાં માનવામાં આવે છે કે ગ્રહો અન્ય ભાવો અને ગ્રહોને જુએ છે અને જેને જુએ છે તેના પર પોતાનો પ્રભાવ પાડે છે. દૃષ્ટિઓ ગ્રહથી ભાવોની ગણતરી પ્રમાણે નક્કી થાય છે.",
+   "name_hi": "दृष्टि",
+   "name_gu": "દૃષ્ટિ"
   }
- ]
+ ],
+ "translation_note": "Hindi (text_hi) and Gujarati (text_gu) are drafts and need review by a fluent reader."
 }

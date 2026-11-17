@@ -433,7 +433,7 @@ async function generateReading(){
       (s.passage_ids||[]).forEach(id=>li.appendChild(el("span",{class:"chip pchip",title:"Traditional meaning: "+id},id)));
       ol.appendChild(li)});
     out.appendChild(ol);
-    if(d.mode==="classic") out.appendChild(el("p",{class:"rnote"},"Classic reading: built from the computed facts and traditional passages, with no AI. Each line says which facts and passages it uses."));
+    if(d.mode==="classic") out.appendChild(el("p",{class:"rnote"},d.note||"Classic reading: built from the computed facts and traditional passages, with no AI."));
     if(d.notice) out.appendChild(el("p",{class:"rnote"},d.notice));
     if(d.mode!=="classic"&&d.passages&&d.passages.length){
       const det=el("details",{class:"rnote"}); det.appendChild(el("summary",null,"Traditional meanings used ("+d.passages.length+")"));
